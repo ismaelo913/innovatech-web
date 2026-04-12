@@ -1,0 +1,57 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Container from '../../components/ui/Container.astro';
+import SectionHeading from '../../components/ui/SectionHeading.astro';
+import Badge from '../../components/ui/Badge.astro';
+import { getCollection } from 'astro:content';
+
+const posts = (await getCollection('blog')).sort(
+  (a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime(),
+);
+---
+
+<BaseLayout
+  title="Blog"
+  description="Articulos sobre construccion, remodelaciones y buenas practicas de subcontrato en Chile. Consejos del equipo Innovatech."
+>
+  <section class="py-16 sm:py-20 bg-neutral-50 border-b border-neutral-200/60">
+    <Container>
+      <SectionHeading
+        label="Blog"
+        title="Articulos y novedades"
+        description="Compartimos conocimiento sobre construccion, buenas practicas y tendencias del sector."
+      />
+    </Container>
+  </section>
+
+  <section class="py-section">
+    <Container narrow>
+      <div class="space-y-8">
+        {posts.map((post) => (
+          <a href={`/blog/${post.id}`} class="group block">
+            <article class="p-6 sm:p-8 rounded-xl border border-neutral-200/60 bg-white hover:shadow-md hover:-translate-y-0.5 transition-all duration-300">
+              <div class="flex flex-wrap gap-2 mb-3">
+                {post.data.tags.map((tag) => (
+                  <Badge>{tag}</Badge>
+                ))}
+              </div>
+              <h2 class="text-xl sm:text-2xl font-bold text-neutral-900 group-hover:text-primary-600 transition-colors mb-2">
+                {post.data.title}
+              </h2>
+              <p class="text-neutral-600 leading-relaxed mb-4">
+                {post.data.description}
+              </p>
+              <div class="flex items-center gap-4 text-sm text-neutral-500">
+                <span>{post.data.author}</span>
+                <span>·</span>
+                <time datetime={post.data.date.toISOString()}>
+                  {new Date(post.data.date).toLocaleDateString('es-CL', { year: 'numeric', month: 'long', day: 'numeric' })}
+                </time>
+              </div>
+            </article>
+          </a>
+        ))}
+      </div>
+    </Container>
+  </section>
+</BaseLayout>

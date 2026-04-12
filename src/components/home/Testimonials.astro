@@ -1,0 +1,70 @@
+---
+import Container from '../ui/Container.astro';
+import SectionHeading from '../ui/SectionHeading.astro';
+
+const testimonials = [
+  {
+    quote: 'Innovatech entrego a tiempo y con una calidad de terminaciones que supero nuestras expectativas. El equipo llego siempre puntual, con todos sus EPPs y herramientas.',
+    name: 'Carolina Mendez',
+    role: 'Gerente de Proyectos',
+    company: 'Constructora del Pacifico',
+  },
+  {
+    quote: 'Llevamos tres proyectos consecutivos con ellos. La diferencia esta en la supervision constante y en que su gente realmente sabe lo que hace.',
+    name: 'Roberto Fuentes',
+    role: 'Director de Operaciones',
+    company: 'Grupo Habitat',
+  },
+  {
+    quote: 'Nos recomendaron Innovatech para una remodelacion comercial compleja. Cumplieron plazos en un proyecto donde otros ya habian fallado.',
+    name: 'Valentina Soto',
+    role: 'Arquitecta',
+    company: 'VS Arquitectos',
+  },
+  {
+    quote: 'Lo que mas valoro es la comunicacion. Siempre sabiamos en que etapa estaba la obra y que venia despues. Profesionalismo real.',
+    name: 'Andres Reyes',
+    role: 'Propietario',
+    company: 'Inmobiliaria Altus',
+  },
+];
+---
+
+<section class="py-section bg-neutral-50">
+  <Container>
+    <SectionHeading
+      label="Testimonios"
+      title="Lo que dicen nuestros clientes"
+      description="La confianza de quienes ya trabajaron con nosotros es nuestra mejor carta de presentacion."
+    />
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      {testimonials.map((t) => (
+        <div class="bg-white rounded-xl border border-neutral-200/60 p-6 sm:p-8 flex flex-col">
+          {/* Stars */}
+          <div class="flex gap-1 mb-4">
+            {Array.from({ length: 5 }).map(() => (
+              <svg class="w-4 h-4 text-accent-400" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+              </svg>
+            ))}
+          </div>
+
+          <blockquote class="text-neutral-700 leading-relaxed flex-1 mb-6">
+            "{t.quote}"
+          </blockquote>
+
+          <div class="flex items-center gap-3 pt-4 border-t border-neutral-100">
+            <div class="w-10 h-10 rounded-full bg-primary-100 flex items-center justify-center text-primary-700 font-semibold text-sm">
+              {t.name.split(' ').map((n) => n[0]).join('')}
+            </div>
+            <div>
+              <div class="text-sm font-semibold text-neutral-900">{t.name}</div>
+              <div class="text-xs text-neutral-500">{t.role}, {t.company}</div>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </Container>
+</section>

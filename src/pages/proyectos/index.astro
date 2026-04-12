@@ -1,0 +1,75 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Container from '../../components/ui/Container.astro';
+import SectionHeading from '../../components/ui/SectionHeading.astro';
+import Badge from '../../components/ui/Badge.astro';
+import CTASection from '../../components/home/CTASection.astro';
+import { getCollection } from 'astro:content';
+
+const projects = (await getCollection('projects')).sort(
+  (a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime(),
+);
+
+const categoryLabels: Record<string, string> = {
+  'remodelacion-residencial': 'Remodelacion Residencial',
+  'remodelacion-comercial': 'Remodelacion Comercial',
+  'obra-gruesa': 'Obra Gruesa',
+  'terminaciones': 'Terminaciones',
+  'ampliacion': 'Ampliacion',
+};
+---
+
+<BaseLayout
+  title="Proyectos"
+  description="Portafolio de proyectos de construccion ejecutados por Innovatech en Santiago. Remodelaciones, obra gruesa, terminaciones y ampliaciones."
+>
+  <section class="py-16 sm:py-20 bg-neutral-50 border-b border-neutral-200/60">
+    <Container>
+      <SectionHeading
+        label="Portafolio"
+        title="Proyectos ejecutados"
+        description="Cada proyecto refleja nuestro compromiso con la calidad, los plazos y la seguridad. Estos son algunos de nuestros trabajos."
+      />
+    </Container>
+  </section>
+
+  <section class="py-section">
+    <Container>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {projects.map((project) => (
+          <a href={`/proyectos/${project.id}`} class="group block">
+            <div class="rounded-xl overflow-hidden border border-neutral-200/60 bg-white shadow-sm transition-all duration-300 group-hover:shadow-lg group-hover:-translate-y-0.5">
+              <div class="aspect-[4/3] bg-gradient-to-br from-primary-100 to-primary-200 flex items-center justify-center relative overflow-hidden">
+                <svg class="w-12 h-12 text-primary-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909M3.75 21h16.5a2.25 2.25 0 002.25-2.25V5.25a2.25 2.25 0 00-2.25-2.25H3.75A2.25 2.25 0 001.5 5.25v13.5A2.25 2.25 0 003.75 21z" />
+                </svg>
+                <div class="absolute inset-0 bg-primary-600/0 group-hover:bg-primary-600/10 transition-colors duration-300"></div>
+              </div>
+              <div class="p-5">
+                <Badge variant="primary" class="mb-3">
+                  {categoryLabels[project.data.category]}
+                </Badge>
+                <h3 class="text-lg font-semibold text-neutral-900 mb-2 group-hover:text-primary-600 transition-colors">
+                  {project.data.title}
+                </h3>
+                <div class="flex items-center flex-wrap gap-x-4 gap-y-1 text-sm text-neutral-500">
+                  <span class="flex items-center gap-1.5">
+                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
+                    </svg>
+                    {project.data.location}
+                  </span>
+                  <span>{project.data.area}</span>
+                  <span>{project.data.duration}</span>
+                </div>
+              </div>
+            </div>
+          </a>
+        ))}
+      </div>
+    </Container>
+  </section>
+
+  <CTASection />
+</BaseLayout>

@@ -1,0 +1,60 @@
+export const SITE = {
+  name: 'Innovatech',
+  tagline: 'Construccion inteligente para proyectos exigentes',
+  description:
+    'Innovatech es una empresa subcontratista de construccion en Santiago de Chile. Mano de obra cualificada, equipada y supervisada para remodelaciones, obra gruesa, terminaciones y ampliaciones.',
+  url: 'https://innovatech.cl',
+  phone: '+56 9 XXXX XXXX',
+  email: 'contacto@innovatech.cl',
+  address: 'Santiago, Region Metropolitana, Chile',
+  whatsapp: '569XXXXXXXX',
+} as const;
+
+export const NAV_LINKS = [
+  { label: 'Inicio', href: '/' },
+  { label: 'Servicios', href: '/servicios' },
+  { label: 'Proyectos', href: '/proyectos' },
+  { label: 'Nosotros', href: '/nosotros' },
+  { label: 'Blog', href: '/blog' },
+  { label: 'Contacto', href: '/contacto' },
+] as const;
+
+export const SERVICES = [
+  {
+    slug: 'remodelaciones-residenciales',
+    title: 'Remodelaciones Residenciales',
+    short: 'Cocinas, banos y espacios interiores con acabados de calidad.',
+    icon: 'home',
+  },
+  {
+    slug: 'remodelaciones-comerciales',
+    title: 'Remodelaciones Comerciales',
+    short: 'Oficinas, locales y espacios corporativos funcionales.',
+    icon: 'building',
+  },
+  {
+    slug: 'obra-gruesa',
+    title: 'Obra Gruesa',
+    short: 'Fundaciones, estructura, albanileria y hormigon armado.',
+    icon: 'hard-hat',
+  },
+  {
+    slug: 'terminaciones',
+    title: 'Terminaciones',
+    short: 'Revestimientos, pintura, pisos y cielos con precision.',
+    icon: 'paint-roller',
+  },
+  {
+    slug: 'ampliaciones',
+    title: 'Ampliaciones',
+    short: 'Segundos pisos, extensiones y nuevas areas construidas.',
+    icon: 'expand',
+  },
+] as const;
+
+export const STATS = [
+  { value: '150+', label: 'Proyectos completados' },
+  { value: '8', label: 'Anos de experiencia' },
+  { value: '50k+', label: 'm2 construidos' },
+  { value: '98%', label: 'Clientes satisfechos' },
+] as const;

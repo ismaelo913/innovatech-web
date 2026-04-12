@@ -1,0 +1,114 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import Container from '../components/ui/Container.astro';
+import Badge from '../components/ui/Badge.astro';
+import Button from '../components/ui/Button.astro';
+import { SERVICES } from '../lib/constants';
+
+interface Props {
+  title: string;
+  description: string;
+  icon: string;
+  features: string[];
+  slug: string;
+}
+
+const { title, description, icon, features, slug } = Astro.props;
+
+const otherServices = SERVICES.filter((s) => s.slug !== slug);
+---
+
+<BaseLayout title={title} description={description}>
+  {/* Hero */}
+  <section class="py-16 sm:py-20 bg-neutral-50 border-b border-neutral-200/60">
+    <Container>
+      <div class="max-w-3xl">
+        <a href="/servicios" class="inline-flex items-center gap-1.5 text-sm text-neutral-500 hover:text-primary-600 transition-colors mb-6">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" />
+          </svg>
+          Volver a servicios
+        </a>
+        <Badge variant="primary" class="mb-4">{title}</Badge>
+        <h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-neutral-950 tracking-tight leading-tight mb-4">
+          {title}
+        </h1>
+        <p class="text-lg text-neutral-600 leading-relaxed">
+          {description}
+        </p>
+      </div>
+    </Container>
+  </section>
+
+  {/* Features */}
+  <section class="py-12 border-b border-neutral-100">
+    <Container>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        {features.map((f) => (
+          <div class="flex items-start gap-3 p-4 rounded-lg bg-neutral-50">
+            <svg class="w-5 h-5 text-primary-600 mt-0.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            <span class="text-sm font-medium text-neutral-700">{f}</span>
+          </div>
+        ))}
+      </div>
+    </Container>
+  </section>
+
+  {/* Content */}
+  <section class="py-section">
+    <Container narrow>
+      <div class="prose prose-neutral prose-lg max-w-none prose-headings:font-bold prose-headings:tracking-tight prose-a:text-primary-600 prose-a:no-underline hover:prose-a:underline">
+        <slot />
+      </div>
+    </Container>
+  </section>
+
+  {/* CTA */}
+  <section class="py-16 bg-primary-600">
+    <Container>
+      <div class="flex flex-col sm:flex-row items-center justify-between gap-6">
+        <div>
+          <h2 class="text-2xl font-bold text-white mb-2">
+            Necesitas {title.toLowerCase()}?
+          </h2>
+          <p class="text-primary-100">
+            Conversemos sobre tu proyecto. Sin compromiso.
+          </p>
+        </div>
+        <Button href="/cotizador" size="lg" variant="accent" class="shrink-0">
+          Cotizar ahora
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+          </svg>
+        </Button>
+      </div>
+    </Container>
+  </section>
+
+  {/* Other services */}
+  <section class="py-section bg-neutral-50">
+    <Container>
+      <h2 class="text-2xl font-bold text-neutral-900 mb-8">Otros servicios</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        {otherServices.map((s) => (
+          <a
+            href={`/servicios/${s.slug}`}
+            class="flex items-center gap-3 p-4 rounded-xl bg-white border border-neutral-200/60 hover:border-primary-200 hover:shadow-sm transition-all group"
+          >
+            <div class="w-10 h-10 rounded-lg bg-primary-50 flex items-center justify-center shrink-0 group-hover:bg-primary-100 transition-colors">
+              <svg class="w-5 h-5 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+              </svg>
+            </div>
+            <div>
+              <div class="text-sm font-semibold text-neutral-900 group-hover:text-primary-600 transition-colors">{s.title}</div>
+              <div class="text-xs text-neutral-500 line-clamp-1">{s.short}</div>
+            </div>
+          </a>
+        ))}
+      </div>
+    </Container>
+  </section>
+</BaseLayout>

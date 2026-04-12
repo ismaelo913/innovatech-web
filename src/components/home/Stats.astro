@@ -1,0 +1,27 @@
+---
+import Container from '../ui/Container.astro';
+import { STATS } from '../../lib/constants';
+---
+
+<section class="py-16 bg-neutral-950 relative overflow-hidden">
+  <div class="absolute inset-0 bg-[linear-gradient(to_right,theme(--color-neutral-800)_1px,transparent_1px),linear-gradient(to_bottom,theme(--color-neutral-800)_1px,transparent_1px)] bg-[size:4rem_4rem] opacity-20"></div>
+
+  <Container>
+    <div class="grid grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12 relative">
+      {STATS.map((stat, i) => (
+        <div class="text-center">
+          <div
+            class="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-2 tracking-tight"
+            style={`font-family: var(--font-mono)`}
+            data-stat-value={stat.value}
+          >
+            {stat.value}
+          </div>
+          <div class="text-sm text-neutral-400 font-medium">
+            {stat.label}
+          </div>
+        </div>
+      ))}
+    </div>
+  </Container>
+</section>

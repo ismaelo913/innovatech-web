@@ -1,0 +1,55 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Container from '../../components/ui/Container.astro';
+import Badge from '../../components/ui/Badge.astro';
+import { getCollection, render } from 'astro:content';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog');
+  return posts.map((post) => ({
+    params: { slug: post.id },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+---
+
+<BaseLayout title={post.data.title} description={post.data.description}>
+  <article>
+    <section class="py-16 sm:py-20 bg-neutral-50 border-b border-neutral-200/60">
+      <Container narrow>
+        <a href="/blog" class="inline-flex items-center gap-1.5 text-sm text-neutral-500 hover:text-primary-600 transition-colors mb-6">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" />
+          </svg>
+          Volver al blog
+        </a>
+        <div class="flex flex-wrap gap-2 mb-4">
+          {post.data.tags.map((tag) => (
+            <Badge variant="primary">{tag}</Badge>
+          ))}
+        </div>
+        <h1 class="text-3xl sm:text-4xl font-bold text-neutral-950 tracking-tight leading-tight mb-4">
+          {post.data.title}
+        </h1>
+        <div class="flex items-center gap-4 text-sm text-neutral-500">
+          <span>{post.data.author}</span>
+          <span>·</span>
+          <time datetime={post.data.date.toISOString()}>
+            {new Date(post.data.date).toLocaleDateString('es-CL', { year: 'numeric', month: 'long', day: 'numeric' })}
+          </time>
+        </div>
+      </Container>
+    </section>
+
+    <section class="py-section">
+      <Container narrow>
+        <div class="prose prose-neutral prose-lg max-w-none prose-headings:font-bold prose-headings:tracking-tight prose-a:text-primary-600 prose-a:no-underline hover:prose-a:underline">
+          <Content />
+        </div>
+      </Container>
+    </section>
+  </article>
+</BaseLayout>

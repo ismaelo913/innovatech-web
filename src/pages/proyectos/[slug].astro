@@ -1,0 +1,95 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Container from '../../components/ui/Container.astro';
+import Badge from '../../components/ui/Badge.astro';
+import Button from '../../components/ui/Button.astro';
+import { getCollection, render } from 'astro:content';
+
+export async function getStaticPaths() {
+  const projects = await getCollection('projects');
+  return projects.map((project) => ({
+    params: { slug: project.id },
+    props: { project },
+  }));
+}
+
+const { project } = Astro.props;
+const { Content } = await render(project);
+
+const categoryLabels: Record<string, string> = {
+  'remodelacion-residencial': 'Remodelacion Residencial',
+  'remodelacion-comercial': 'Remodelacion Comercial',
+  'obra-gruesa': 'Obra Gruesa',
+  'terminaciones': 'Terminaciones',
+  'ampliacion': 'Ampliacion',
+};
+
+const details = [
+  { label: 'Cliente', value: project.data.client },
+  { label: 'Ubicacion', value: project.data.location },
+  { label: 'Superficie', value: project.data.area },
+  { label: 'Duracion', value: project.data.duration },
+  { label: 'Fecha', value: new Date(project.data.date).toLocaleDateString('es-CL', { year: 'numeric', month: 'long' }) },
+];
+---
+
+<BaseLayout title={project.data.title} description={`Proyecto ${project.data.title} ejecutado por Innovatech en ${project.data.location}.`}>
+  {/* Hero */}
+  <section class="py-16 sm:py-20 bg-neutral-50 border-b border-neutral-200/60">
+    <Container>
+      <a href="/proyectos" class="inline-flex items-center gap-1.5 text-sm text-neutral-500 hover:text-primary-600 transition-colors mb-6">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" />
+        </svg>
+        Volver a proyectos
+      </a>
+      <Badge variant="primary" class="mb-4">{categoryLabels[project.data.category]}</Badge>
+      <h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-neutral-950 tracking-tight leading-tight mb-4">
+        {project.data.title}
+      </h1>
+    </Container>
+  </section>
+
+  {/* Image placeholder */}
+  <section class="border-b border-neutral-200/60">
+    <Container>
+      <div class="aspect-[21/9] -mt-0 rounded-2xl overflow-hidden bg-gradient-to-br from-primary-100 to-primary-200 flex items-center justify-center my-8">
+        <svg class="w-16 h-16 text-primary-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909M3.75 21h16.5a2.25 2.25 0 002.25-2.25V5.25a2.25 2.25 0 00-2.25-2.25H3.75A2.25 2.25 0 001.5 5.25v13.5A2.25 2.25 0 003.75 21z" />
+        </svg>
+      </div>
+    </Container>
+  </section>
+
+  {/* Details + Content */}
+  <section class="py-section">
+    <Container>
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
+        {/* Sidebar */}
+        <div class="lg:col-span-1 order-2 lg:order-1">
+          <div class="sticky top-28 bg-neutral-50 rounded-xl p-6 space-y-4">
+            <h3 class="font-semibold text-neutral-900 mb-2">Datos del proyecto</h3>
+            {details.map((d) => (
+              <div>
+                <div class="text-xs text-neutral-500 uppercase tracking-wider">{d.label}</div>
+                <div class="text-sm font-medium text-neutral-900">{d.value}</div>
+              </div>
+            ))}
+            <div class="pt-4">
+              <Button href="/cotizador" size="sm" class="w-full justify-center">
+                Cotizar proyecto similar
+              </Button>
+            </div>
+          </div>
+        </div>
+
+        {/* Content */}
+        <div class="lg:col-span-2 order-1 lg:order-2">
+          <div class="prose prose-neutral prose-lg max-w-none prose-headings:font-bold prose-headings:tracking-tight">
+            <Content />
+          </div>
+        </div>
+      </div>
+    </Container>
+  </section>
+</BaseLayout>

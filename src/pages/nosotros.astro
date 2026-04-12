@@ -1,0 +1,171 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Container from '../components/ui/Container.astro';
+import SectionHeading from '../components/ui/SectionHeading.astro';
+import Card from '../components/ui/Card.astro';
+import Button from '../components/ui/Button.astro';
+import CTASection from '../components/home/CTASection.astro';
+
+const values = [
+  {
+    title: 'Profesionalismo',
+    description: 'Cada maestro y supervisor esta capacitado para ejecutar con estandares exigentes. No improvisamos.',
+    icon: 'M9 12.75L11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 01-1.043 3.296 3.745 3.745 0 01-3.296 1.043A3.745 3.745 0 0112 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 01-3.296-1.043 3.745 3.745 0 01-1.043-3.296A3.745 3.745 0 013 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 011.043-3.296 3.746 3.746 0 013.296-1.043A3.746 3.746 0 0112 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 013.296 1.043 3.746 3.746 0 011.043 3.296A3.745 3.745 0 0121 12z',
+  },
+  {
+    title: 'Seguridad',
+    description: 'Nuestro personal trabaja con EPPs completos y herramientas propias. La seguridad es innegociable.',
+    icon: 'M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z',
+  },
+  {
+    title: 'Cumplimiento',
+    description: 'Respetamos plazos y presupuestos. Nuestro supervisor coordina para que todo avance segun lo planificado.',
+    icon: 'M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z',
+  },
+  {
+    title: 'Transparencia',
+    description: 'Reportes de avance diarios, comunicacion directa y sin letra chica. Sabes exactamente que pasa en tu obra.',
+    icon: 'M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z M15 12a3 3 0 11-6 0 3 3 0 016 0z',
+  },
+];
+
+const team = [
+  { name: 'Director General', role: 'Liderazgo y estrategia', initials: 'DG' },
+  { name: 'Jefe de Operaciones', role: 'Coordinacion de proyectos', initials: 'JO' },
+  { name: 'Supervisor Senior', role: 'Control de calidad en obra', initials: 'SS' },
+  { name: 'Administracion', role: 'Gestion administrativa y RRHH', initials: 'AD' },
+];
+
+const differentiators = [
+  { title: 'Personal con EPPs', description: 'Casco, zapatos de seguridad, lentes, guantes y arnes cuando corresponde.' },
+  { title: 'Herramientas propias', description: 'Herramientas electricas menores incluidas. Menos dependencia, mas productividad.' },
+  { title: 'Supervision permanente', description: 'Supervisor dedicado en cada obra. Reportes diarios al mandante.' },
+  { title: 'Personal cualificado', description: 'Maestros con experiencia comprobada en cada especialidad.' },
+];
+---
+
+<BaseLayout
+  title="Nosotros"
+  description="Conoce Innovatech: startup de construccion en Santiago. Mano de obra cualificada, equipada y supervisada para tu proyecto."
+>
+  {/* Hero */}
+  <section class="py-16 sm:py-24 bg-neutral-50 border-b border-neutral-200/60">
+    <Container>
+      <div class="max-w-3xl mx-auto text-center">
+        <span class="inline-block text-sm font-semibold tracking-widest uppercase text-primary-600 mb-4">
+          Sobre nosotros
+        </span>
+        <h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-neutral-950 tracking-tight leading-tight mb-6">
+          Modernizamos el subcontrato en construccion
+        </h1>
+        <p class="text-lg text-neutral-600 leading-relaxed">
+          Innovatech nace de una conviccion simple: la construccion necesita subcontratistas que trabajen con estandares profesionales reales. Personal capacitado, equipado y supervisado. Sin improvisacion.
+        </p>
+      </div>
+    </Container>
+  </section>
+
+  {/* Story */}
+  <section class="py-section">
+    <Container>
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+        <div>
+          <span class="inline-block text-sm font-semibold tracking-widest uppercase text-primary-600 mb-3">
+            Nuestra historia
+          </span>
+          <h2 class="text-2xl sm:text-3xl font-bold text-neutral-900 tracking-tight mb-6">
+            De la frustracion a la solucion
+          </h2>
+          <div class="space-y-4 text-neutral-600 leading-relaxed">
+            <p>
+              Despues de anos trabajando en proyectos de construccion, vimos siempre el mismo problema: subcontratistas que llegan sin herramientas, sin EPPs, sin supervision y sin compromiso con los plazos.
+            </p>
+            <p>
+              Innovatech nacio para cambiar eso. Somos una empresa que profesionaliza la mano de obra en construccion. Nuestros maestros llegan equipados, capacitados y con un supervisor que coordina cada detalle.
+            </p>
+            <p>
+              Operamos en Santiago y la Region Metropolitana, atendiendo desde remodelaciones residenciales hasta proyectos de obra gruesa para constructoras e inmobiliarias.
+            </p>
+          </div>
+        </div>
+        <div class="aspect-[4/3] rounded-2xl bg-gradient-to-br from-primary-100 to-primary-200 flex items-center justify-center">
+          <div class="text-center p-8">
+            <div class="text-6xl font-bold text-primary-600 mb-2" style="font-family: var(--font-mono)">8+</div>
+            <div class="text-primary-700 font-medium">anos profesionalizando la construccion</div>
+          </div>
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  {/* Values */}
+  <section class="py-section bg-neutral-50">
+    <Container>
+      <SectionHeading
+        label="Valores"
+        title="Lo que nos define"
+        description="Estos principios guian cada decision que tomamos, desde la seleccion de personal hasta la entrega final."
+      />
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+        {values.map((v) => (
+          <Card class="flex gap-5">
+            <div class="w-12 h-12 rounded-xl bg-primary-50 flex items-center justify-center shrink-0">
+              <svg class="w-6 h-6 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d={v.icon} />
+              </svg>
+            </div>
+            <div>
+              <h3 class="text-lg font-semibold text-neutral-900 mb-1">{v.title}</h3>
+              <p class="text-sm text-neutral-600 leading-relaxed">{v.description}</p>
+            </div>
+          </Card>
+        ))}
+      </div>
+    </Container>
+  </section>
+
+  {/* Differentiators */}
+  <section class="py-section bg-neutral-950">
+    <Container>
+      <SectionHeading
+        label="Diferenciadores"
+        title="Por que somos diferentes"
+        description="No somos un subcontratista mas. Esto es lo que nos distingue en cada obra."
+        dark
+      />
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        {differentiators.map((d, i) => (
+          <div class="p-6 rounded-xl bg-neutral-900 border border-neutral-800">
+            <div class="text-3xl font-bold text-primary-400 mb-3" style="font-family: var(--font-mono)">{String(i + 1).padStart(2, '0')}</div>
+            <h3 class="text-lg font-semibold text-white mb-2">{d.title}</h3>
+            <p class="text-sm text-neutral-400 leading-relaxed">{d.description}</p>
+          </div>
+        ))}
+      </div>
+    </Container>
+  </section>
+
+  {/* Team */}
+  <section class="py-section">
+    <Container>
+      <SectionHeading
+        label="Equipo"
+        title="Quienes lideran Innovatech"
+        description="Un equipo con experiencia en construccion, gestion de proyectos y administracion de personal."
+      />
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-6">
+        {team.map((member) => (
+          <div class="text-center">
+            <div class="w-24 h-24 mx-auto rounded-2xl bg-neutral-100 flex items-center justify-center mb-4">
+              <span class="text-2xl font-bold text-neutral-400">{member.initials}</span>
+            </div>
+            <h3 class="font-semibold text-neutral-900">{member.name}</h3>
+            <p class="text-sm text-neutral-500 mt-1">{member.role}</p>
+          </div>
+        ))}
+      </div>
+    </Container>
+  </section>
+
+  <CTASection />
+</BaseLayout>

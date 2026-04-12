@@ -1,0 +1,141 @@
+---
+import Container from '../ui/Container.astro';
+import Button from '../ui/Button.astro';
+import { NAV_LINKS, SITE } from '../../lib/constants';
+
+const currentPath = Astro.url.pathname;
+---
+
+<header
+  id="site-header"
+  class="fixed top-0 inset-x-0 z-50 transition-all duration-300"
+>
+  <Container>
+    <nav class="flex items-center justify-between h-18 lg:h-20" aria-label="Main navigation">
+      <!-- Logo -->
+      <a href="/" class="flex items-center gap-2.5 group" aria-label={SITE.name}>
+        <div class="w-9 h-9 rounded-lg bg-primary-600 flex items-center justify-center transition-transform duration-300 group-hover:scale-105">
+          <span class="text-white font-bold text-lg leading-none">I</span>
+        </div>
+        <span class="text-xl font-bold tracking-tight text-neutral-900 header-logo-text">
+          Innova<span class="text-primary-600">tech</span>
+        </span>
+      </a>
+
+      <!-- Desktop Nav -->
+      <ul class="hidden lg:flex items-center gap-1">
+        {NAV_LINKS.map((link) => (
+          <li>
+            <a
+              href={link.href}
+              class:list={[
+                'px-3.5 py-2 rounded-lg text-sm font-medium transition-colors duration-200',
+                currentPath === link.href || (link.href !== '/' && currentPath.startsWith(link.href))
+                  ? 'text-primary-600 bg-primary-50'
+                  : 'text-neutral-600 hover:text-neutral-900 hover:bg-neutral-100',
+              ]}
+              aria-current={currentPath === link.href ? 'page' : undefined}
+            >
+              {link.label}
+            </a>
+          </li>
+        ))}
+      </ul>
+
+      <!-- Desktop CTA -->
+      <div class="hidden lg:flex items-center gap-3">
+        <Button href="/cotizador" size="sm">
+          Cotiza tu proyecto
+        </Button>
+      </div>
+
+      <!-- Mobile Hamburger -->
+      <button
+        id="menu-toggle"
+        class="lg:hidden flex items-center justify-center w-10 h-10 rounded-lg hover:bg-neutral-100 transition-colors"
+        aria-label="Abrir menu"
+        aria-expanded="false"
+        aria-controls="mobile-menu"
+      >
+        <svg id="menu-icon-open" class="w-5 h-5 text-neutral-700" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+        <svg id="menu-icon-close" class="w-5 h-5 text-neutral-700 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+    </nav>
+  </Container>
+
+  <!-- Mobile Menu -->
+  <div
+    id="mobile-menu"
+    class="lg:hidden fixed inset-x-0 top-18 bottom-0 bg-white/95 backdrop-blur-lg -translate-x-full transition-transform duration-300 ease-out z-40"
+    aria-hidden="true"
+  >
+    <Container>
+      <ul class="flex flex-col gap-1 pt-6">
+        {NAV_LINKS.map((link) => (
+          <li>
+            <a
+              href={link.href}
+              class:list={[
+                'flex items-center px-4 py-3 rounded-lg text-base font-medium transition-colors',
+                currentPath === link.href
+                  ? 'text-primary-600 bg-primary-50'
+                  : 'text-neutral-700 hover:bg-neutral-100',
+              ]}
+            >
+              {link.label}
+            </a>
+          </li>
+        ))}
+      </ul>
+      <div class="mt-6 px-4">
+        <Button href="/cotizador" size="lg" class="w-full justify-center">
+          Cotiza tu proyecto
+        </Button>
+      </div>
+    </Container>
+  </div>
+</header>
+
+<script>
+  const header = document.getElementById('site-header')!;
+  const toggle = document.getElementById('menu-toggle')!;
+  const menu = document.getElementById('mobile-menu')!;
+  const iconOpen = document.getElementById('menu-icon-open')!;
+  const iconClose = document.getElementById('menu-icon-close')!;
+
+  let isOpen = false;
+
+  // Scroll effect: background blur on scroll
+  const onScroll = () => {
+    if (window.scrollY > 20) {
+      header.classList.add('bg-white/80', 'backdrop-blur-lg', 'border-b', 'border-neutral-200/50', 'shadow-sm');
+    } else {
+      header.classList.remove('bg-white/80', 'backdrop-blur-lg', 'border-b', 'border-neutral-200/50', 'shadow-sm');
+    }
+  };
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  // Mobile menu toggle
+  toggle.addEventListener('click', () => {
+    isOpen = !isOpen;
+    menu.classList.toggle('-translate-x-full', !isOpen);
+    menu.classList.toggle('translate-x-0', isOpen);
+    menu.setAttribute('aria-hidden', String(!isOpen));
+    toggle.setAttribute('aria-expanded', String(isOpen));
+    iconOpen.classList.toggle('hidden', isOpen);
+    iconClose.classList.toggle('hidden', !isOpen);
+    document.body.style.overflow = isOpen ? 'hidden' : '';
+  });
+
+  // Close menu on link click
+  menu.querySelectorAll('a').forEach((link) => {
+    link.addEventListener('click', () => {
+      if (isOpen) toggle.click();
+    });
+  });
+</script>

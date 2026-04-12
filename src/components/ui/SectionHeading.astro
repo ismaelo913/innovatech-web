@@ -1,0 +1,52 @@
+---
+interface Props {
+  label?: string;
+  title: string;
+  description?: string;
+  align?: 'left' | 'center';
+  dark?: boolean;
+  class?: string;
+}
+
+const {
+  label,
+  title,
+  description,
+  align = 'center',
+  dark = false,
+  class: className,
+} = Astro.props;
+
+const alignClass = align === 'center' ? 'text-center mx-auto' : 'text-left';
+---
+
+<div class:list={['max-w-2xl mb-12', alignClass, className]}>
+  {label && (
+    <span
+      class:list={[
+        'inline-block text-sm font-semibold tracking-widest uppercase mb-3',
+        dark ? 'text-primary-400' : 'text-primary-600',
+      ]}
+    >
+      {label}
+    </span>
+  )}
+  <h2
+    class:list={[
+      'text-3xl sm:text-4xl font-bold tracking-tight leading-tight',
+      dark ? 'text-white' : 'text-neutral-900',
+    ]}
+  >
+    {title}
+  </h2>
+  {description && (
+    <p
+      class:list={[
+        'mt-4 text-lg leading-relaxed',
+        dark ? 'text-neutral-400' : 'text-neutral-600',
+      ]}
+    >
+      {description}
+    </p>
+  )}
+</div>
