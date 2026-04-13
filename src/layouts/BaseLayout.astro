@@ -47,16 +47,65 @@ const canonicalUrl = new URL(Astro.url.pathname, SITE.url);
     <meta name="twitter:title" content={pageTitle} />
     <meta name="twitter:description" content={description} />
 
-    <!-- Fonts -->
+    <!-- Fonts (optimized loading) -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
       rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;700&display=swap"
+      rel="stylesheet"
+      media="print"
+      onload="this.media='all'"
     />
 
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <!-- Theme Color -->
+    <meta name="theme-color" content="#e8730c" />
+
+    <!-- Structured Data: LocalBusiness -->
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "LocalBusiness",
+      "name": SITE.name,
+      "description": SITE.description,
+      "url": SITE.url,
+      "telephone": SITE.phone,
+      "email": SITE.email,
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Santiago",
+        "addressRegion": "Región Metropolitana",
+        "addressCountry": "CL"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": -33.4489,
+        "longitude": -70.6693
+      },
+      "image": new URL("/images/logo/logo-full.jpeg", SITE.url).href,
+      "slogan": SITE.tagline,
+      "serviceArea": {
+        "@type": "GeoCircle",
+        "geoMidpoint": { "@type": "GeoCoordinates", "latitude": -33.4489, "longitude": -70.6693 },
+        "geoRadius": "50000"
+      },
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Servicios de Construcción",
+        "itemListElement": [
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Remodelaciones Residenciales" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Remodelaciones Comerciales" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Obra Gruesa" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Terminaciones" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Ampliaciones" } }
+        ]
+      }
+    })} />
   </head>
   <body class="min-h-screen flex flex-col bg-background text-text">
     <a href="#main-content" class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:px-4 focus:py-2 focus:bg-primary-600 focus:text-white focus:rounded-lg">
