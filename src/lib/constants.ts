@@ -4,10 +4,10 @@ export const SITE = {
   description:
     'Innovatech es una empresa subcontratista de construcción en Santiago de Chile. Calidad que se ve, seguridad que se siente. Mano de obra cualificada, equipada y supervisada.',
   url: 'https://innovatech.cl',
-  phone: '+56 9 XXXX XXXX',
+  phone: '+56 9 3890 5488',
   email: 'contacto@innovatech.cl',
   address: 'Santiago, Región Metropolitana, Chile',
-  whatsapp: '569XXXXXXXX',
+  whatsapp: '56938905488',
 } as const;
 
 export const NAV_LINKS = [

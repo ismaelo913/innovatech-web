@@ -57,7 +57,7 @@ export default function ContactForm() {
 
     // Fallback: open WhatsApp with pre-filled message
     const waMsg = `Hola Innovatech, soy ${name}.\n\n📋 Servicio: ${service}\n📧 Email: ${email}\n📱 Teléfono: ${phone}\n\n💬 Mensaje:\n${message}`;
-    const waUrl = `https://wa.me/569XXXXXXXX?text=${encodeURIComponent(waMsg)}`;
+    const waUrl = `https://wa.me/56938905488?text=${encodeURIComponent(waMsg)}`;
     window.open(waUrl, '_blank');
     setStatus('success');
     formRef.current.reset();

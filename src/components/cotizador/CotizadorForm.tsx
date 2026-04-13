@@ -67,7 +67,7 @@ export default function CotizadorForm() {
 
     // Fallback: WhatsApp
     const waMsg = `Hola Innovatech, solicito cotización.\n\n👤 ${name}\n📱 ${phone}\n📧 ${email}\n\n🔧 Servicio: ${service}\n📐 m²: ${area}\n📍 Comuna: ${comuna}\n⏰ Urgencia: ${urgency || 'No especificada'}\n✉️ Contactar por: ${contactPref || 'WhatsApp'}\n\n📝 Descripción:\n${description || 'Sin descripción'}`;
-    const waUrl = `https://wa.me/569XXXXXXXX?text=${encodeURIComponent(waMsg)}`;
+    const waUrl = `https://wa.me/56938905488?text=${encodeURIComponent(waMsg)}`;
     window.open(waUrl, '_blank');
     setStatus('success');
     formRef.current.reset();
