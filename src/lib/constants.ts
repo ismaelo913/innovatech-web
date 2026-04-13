@@ -2,7 +2,7 @@ export const SITE = {
   name: 'Innovatech',
   tagline: 'Calidad que se ve, seguridad que se siente',
   description:
-    'Innovatech es una empresa subcontratista de construcción en Santiago de Chile. Mano de obra cualificada, equipada y supervisada para remodelaciones, obra gruesa, terminaciones y ampliaciones.',
+    'Innovatech es una empresa subcontratista de construcción en Santiago de Chile. Calidad que se ve, seguridad que se siente. Mano de obra cualificada, equipada y supervisada.',
   url: 'https://innovatech.cl',
   phone: '+56 9 XXXX XXXX',
   email: 'contacto@innovatech.cl',
@@ -52,9 +52,3 @@ export const SERVICES = [
   },
 ] as const;
 
-export const STATS = [
-  { value: '150+', label: 'Proyectos completados' },
-  { value: '8', label: 'Años de experiencia' },
-  { value: '50k+', label: 'm2 construidos' },
-  { value: '98%', label: 'Clientes satisfechos' },
-] as const;
