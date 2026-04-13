@@ -24,6 +24,13 @@ const categoryLabels: Record<string, string> = {
   'ampliacion': 'Ampliacion',
 };
 
+const projectImages: Record<string, string[]> = {
+  'oficinas-las-condes': ['/images/projects/terminaciones-interior.jpeg', '/images/projects/instalaciones-sanitarias-2.jpeg'],
+  'edificio-nunoa': ['/images/projects/estructura-metalica-1.jpeg', '/images/projects/estructura-metalica-2.jpeg', '/images/projects/compactacion-terreno.jpeg'],
+  'ampliacion-providencia': ['/images/projects/estructura-metalica-2.jpeg', '/images/projects/instalaciones-sanitarias-1.jpeg', '/images/projects/pavimentos-exterior.jpeg'],
+};
+const images = projectImages[project.id] || ['/images/projects/estructura-metalica-1.jpeg'];
+
 const details = [
   { label: 'Cliente', value: project.data.client },
   { label: 'Ubicacion', value: project.data.location },
@@ -50,13 +57,26 @@ const details = [
     </Container>
   </section>
 
-  {/* Image placeholder */}
+  {/* Project images */}
   <section class="border-b border-neutral-200/60">
     <Container>
-      <div class="aspect-[21/9] -mt-0 rounded-2xl overflow-hidden bg-gradient-to-br from-primary-100 to-primary-200 flex items-center justify-center my-8">
-        <svg class="w-16 h-16 text-primary-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909M3.75 21h16.5a2.25 2.25 0 002.25-2.25V5.25a2.25 2.25 0 00-2.25-2.25H3.75A2.25 2.25 0 001.5 5.25v13.5A2.25 2.25 0 003.75 21z" />
-        </svg>
+      <div class="my-8 grid grid-cols-1 gap-4">
+        <div class="aspect-[21/9] rounded-2xl overflow-hidden bg-neutral-200">
+          <img
+            src={images[0]}
+            alt={project.data.title}
+            class="w-full h-full object-cover"
+          />
+        </div>
+        {images.length > 1 && (
+          <div class="grid grid-cols-2 gap-4">
+            {images.slice(1).map((img) => (
+              <div class="aspect-[4/3] rounded-xl overflow-hidden bg-neutral-200">
+                <img src={img} alt={project.data.title} class="w-full h-full object-cover" loading="lazy" />
+              </div>
+            ))}
+          </div>
+        )}
       </div>
     </Container>
   </section>

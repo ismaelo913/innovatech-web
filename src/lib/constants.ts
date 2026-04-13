@@ -1,6 +1,6 @@
 export const SITE = {
   name: 'Innovatech',
-  tagline: 'Construccion inteligente para proyectos exigentes',
+  tagline: 'Calidad que se ve, seguridad que se siente',
   description:
     'Innovatech es una empresa subcontratista de construccion en Santiago de Chile. Mano de obra cualificada, equipada y supervisada para remodelaciones, obra gruesa, terminaciones y ampliaciones.',
   url: 'https://innovatech.cl',

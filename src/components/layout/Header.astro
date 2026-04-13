@@ -13,12 +13,16 @@ const currentPath = Astro.url.pathname;
   <Container>
     <nav class="flex items-center justify-between h-18 lg:h-20" aria-label="Main navigation">
       <!-- Logo -->
-      <a href="/" class="flex items-center gap-2.5 group" aria-label={SITE.name}>
-        <div class="w-9 h-9 rounded-lg bg-primary-600 flex items-center justify-center transition-transform duration-300 group-hover:scale-105">
-          <span class="text-white font-bold text-lg leading-none">I</span>
-        </div>
+      <a href="/" class="flex items-center gap-2 group" aria-label={SITE.name}>
+        <img
+          src="/images/logo/logo-icon.jpeg"
+          alt="Innovatech"
+          width="40"
+          height="40"
+          class="w-10 h-10 rounded-lg object-contain bg-neutral-950 transition-transform duration-300 group-hover:scale-105"
+        />
         <span class="text-xl font-bold tracking-tight text-neutral-900 header-logo-text">
-          Innova<span class="text-primary-600">tech</span>
+          INNOVA<span class="text-accent-500">TECH</span>
         </span>
       </a>
 

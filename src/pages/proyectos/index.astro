@@ -10,6 +10,12 @@ const projects = (await getCollection('projects')).sort(
   (a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime(),
 );
 
+const projectImages: Record<string, string> = {
+  'oficinas-las-condes': '/images/projects/terminaciones-interior.jpeg',
+  'edificio-nunoa': '/images/projects/estructura-metalica-1.jpeg',
+  'ampliacion-providencia': '/images/projects/estructura-metalica-2.jpeg',
+};
+
 const categoryLabels: Record<string, string> = {
   'remodelacion-residencial': 'Remodelacion Residencial',
   'remodelacion-comercial': 'Remodelacion Comercial',
@@ -39,10 +45,13 @@ const categoryLabels: Record<string, string> = {
         {projects.map((project) => (
           <a href={`/proyectos/${project.id}`} class="group block">
             <div class="rounded-xl overflow-hidden border border-neutral-200/60 bg-white shadow-sm transition-all duration-300 group-hover:shadow-lg group-hover:-translate-y-0.5">
-              <div class="aspect-[4/3] bg-gradient-to-br from-primary-100 to-primary-200 flex items-center justify-center relative overflow-hidden">
-                <svg class="w-12 h-12 text-primary-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909M3.75 21h16.5a2.25 2.25 0 002.25-2.25V5.25a2.25 2.25 0 00-2.25-2.25H3.75A2.25 2.25 0 001.5 5.25v13.5A2.25 2.25 0 003.75 21z" />
-                </svg>
+              <div class="aspect-[4/3] relative overflow-hidden bg-neutral-200">
+                <img
+                  src={projectImages[project.id] || '/images/projects/estructura-metalica-1.jpeg'}
+                  alt={project.data.title}
+                  class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  loading="lazy"
+                />
                 <div class="absolute inset-0 bg-primary-600/0 group-hover:bg-primary-600/10 transition-colors duration-300"></div>
               </div>
               <div class="p-5">
