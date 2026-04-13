@@ -48,8 +48,8 @@ const projects = [
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-      {projects.map((project) => (
-        <a href={`/proyectos/${project.slug}`} class="group block">
+      {projects.map((project, index) => (
+        <a href={`/proyectos/${project.slug}`} class="group block reveal" style={`transition-delay: ${(index % 3) * 100}ms`}>
           <div class="rounded-xl overflow-hidden border border-neutral-200/60 bg-white shadow-sm transition-all duration-300 group-hover:shadow-lg group-hover:-translate-y-0.5">
             <div class="aspect-[4/3] bg-neutral-200 relative overflow-hidden">
               <img

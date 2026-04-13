@@ -155,7 +155,7 @@ export default function ProjectGallery({ images, alt }: Props) {
                       : 'opacity-50 hover:opacity-80'
                   }`}
                 >
-                  <img src={img} alt="" className="w-full h-full object-cover" />
+                  <img src={img} alt={`Miniatura ${index + 1}`} className="w-full h-full object-cover" />
                 </button>
               ))}
             </div>
