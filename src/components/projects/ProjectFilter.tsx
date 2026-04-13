@@ -35,8 +35,8 @@ export default function ProjectFilter({ projects, categoryLabels }: Props) {
               onClick={() => setActiveFilter(cat)}
               className={`px-4 py-2 rounded-lg text-sm font-medium transition-all cursor-pointer ${
                 isActive
-                  ? 'bg-[oklch(50%_0.22_250)] text-white shadow-md'
-                  : 'bg-white text-neutral-600 border border-neutral-200 hover:border-[oklch(78%_0.10_250)] hover:text-[oklch(50%_0.22_250)]'
+                  ? 'bg-[oklch(70%_0.18_50)] text-white shadow-md'
+                  : 'bg-white text-neutral-600 border border-neutral-200 hover:border-[oklch(79%_0.14_55)] hover:text-[oklch(62%_0.18_45)]'
               }`}
             >
               {label}
@@ -57,13 +57,13 @@ export default function ProjectFilter({ projects, categoryLabels }: Props) {
                   className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                   loading="lazy"
                 />
-                <div className="absolute inset-0 bg-[oklch(50%_0.22_250/0)] group-hover:bg-[oklch(50%_0.22_250/0.1)] transition-colors duration-300" />
+                <div className="absolute inset-0 bg-[oklch(70%_0.18_50/0)] group-hover:bg-[oklch(70%_0.18_50/0.1)] transition-colors duration-300" />
               </div>
               <div className="p-5">
-                <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-[oklch(97%_0.01_250)] text-[oklch(50%_0.22_250)] border border-[oklch(88%_0.06_250)] mb-3">
+                <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-[oklch(97%_0.02_65)] text-[oklch(62%_0.18_45)] border border-[oklch(87%_0.10_58)] mb-3">
                   {categoryLabels[project.category] || project.category}
                 </span>
-                <h3 className="text-lg font-semibold text-neutral-900 mb-2 group-hover:text-[oklch(50%_0.22_250)] transition-colors">
+                <h3 className="text-lg font-semibold text-neutral-900 mb-2 group-hover:text-[oklch(62%_0.18_45)] transition-colors">
                   {project.title}
                 </h3>
                 {project.location && (

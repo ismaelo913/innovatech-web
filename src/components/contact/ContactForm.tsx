@@ -18,7 +18,7 @@ export default function ContactForm() {
   const [status, setStatus] = useState<FormStatus>('idle');
 
   const inputClass =
-    'w-full px-4 py-2.5 rounded-lg border border-neutral-300 bg-white text-neutral-900 text-sm placeholder:text-neutral-400 focus:border-[oklch(50%_0.22_250)] focus:ring-2 focus:ring-[oklch(50%_0.22_250/0.2)] transition-colors outline-none';
+    'w-full px-4 py-2.5 rounded-lg border border-neutral-300 bg-white text-neutral-900 text-sm placeholder:text-neutral-400 focus:border-[oklch(70%_0.18_50)] focus:ring-2 focus:ring-[oklch(70%_0.18_50/0.2)] transition-colors outline-none';
 
   async function handleSubmit(e: FormEvent) {
     e.preventDefault();
@@ -146,7 +146,7 @@ export default function ContactForm() {
       <button
         type="submit"
         disabled={status === 'sending'}
-        className="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-[oklch(50%_0.22_250)] text-white font-semibold text-sm hover:bg-[oklch(44%_0.20_250)] disabled:opacity-50 disabled:cursor-not-allowed transition-colors cursor-pointer"
+        className="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-[oklch(70%_0.18_50)] text-white font-semibold text-sm hover:bg-[oklch(62%_0.18_45)] disabled:opacity-50 disabled:cursor-not-allowed transition-colors cursor-pointer"
       >
         {status === 'sending' ? (
           <>

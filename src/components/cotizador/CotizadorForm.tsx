@@ -26,7 +26,7 @@ export default function CotizadorForm() {
   const [selectedService, setSelectedService] = useState('');
 
   const inputClass =
-    'w-full px-4 py-2.5 rounded-lg border border-neutral-300 bg-white text-neutral-900 text-sm placeholder:text-neutral-400 focus:border-[oklch(50%_0.22_250)] focus:ring-2 focus:ring-[oklch(50%_0.22_250/0.2)] transition-colors outline-none';
+    'w-full px-4 py-2.5 rounded-lg border border-neutral-300 bg-white text-neutral-900 text-sm placeholder:text-neutral-400 focus:border-[oklch(70%_0.18_50)] focus:ring-2 focus:ring-[oklch(70%_0.18_50/0.2)] transition-colors outline-none';
 
   async function handleSubmit(e: FormEvent) {
     e.preventDefault();
@@ -115,7 +115,7 @@ export default function CotizadorForm() {
                 checked={selectedService === service.title}
                 onChange={() => setSelectedService(service.title)}
               />
-              <div className="p-4 rounded-xl border-2 border-neutral-200 bg-white hover:border-[oklch(78%_0.10_250)] peer-checked:border-[oklch(55%_0.20_250)] peer-checked:bg-[oklch(97%_0.01_250)] transition-all">
+              <div className="p-4 rounded-xl border-2 border-neutral-200 bg-white hover:border-[oklch(79%_0.14_55)] peer-checked:border-[oklch(70%_0.18_50)] peer-checked:bg-[oklch(97%_0.02_65)] transition-all">
                 <div className="font-medium text-neutral-900 text-sm">{service.title}</div>
                 <div className="text-xs text-neutral-500 mt-1">{service.short}</div>
               </div>
@@ -160,7 +160,7 @@ export default function CotizadorForm() {
             {['Flexible', '1-3 meses', 'Urgente'].map((u) => (
               <label key={u} className="cursor-pointer">
                 <input type="radio" name="urgency" value={u} className="peer sr-only" />
-                <span className="inline-flex px-4 py-2 rounded-lg border-2 border-neutral-200 text-sm font-medium text-neutral-700 hover:border-[oklch(78%_0.10_250)] peer-checked:border-[oklch(55%_0.20_250)] peer-checked:bg-[oklch(97%_0.01_250)] peer-checked:text-[oklch(44%_0.20_250)] transition-all">
+                <span className="inline-flex px-4 py-2 rounded-lg border-2 border-neutral-200 text-sm font-medium text-neutral-700 hover:border-[oklch(79%_0.14_55)] peer-checked:border-[oklch(70%_0.18_50)] peer-checked:bg-[oklch(97%_0.02_65)] peer-checked:text-[oklch(53%_0.16_42)] transition-all">
                   {u}
                 </span>
               </label>
