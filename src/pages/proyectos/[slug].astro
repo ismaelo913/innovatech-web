@@ -3,6 +3,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import Container from '../../components/ui/Container.astro';
 import Badge from '../../components/ui/Badge.astro';
 import Button from '../../components/ui/Button.astro';
+import ProjectGallery from '../../components/projects/ProjectGallery.tsx';
 import { getCollection, render } from 'astro:content';
 
 export async function getStaticPaths() {
@@ -17,11 +18,11 @@ const { project } = Astro.props;
 const { Content } = await render(project);
 
 const categoryLabels: Record<string, string> = {
-  'remodelacion-residencial': 'Remodelacion Residencial',
-  'remodelacion-comercial': 'Remodelacion Comercial',
+  'remodelacion-residencial': 'Remodelación Residencial',
+  'remodelacion-comercial': 'Remodelación Comercial',
   'obra-gruesa': 'Obra Gruesa',
   'terminaciones': 'Terminaciones',
-  'ampliacion': 'Ampliacion',
+  'ampliacion': 'Ampliación',
 };
 
 const projectImages: Record<string, string[]> = {
@@ -41,7 +42,7 @@ const projectImages: Record<string, string[]> = {
     '/images/projects/techumbre-2.jpeg'
   ],
 };
-const images = projectImages[project.id] || ['/images/projects/estructura-metalica-1.jpeg'];
+const images = projectImages[project.id] || ['/images/projects/colina-1.jpeg'];
 
 const allDetails = [
   { label: 'Ubicación', value: project.data.location },
@@ -68,26 +69,11 @@ const details = allDetails.filter(d => Boolean(d.value));
     </Container>
   </section>
 
-  {/* Project images */}
+  {/* Project images — React Lightbox Island */}
   <section class="border-b border-neutral-200/60">
     <Container>
-      <div class="my-8 grid grid-cols-1 gap-4">
-        <div class="aspect-[21/9] rounded-2xl overflow-hidden bg-neutral-200">
-          <img
-            src={images[0]}
-            alt={project.data.title}
-            class="w-full h-full object-cover"
-          />
-        </div>
-        {images.length > 1 && (
-          <div class="grid grid-cols-2 gap-4">
-            {images.slice(1).map((img) => (
-              <div class="aspect-[4/3] rounded-xl overflow-hidden bg-neutral-200">
-                <img src={img} alt={project.data.title} class="w-full h-full object-cover" loading="lazy" />
-              </div>
-            ))}
-          </div>
-        )}
+      <div class="my-8">
+        <ProjectGallery client:visible images={images} alt={project.data.title} />
       </div>
     </Container>
   </section>
