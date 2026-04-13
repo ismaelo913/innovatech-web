@@ -25,22 +25,33 @@ const categoryLabels: Record<string, string> = {
 };
 
 const projectImages: Record<string, string[]> = {
-  'oficinas-las-condes': ['/images/projects/terminaciones-interior.jpeg', '/images/projects/instalaciones-sanitarias-2.jpeg'],
-  'edificio-nunoa': ['/images/projects/estructura-metalica-1.jpeg', '/images/projects/estructura-metalica-2.jpeg', '/images/projects/compactacion-terreno.jpeg'],
-  'ampliacion-providencia': ['/images/projects/estructura-metalica-2.jpeg', '/images/projects/instalaciones-sanitarias-1.jpeg', '/images/projects/pavimentos-exterior.jpeg'],
+  'condominio-colina': [
+    '/images/projects/colina-1.jpeg',
+    '/images/projects/colina-2.jpeg',
+    '/images/projects/colina-3.jpeg'
+  ],
+  'condominio-las-condes': [
+    '/images/projects/las-condes-1.jpeg',
+    '/images/projects/las-condes-2.jpeg',
+    '/images/projects/las-condes-3.jpeg',
+    '/images/projects/las-condes-4.jpeg'
+  ],
+  'techumbre-terminaciones': [
+    '/images/projects/techumbre-1.jpeg',
+    '/images/projects/techumbre-2.jpeg'
+  ],
 };
 const images = projectImages[project.id] || ['/images/projects/estructura-metalica-1.jpeg'];
 
-const details = [
-  { label: 'Cliente', value: project.data.client },
-  { label: 'Ubicacion', value: project.data.location },
-  { label: 'Superficie', value: project.data.area },
-  { label: 'Duracion', value: project.data.duration },
+const allDetails = [
+  { label: 'Ubicación', value: project.data.location },
   { label: 'Fecha', value: new Date(project.data.date).toLocaleDateString('es-CL', { year: 'numeric', month: 'long' }) },
 ];
+
+const details = allDetails.filter(d => Boolean(d.value));
 ---
 
-<BaseLayout title={project.data.title} description={`Proyecto ${project.data.title} ejecutado por Innovatech en ${project.data.location}.`}>
+<BaseLayout title={project.data.title} description={`Proyecto ${project.data.title} ejecutado por Innovatech${project.data.location ? ` en ${project.data.location}` : ''}.`}>
   {/* Hero */}
   <section class="py-16 sm:py-20 bg-neutral-50 border-b border-neutral-200/60">
     <Container>

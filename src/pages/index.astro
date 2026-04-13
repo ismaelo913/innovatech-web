@@ -1,10 +1,8 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Hero from '../components/home/Hero.astro';
-import Stats from '../components/home/Stats.astro';
 import ServicesPreview from '../components/home/ServicesPreview.astro';
 import ProjectsShowcase from '../components/home/ProjectsShowcase.astro';
-import Testimonials from '../components/home/Testimonials.astro';
 import CTASection from '../components/home/CTASection.astro';
 import { SITE } from '../lib/constants';
 ---
@@ -14,9 +12,7 @@ import { SITE } from '../lib/constants';
   description={SITE.description}
 >
   <Hero />
-  <Stats />
   <ServicesPreview />
   <ProjectsShowcase />
-  <Testimonials />
   <CTASection />
 </BaseLayout>

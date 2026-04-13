@@ -11,23 +11,23 @@ const projects = (await getCollection('projects')).sort(
 );
 
 const projectImages: Record<string, string> = {
-  'oficinas-las-condes': '/images/projects/terminaciones-interior.jpeg',
-  'edificio-nunoa': '/images/projects/estructura-metalica-1.jpeg',
-  'ampliacion-providencia': '/images/projects/estructura-metalica-2.jpeg',
+  'condominio-colina': '/images/projects/colina-1.jpeg',
+  'condominio-las-condes': '/images/projects/las-condes-1.jpeg',
+  'techumbre-terminaciones': '/images/projects/techumbre-1.jpeg',
 };
 
 const categoryLabels: Record<string, string> = {
-  'remodelacion-residencial': 'Remodelacion Residencial',
-  'remodelacion-comercial': 'Remodelacion Comercial',
+  'remodelacion-residencial': 'Remodelación Residencial',
+  'remodelacion-comercial': 'Remodelación Comercial',
   'obra-gruesa': 'Obra Gruesa',
   'terminaciones': 'Terminaciones',
-  'ampliacion': 'Ampliacion',
+  'ampliacion': 'Ampliación',
 };
 ---
 
 <BaseLayout
   title="Proyectos"
-  description="Portafolio de proyectos de construccion ejecutados por Innovatech en Santiago. Remodelaciones, obra gruesa, terminaciones y ampliaciones."
+  description="Portafolio de proyectos de construcción ejecutados por Innovatech en Santiago. Remodelaciones, obra gruesa, terminaciones y ampliaciones."
 >
   <section class="py-16 sm:py-20 bg-neutral-50 border-b border-neutral-200/60">
     <Container>
@@ -62,15 +62,15 @@ const categoryLabels: Record<string, string> = {
                   {project.data.title}
                 </h3>
                 <div class="flex items-center flex-wrap gap-x-4 gap-y-1 text-sm text-neutral-500">
-                  <span class="flex items-center gap-1.5">
-                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
-                      <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
-                      <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
-                    </svg>
-                    {project.data.location}
-                  </span>
-                  <span>{project.data.area}</span>
-                  <span>{project.data.duration}</span>
+                  {project.data.location && (
+                    <span class="flex items-center gap-1.5">
+                      <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
+                      </svg>
+                      {project.data.location}
+                    </span>
+                  )}
                 </div>
               </div>
             </div>

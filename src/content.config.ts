@@ -17,7 +17,7 @@ const projects = defineCollection({
   loader: glob({ pattern: '**/*.md', base: './src/content/projects' }),
   schema: z.object({
     title: z.string(),
-    client: z.string(),
+    client: z.string().optional(),
     category: z.enum([
       'remodelacion-residencial',
       'remodelacion-comercial',
@@ -25,9 +25,9 @@ const projects = defineCollection({
       'terminaciones',
       'ampliacion',
     ]),
-    location: z.string(),
-    area: z.string(),
-    duration: z.string(),
+    location: z.string().optional(),
+    area: z.string().optional(),
+    duration: z.string().optional(),
     featured: z.boolean().default(false),
     date: z.coerce.date(),
   }),

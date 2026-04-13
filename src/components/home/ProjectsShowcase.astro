@@ -6,28 +6,25 @@ import Button from '../ui/Button.astro';
 
 const projects = [
   {
-    title: 'Remodelacion Oficinas Corporativas',
-    category: 'Remodelacion Comercial',
+    title: 'Condominio Colina',
+    category: 'Terminaciones',
+    location: 'Colina, Santa Elena',
+    image: '/images/projects/colina-1.jpeg',
+    slug: 'condominio-colina',
+  },
+  {
+    title: 'Condominio Las Condes',
+    category: 'Terminaciones',
     location: 'Las Condes, Santiago',
-    area: '450 m2',
-    image: '/images/projects/terminaciones-interior.jpeg',
-    slug: 'oficinas-las-condes',
+    image: '/images/projects/las-condes-1.jpeg',
+    slug: 'condominio-las-condes',
   },
   {
-    title: 'Obra Gruesa Edificio Residencial',
-    category: 'Obra Gruesa',
-    location: 'Nunoa, Santiago',
-    area: '1.200 m2',
-    image: '/images/projects/estructura-metalica-1.jpeg',
-    slug: 'edificio-nunoa',
-  },
-  {
-    title: 'Ampliacion Vivienda Familiar',
-    category: 'Ampliacion',
-    location: 'Providencia, Santiago',
-    area: '85 m2',
-    image: '/images/projects/estructura-metalica-2.jpeg',
-    slug: 'ampliacion-providencia',
+    title: 'Techumbre y Terminaciones',
+    category: 'Terminaciones',
+    location: null,
+    image: '/images/projects/techumbre-1.jpeg',
+    slug: 'techumbre-terminaciones',
   },
 ];
 ---
@@ -70,19 +67,15 @@ const projects = [
                 {project.title}
               </h3>
               <div class="flex items-center gap-4 text-sm text-neutral-500">
-                <span class="flex items-center gap-1.5">
-                  <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
-                  </svg>
-                  {project.location}
-                </span>
-                <span class="flex items-center gap-1.5">
-                  <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3.75v4.5m0-4.5h4.5m-4.5 0L9 9M3.75 20.25v-4.5m0 4.5h4.5m-4.5 0L9 15M20.25 3.75h-4.5m4.5 0v4.5m0-4.5L15 9m5.25 11.25h-4.5m4.5 0v-4.5m0 4.5L15 15" />
-                  </svg>
-                  {project.area}
-                </span>
+                {project.location && (
+                  <span class="flex items-center gap-1.5">
+                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
+                    </svg>
+                    {project.location}
+                  </span>
+                )}
               </div>
             </div>
           </div>
