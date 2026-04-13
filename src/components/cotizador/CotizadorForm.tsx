@@ -1,6 +1,5 @@
 import { useRef, useState, type FormEvent } from 'react';
-import emailjs from '@emailjs/browser';
-import { EMAILJS_CONFIG, isEmailConfigured } from '../../lib/emailjs';
+
 
 const SERVICES = [
   { title: 'Remodelaciones Residenciales', short: 'Cocinas, baños y espacios interiores con acabados de calidad.' },
@@ -48,21 +47,49 @@ export default function CotizadorForm() {
     const urgency = fd.get('urgency') as string;
     const contactPref = fd.get('contact_preference') as string;
 
-    if (isEmailConfigured()) {
-      try {
-        await emailjs.sendForm(
-          EMAILJS_CONFIG.serviceId,
-          EMAILJS_CONFIG.cotizadorTemplateId,
-          formRef.current,
-          { publicKey: EMAILJS_CONFIG.publicKey },
-        );
-        setStatus('success');
-        formRef.current.reset();
-        setSelectedService('');
-        return;
-      } catch {
-        // Fall through to WhatsApp
+    // Preparar el Payload
+    const payload = {
+      name,
+      phone,
+      email,
+      service,
+      area,
+      comuna,
+      description,
+      urgency,
+      contact_preference: contactPref
+    };
+
+    try {
+      // Llamada a Vercel Serverless Function configurada en /api/cotizar
+      const response = await fetch('/api/cotizar', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+
+      if (!response.ok) {
+        throw new Error('Error al generar la cotización');
       }
+
+      // Procesar el blob del PDF y disparar la descarga en el navegador
+      const blob = await response.blob();
+      const downloadUrl = window.URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = downloadUrl;
+      a.download = `Cotizacion_${name.replace(/\s+/g, '_')}.pdf`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      window.URL.revokeObjectURL(downloadUrl);
+
+      setStatus('success');
+      formRef.current.reset();
+      setSelectedService('');
+      return;
+    } catch (e) {
+      console.error("Error API:", e);
+      // Fall through to WhatsApp en caso de error
     }
 
     // Fallback: WhatsApp
@@ -83,8 +110,8 @@ export default function CotizadorForm() {
           </svg>
         </div>
         <h3 className="text-2xl font-bold text-green-900 mb-2">¡Solicitud enviada!</h3>
-        <p className="text-green-700 mb-2">Hemos recibido tu solicitud de cotización.</p>
-        <p className="text-sm text-green-600 mb-8">Te contactaremos en menos de 24 horas.</p>
+        <p className="text-green-700 mb-2">Tu cotización en PDF ha sido generada y descargada.</p>
+        <p className="text-sm text-green-600 mb-8">Un asesor te contactará a la brevedad para agendar la visita en terreno.</p>
         <button
           onClick={() => setStatus('idle')}
           className="text-sm font-medium text-green-700 hover:text-green-900 underline underline-offset-4 transition-colors"
@@ -210,7 +237,7 @@ export default function CotizadorForm() {
                 <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
                 <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
               </svg>
-              Enviando...
+              Calculando Materiales y Generando PDF...
             </>
           ) : (
             <>
@@ -222,7 +249,7 @@ export default function CotizadorForm() {
           )}
         </button>
         <p className="text-xs text-neutral-500 mt-3">
-          Al enviar este formulario aceptas que te contactemos para darte una cotización. No compartimos tus datos.
+          Al acceder a esta versión preliminar, aceptas que generemos un documento PDF inmediato basándonos en datos del mercado actual.
         </p>
       </div>
 

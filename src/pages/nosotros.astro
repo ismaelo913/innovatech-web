@@ -29,13 +29,6 @@ const values = [
   },
 ];
 
-const team = [
-  { name: 'Director General', role: 'Liderazgo y estrategia', initials: 'DG' },
-  { name: 'Jefe de Operaciones', role: 'Coordinación de proyectos', initials: 'JO' },
-  { name: 'Supervisor Senior', role: 'Control de calidad en obra', initials: 'SS' },
-  { name: 'Administración', role: 'Gestión administrativa y RRHH', initials: 'AD' },
-];
-
 const differentiators = [
   { title: 'Personal con EPPs', description: 'Casco, zapatos de seguridad, lentes, guantes y arnés cuando corresponde.' },
   { title: 'Herramientas propias', description: 'Herramientas eléctricas menores incluidas. Menos dependencia, más productividad.' },
@@ -147,27 +140,6 @@ const differentiators = [
     </Container>
   </section>
 
-  {/* Team */}
-  <section class="py-section">
-    <Container>
-      <SectionHeading
-        label="Equipo"
-        title="Las personas detrás de Innovatech"
-        description="Un equipo con experiencia en construcción y gestión de proyectos, comprometido con hacer las cosas bien."
-      />
-      <div class="grid grid-cols-2 lg:grid-cols-4 gap-6">
-        {team.map((member) => (
-          <div class="text-center">
-            <div class="w-24 h-24 mx-auto rounded-2xl bg-neutral-100 flex items-center justify-center mb-4">
-              <span class="text-2xl font-bold text-neutral-400">{member.initials}</span>
-            </div>
-            <h3 class="font-semibold text-neutral-900">{member.name}</h3>
-            <p class="text-sm text-neutral-500 mt-1">{member.role}</p>
-          </div>
-        ))}
-      </div>
-    </Container>
-  </section>
 
   <CTASection />
 </BaseLayout>

@@ -26,3 +26,6 @@ pnpm-debug.log*
 .vercel
 
 IMAGENES EMPRESA/
+
+# Firebase Credentials
+serviceAccountKey.json
