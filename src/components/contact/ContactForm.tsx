@@ -18,7 +18,7 @@ export default function ContactForm() {
   const [status, setStatus] = useState<FormStatus>('idle');
 
   const inputClass =
-    'w-full px-4 py-2.5 rounded-lg border border-neutral-300 bg-white text-neutral-900 text-sm placeholder:text-neutral-400 focus:border-[oklch(70%_0.18_50)] focus:ring-2 focus:ring-[oklch(70%_0.18_50/0.2)] transition-colors outline-none';
+    'w-full px-4 py-2.5 border border-neutral-900 bg-white text-neutral-950 text-sm placeholder:text-neutral-400 focus:ring-2 focus:ring-primary-400 transition-colors outline-none';
 
   async function handleSubmit(e: FormEvent) {
     e.preventDefault();
@@ -65,13 +65,13 @@ export default function ContactForm() {
 
   if (status === 'success') {
     return (
-      <div className="text-center py-12 px-6 rounded-xl border-2 border-green-200 bg-green-50">
+      <div className="text-center py-12 px-6 border-2 border-green-700 bg-green-50">
         <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-green-100 flex items-center justify-center">
           <svg className="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
             <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
           </svg>
         </div>
-        <h3 className="text-xl font-bold text-green-900 mb-2">¡Mensaje enviado!</h3>
+        <h3 className="text-xl font-black uppercase text-green-900 mb-2">¡Mensaje enviado!</h3>
         <p className="text-green-700 mb-6">Te responderemos en menos de 24 horas.</p>
         <button
           onClick={() => setStatus('idle')}
@@ -146,7 +146,7 @@ export default function ContactForm() {
       <button
         type="submit"
         disabled={status === 'sending'}
-        className="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-[oklch(70%_0.18_50)] text-white font-semibold text-sm hover:bg-[oklch(62%_0.18_45)] disabled:opacity-50 disabled:cursor-not-allowed transition-colors cursor-pointer"
+        className="inline-flex items-center gap-2 px-6 py-3 rounded-2xl bg-primary-600 text-white font-bold text-sm hover:bg-neutral-950 disabled:opacity-50 disabled:cursor-not-allowed transition-colors cursor-pointer"
       >
         {status === 'sending' ? (
           <>

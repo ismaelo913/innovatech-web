@@ -4,6 +4,7 @@ import Container from '../../components/ui/Container.astro';
 import SectionHeading from '../../components/ui/SectionHeading.astro';
 import ProjectFilter from '../../components/projects/ProjectFilter.tsx';
 import CTASection from '../../components/home/CTASection.astro';
+import Breadcrumbs from '../../components/ui/Breadcrumbs.astro';
 import { getCollection } from 'astro:content';
 
 const rawProjects = (await getCollection('projects')).sort(
@@ -11,17 +12,21 @@ const rawProjects = (await getCollection('projects')).sort(
 );
 
 const projectImages: Record<string, string> = {
-  'condominio-colina': '/images/projects/colina-1.jpeg',
-  'condominio-las-condes': '/images/projects/las-condes-1.jpeg',
-  'techumbre-terminaciones': '/images/projects/techumbre-1.jpeg',
+  'condominio-colina':              '/images/projects/colina-1.jpeg',
+  'condominio-las-condes':          '/images/projects/las-condes-1.jpeg',
+  'techumbre-terminaciones':        '/images/projects/techumbre-1.jpeg',
+  'mina-cmp-copiapo':               '/images/projects/mina-cmp-1.jpeg',
+  'tableros-electricos-armados':    '/images/projects/tableros-1.jpeg',
+  'montaje-electrico-industrial':   '/images/projects/montaje-electrico-1.jpeg',
 };
 
 const categoryLabels: Record<string, string> = {
   'remodelacion-residencial': 'Remodelación Residencial',
-  'remodelacion-comercial': 'Remodelación Comercial',
-  'obra-gruesa': 'Obra Gruesa',
-  'terminaciones': 'Terminaciones',
-  'ampliacion': 'Ampliación',
+  'remodelacion-comercial':   'Remodelación Comercial',
+  'obra-gruesa':              'Obra Gruesa',
+  'terminaciones':            'Terminaciones',
+  'ampliacion':               'Ampliación',
+  'montaje-electrico':        'Montaje Eléctrico',
 };
 
 // Serialize projects for the React island
@@ -38,7 +43,15 @@ const projects = rawProjects.map((p) => ({
   title="Proyectos"
   description="Proyectos de construcción ejecutados por Innovatech en Santiago. Calidad que se ve, seguridad que se siente."
 >
-  <section class="py-16 sm:py-20 bg-neutral-50 border-b border-neutral-200/60">
+  <div class="bg-background border-b-brutal">
+    <Container>
+      <div class="pt-4">
+        <Breadcrumbs items={[{ label: 'Inicio', href: '/' }, { label: 'Proyectos' }]} />
+      </div>
+    </Container>
+  </div>
+
+  <section class="py-16 sm:py-20 bg-background border-b-brutal">
     <Container>
       <SectionHeading
         label="Portafolio"

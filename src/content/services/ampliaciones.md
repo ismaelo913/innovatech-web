@@ -2,7 +2,7 @@
 title: Ampliaciones
 description: Segundos pisos, extensiones y nuevas áreas construidas. Amplía tu espacio sin perder lo que ya tienes.
 icon: expand
-order: 5
+order: 4
 features:
   - Segundos pisos en estructura metálica o madera
   - Extensiones laterales y posteriores

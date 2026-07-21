@@ -42,16 +42,16 @@ const differentiators = [
   description="Conoce Innovatech: calidad que se ve, seguridad que se siente. Mano de obra cualificada, equipada y supervisada en Santiago de Chile."
 >
   {/* Hero */}
-  <section class="py-16 sm:py-24 bg-neutral-50 border-b border-neutral-200/60">
+  <section class="py-16 sm:py-24 bg-background border-b-brutal">
     <Container>
       <div class="max-w-3xl mx-auto text-center">
-        <span class="inline-block text-sm font-semibold tracking-widest uppercase text-primary-600 mb-4">
+        <span class="inline-block text-sm font-bold tracking-widest uppercase text-primary-600 mb-4">
           Sobre nosotros
         </span>
-        <h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-neutral-950 tracking-tight leading-tight mb-6">
+        <h1 class="text-3xl sm:text-4xl lg:text-5xl font-black uppercase text-neutral-950 tracking-tight leading-tight mb-6">
           Construimos con el estándar que tu proyecto merece
         </h1>
-        <p class="text-lg text-neutral-600 leading-relaxed">
+        <p class="text-lg font-light text-accent-500 leading-relaxed">
           Innovatech nace de una convicción: que la calidad de una obra se nota en cada detalle, y la seguridad de quienes la construyen no es negociable.
         </p>
       </div>
@@ -63,13 +63,13 @@ const differentiators = [
     <Container>
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
         <div>
-          <span class="inline-block text-sm font-semibold tracking-widest uppercase text-primary-600 mb-3">
+          <span class="inline-block text-sm font-bold tracking-widest uppercase text-primary-600 mb-3">
             Nuestra historia
           </span>
-          <h2 class="text-2xl sm:text-3xl font-bold text-neutral-900 tracking-tight mb-6">
+          <h2 class="text-2xl sm:text-3xl font-black uppercase text-neutral-950 tracking-tight mb-6">
             Por qué Innovatech
           </h2>
-          <div class="space-y-4 text-neutral-600 leading-relaxed">
+          <div class="space-y-4 text-accent-500 font-light leading-relaxed">
             <p>
               Después de años de experiencia en construcción, identificamos un problema recurrente: la falta de profesionalismo en el subcontrato. Personal sin equipamiento, sin supervisión y sin un compromiso real con los plazos.
             </p>
@@ -77,16 +77,19 @@ const differentiators = [
               Innovatech nació para ofrecer algo diferente. Un equipo que llega preparado, con las herramientas adecuadas, los EPPs correspondientes y un supervisor que coordina cada avance.
             </p>
             <p>
-              Operamos en Santiago y la Región Metropolitana, trabajando en remodelaciones, obra gruesa, terminaciones y ampliaciones para constructoras, inmobiliarias y particulares.
+              Operamos en Santiago y la Región Metropolitana, trabajando en montaje eléctrico, obra gruesa, terminaciones, ampliaciones y remodelaciones para constructoras, inmobiliarias, mineras y particulares.
             </p>
           </div>
         </div>
-        <div class="aspect-[4/3] rounded-2xl overflow-hidden relative bg-neutral-950">
+        <div class="aspect-[4/3] border-brutal overflow-hidden relative bg-neutral-950">
           <img
             src="/images/logo/logo-full.jpeg"
             alt="Innovatech - Calidad que se ve, seguridad que se siente"
             class="absolute inset-0 w-full h-full object-contain p-4"
             loading="lazy"
+            decoding="async"
+            width="800"
+            height="600"
           />
         </div>
       </div>
@@ -94,7 +97,7 @@ const differentiators = [
   </section>
 
   {/* Values */}
-  <section class="py-section bg-neutral-50">
+  <section class="py-section bg-surface-alt">
     <Container>
       <SectionHeading
         label="Valores"
@@ -103,15 +106,15 @@ const differentiators = [
       />
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
         {values.map((v) => (
-          <Card class="flex gap-5">
-            <div class="w-12 h-12 rounded-xl bg-primary-50 flex items-center justify-center shrink-0">
+          <Card class="flex gap-5" hover={false}>
+            <div class="w-12 h-12 border-brutal bg-primary-50 flex items-center justify-center shrink-0">
               <svg class="w-6 h-6 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
                 <path stroke-linecap="round" stroke-linejoin="round" d={v.icon} />
               </svg>
             </div>
             <div>
-              <h3 class="text-lg font-semibold text-neutral-900 mb-1">{v.title}</h3>
-              <p class="text-sm text-neutral-600 leading-relaxed">{v.description}</p>
+              <h3 class="text-lg font-bold text-neutral-950 mb-1">{v.title}</h3>
+              <p class="text-sm font-light text-accent-500 leading-relaxed">{v.description}</p>
             </div>
           </Card>
         ))}
@@ -120,7 +123,7 @@ const differentiators = [
   </section>
 
   {/* Differentiators */}
-  <section class="py-section bg-neutral-950">
+  <section class="py-section bg-neutral-950 border-y-brutal-invert">
     <Container>
       <SectionHeading
         label="Diferenciadores"
@@ -130,10 +133,10 @@ const differentiators = [
       />
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
         {differentiators.map((d, i) => (
-          <div class="p-6 rounded-xl bg-neutral-900 border border-neutral-800">
-            <div class="text-3xl font-bold text-primary-400 mb-3" style="font-family: var(--font-mono)">{String(i + 1).padStart(2, '0')}</div>
-            <h3 class="text-lg font-semibold text-white mb-2">{d.title}</h3>
-            <p class="text-sm text-neutral-400 leading-relaxed">{d.description}</p>
+          <div class="p-6 border-brutal-invert">
+            <div class="text-3xl font-bold text-primary-500 mb-3" style="font-family: var(--font-mono)">{String(i + 1).padStart(2, '0')}</div>
+            <h3 class="text-lg font-bold text-white mb-2">{d.title}</h3>
+            <p class="text-sm font-light text-neutral-400 leading-relaxed">{d.description}</p>
           </div>
         ))}
       </div>

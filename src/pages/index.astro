@@ -1,8 +1,13 @@
 ---
+// SSR required: middleware reads request headers for A/B test cookie assignment, but can run on static routes
+export const prerender = true;
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Hero from '../components/home/Hero.astro';
+import ProcessBlueprint from '../components/home/ProcessBlueprint.astro';
 import ServicesPreview from '../components/home/ServicesPreview.astro';
-import ProjectsShowcase from '../components/home/ProjectsShowcase.astro';
+import ClientsSection from '../components/home/ClientsSection.astro';
+import B2BSection from '../components/home/B2BSection.astro';
+import ProjectsReveal from '../components/home/ProjectsReveal.astro';
 import CTASection from '../components/home/CTASection.astro';
 import { SITE } from '../lib/constants';
 ---
@@ -12,7 +17,12 @@ import { SITE } from '../lib/constants';
   description={SITE.description}
 >
   <Hero />
+  <ProcessBlueprint />
   <ServicesPreview />
-  <ProjectsShowcase />
+  <ClientsSection />
+  <B2BSection />
+  <ProjectsReveal />
   <CTASection />
 </BaseLayout>
+
+<script src="../scripts/home-animations.js"></script>

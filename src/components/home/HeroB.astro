@@ -1,0 +1,75 @@
+---
+import Container from '../ui/Container.astro';
+import Button from '../ui/Button.astro';
+import Badge from '../ui/Badge.astro';
+---
+
+<section class="relative overflow-hidden py-20 sm:py-28 lg:py-36 border-b-brutal">
+  <Container>
+    <div class="max-w-4xl mx-auto text-center">
+      <Badge variant="primary" class="mb-6">
+        Visita técnica gratuita · Santiago RM
+      </Badge>
+
+      <h1 class="text-4xl sm:text-5xl lg:text-6xl font-black uppercase tracking-tight text-neutral-950 leading-[0.95] mb-6">
+        Tu obra, en el plazo
+        <span class="relative inline-block">
+          <span class="relative z-10 text-primary-600">que acordamos</span>
+          <span class="absolute bottom-1 left-0 w-full h-3 bg-primary-200/60 -z-0"></span>
+        </span>
+      </h1>
+
+      <p class="text-lg sm:text-xl font-light text-accent-500 max-w-2xl mx-auto mb-10 leading-relaxed">
+        Evaluamos tu proyecto en terreno sin costo, entregamos presupuesto formal desglosado en 48 horas y asignamos un supervisor dedicado desde el primer día. Sin sorpresas en el precio ni en los plazos.
+      </p>
+
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+        <Button href="/cotizador" size="lg" variant="primary" id="hero-b-cta-primary">
+          Solicitar visita gratuita
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+          </svg>
+        </Button>
+        <Button href="/proyectos" size="lg" variant="outline" id="hero-b-cta-secondary">
+          Ver proyectos reales
+        </Button>
+      </div>
+
+      <!-- Trust indicators -->
+      <div class="mt-16 flex flex-wrap items-center justify-center gap-x-8 gap-y-4 text-sm text-neutral-500">
+        <div class="flex items-center gap-2">
+          <svg class="w-4 h-4 text-green-500" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+          </svg>
+          Visita técnica sin costo
+        </div>
+        <div class="flex items-center gap-2">
+          <svg class="w-4 h-4 text-green-500" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+          </svg>
+          Presupuesto formal en 48 horas
+        </div>
+        <div class="flex items-center gap-2">
+          <svg class="w-4 h-4 text-green-500" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+          </svg>
+          Supervisor dedicado en obra
+        </div>
+      </div>
+    </div>
+  </Container>
+</section>
+
+<script>
+  // Track variant B CTA clicks with Vercel Analytics
+  document.getElementById('hero-b-cta-primary')?.addEventListener('click', () => {
+    if (typeof window.va === 'function') {
+      window.va('event', { name: 'hero_cta_click', data: { variant: 'b', cta: 'primary' } });
+    }
+  });
+  document.getElementById('hero-b-cta-secondary')?.addEventListener('click', () => {
+    if (typeof window.va === 'function') {
+      window.va('event', { name: 'hero_cta_click', data: { variant: 'b', cta: 'secondary' } });
+    }
+  });
+</script>

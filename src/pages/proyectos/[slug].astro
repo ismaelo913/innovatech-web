@@ -3,6 +3,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import Container from '../../components/ui/Container.astro';
 import Badge from '../../components/ui/Badge.astro';
 import Button from '../../components/ui/Button.astro';
+import Breadcrumbs from '../../components/ui/Breadcrumbs.astro';
 import ProjectGallery from '../../components/projects/ProjectGallery.tsx';
 import { getCollection, render } from 'astro:content';
 
@@ -19,27 +20,34 @@ const { Content } = await render(project);
 
 const categoryLabels: Record<string, string> = {
   'remodelacion-residencial': 'Remodelación Residencial',
-  'remodelacion-comercial': 'Remodelación Comercial',
-  'obra-gruesa': 'Obra Gruesa',
-  'terminaciones': 'Terminaciones',
-  'ampliacion': 'Ampliación',
+  'remodelacion-comercial':   'Remodelación Comercial',
+  'obra-gruesa':              'Obra Gruesa',
+  'terminaciones':            'Terminaciones',
+  'ampliacion':               'Ampliación',
+  'montaje-electrico':        'Montaje Eléctrico',
 };
 
 const projectImages: Record<string, string[]> = {
   'condominio-colina': [
     '/images/projects/colina-1.jpeg',
     '/images/projects/colina-2.jpeg',
-    '/images/projects/colina-3.jpeg'
+    '/images/projects/colina-3.jpeg',
   ],
   'condominio-las-condes': [
     '/images/projects/las-condes-1.jpeg',
     '/images/projects/las-condes-2.jpeg',
     '/images/projects/las-condes-3.jpeg',
-    '/images/projects/las-condes-4.jpeg'
+    '/images/projects/las-condes-4.jpeg',
   ],
   'techumbre-terminaciones': [
     '/images/projects/techumbre-1.jpeg',
-    '/images/projects/techumbre-2.jpeg'
+    '/images/projects/techumbre-2.jpeg',
+  ],
+  'mina-cmp-copiapo': Array.from({ length: 10 }, (_, i) => `/images/projects/mina-cmp-${i + 1}.jpeg`),
+  'tableros-electricos-armados': Array.from({ length: 12 }, (_, i) => `/images/projects/tableros-${i + 1}.jpeg`),
+  'montaje-electrico-industrial': [
+    '/images/projects/montaje-electrico-1.jpeg',
+    '/images/projects/montaje-electrico-2.jpeg',
   ],
 };
 const images = projectImages[project.id] || ['/images/projects/colina-1.jpeg'];
@@ -54,23 +62,22 @@ const details = allDetails.filter(d => Boolean(d.value));
 
 <BaseLayout title={project.data.title} description={`Proyecto ${project.data.title} ejecutado por Innovatech${project.data.location ? ` en ${project.data.location}` : ''}.`}>
   {/* Hero */}
-  <section class="py-16 sm:py-20 bg-neutral-50 border-b border-neutral-200/60">
+  <section class="py-16 sm:py-20 bg-background border-b-brutal">
     <Container>
-      <a href="/proyectos" class="inline-flex items-center gap-1.5 text-sm text-neutral-500 hover:text-primary-600 transition-colors mb-6">
-        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" />
-        </svg>
-        Volver a proyectos
-      </a>
+      <Breadcrumbs items={[
+        { label: 'Inicio', href: '/' },
+        { label: 'Proyectos', href: '/proyectos' },
+        { label: project.data.title },
+      ]} />
       <Badge variant="primary" class="mb-4">{categoryLabels[project.data.category]}</Badge>
-      <h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-neutral-950 tracking-tight leading-tight mb-4">
+      <h1 class="text-3xl sm:text-4xl lg:text-5xl font-black uppercase text-neutral-950 tracking-tight leading-tight mb-4">
         {project.data.title}
       </h1>
     </Container>
   </section>
 
   {/* Project images — React Lightbox Island */}
-  <section class="border-b border-neutral-200/60">
+  <section class="border-b-brutal">
     <Container>
       <div class="my-8">
         <ProjectGallery client:visible images={images} alt={project.data.title} />
@@ -84,8 +91,8 @@ const details = allDetails.filter(d => Boolean(d.value));
       <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
         {/* Sidebar */}
         <div class="lg:col-span-1 order-2 lg:order-1">
-          <div class="sticky top-28 bg-neutral-50 rounded-xl p-6 space-y-4">
-            <h3 class="font-semibold text-neutral-900 mb-2">Datos del proyecto</h3>
+          <div class="sticky top-28 bg-surface-alt border-brutal p-6 space-y-4">
+            <h3 class="font-bold uppercase text-neutral-950 mb-2">Datos del proyecto</h3>
             {details.map((d) => (
               <div>
                 <div class="text-xs text-neutral-500 uppercase tracking-wider">{d.label}</div>

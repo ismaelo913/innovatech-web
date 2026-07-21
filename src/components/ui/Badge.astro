@@ -7,15 +7,15 @@ interface Props {
 const { variant = 'default', class: className } = Astro.props;
 
 const variants: Record<string, string> = {
-  default: 'bg-neutral-100 text-neutral-700',
-  primary: 'bg-primary-100 text-primary-700',
-  accent: 'bg-accent-100 text-accent-700',
+  default: 'border-brutal text-neutral-950',
+  primary: 'border-brutal bg-primary-600 text-white',
+  accent: 'border-brutal bg-accent-600 text-white',
 };
 ---
 
 <span
   class:list={[
-    'inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium tracking-wide',
+    'inline-flex items-center px-3 py-1 text-xs font-bold uppercase tracking-widest',
     variants[variant],
     className,
   ]}

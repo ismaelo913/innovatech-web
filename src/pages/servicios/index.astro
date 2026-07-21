@@ -4,6 +4,7 @@ import Container from '../../components/ui/Container.astro';
 import SectionHeading from '../../components/ui/SectionHeading.astro';
 import ServiceCard from '../../components/services/ServiceCard.astro';
 import CTASection from '../../components/home/CTASection.astro';
+import Breadcrumbs from '../../components/ui/Breadcrumbs.astro';
 import { getCollection } from 'astro:content';
 
 const services = (await getCollection('services')).sort(
@@ -13,9 +14,17 @@ const services = (await getCollection('services')).sort(
 
 <BaseLayout
   title="Servicios"
-  description="Servicios de construcción en Santiago: remodelaciones, obra gruesa, terminaciones y ampliaciones. Calidad que se ve, seguridad que se siente."
+  description="Servicios de construcción y montaje eléctrico en Santiago: electricidad, obra gruesa, terminaciones, ampliaciones y remodelaciones. Calidad que se ve, seguridad que se siente."
 >
-  <section class="py-16 sm:py-20 bg-neutral-50 border-b border-neutral-200/60">
+  <div class="bg-background border-b-brutal">
+    <Container>
+      <div class="pt-4">
+        <Breadcrumbs items={[{ label: 'Inicio', href: '/' }, { label: 'Servicios' }]} />
+      </div>
+    </Container>
+  </div>
+
+  <section class="py-16 sm:py-20 bg-background border-b-brutal">
     <Container>
       <SectionHeading
         label="Nuestros servicios"

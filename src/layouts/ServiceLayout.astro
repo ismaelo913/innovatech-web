@@ -3,7 +3,8 @@ import BaseLayout from './BaseLayout.astro';
 import Container from '../components/ui/Container.astro';
 import Badge from '../components/ui/Badge.astro';
 import Button from '../components/ui/Button.astro';
-import { SERVICES } from '../lib/constants';
+import Breadcrumbs from '../components/ui/Breadcrumbs.astro';
+import { SERVICES, SITE } from '../lib/constants';
 
 interface Props {
   title: string;
@@ -16,24 +17,42 @@ interface Props {
 const { title, description, icon, features, slug } = Astro.props;
 
 const otherServices = SERVICES.filter((s) => s.slug !== slug);
+
+const serviceSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  name: title,
+  description,
+  serviceType: title,
+  provider: {
+    '@type': 'LocalBusiness',
+    name: SITE.name,
+    url: SITE.url,
+  },
+  areaServed: {
+    '@type': 'City',
+    name: 'Santiago',
+    containedInPlace: { '@type': 'State', name: 'Región Metropolitana' },
+  },
+  url: new URL(`/servicios/${slug}`, SITE.url).href,
+};
 ---
 
-<BaseLayout title={title} description={description}>
+<BaseLayout title={title} description={description} schema={serviceSchema}>
   {/* Hero */}
-  <section class="py-16 sm:py-20 bg-neutral-50 border-b border-neutral-200/60">
+  <section class="py-16 sm:py-20 bg-background border-b-brutal">
     <Container>
       <div class="max-w-3xl">
-        <a href="/servicios" class="inline-flex items-center gap-1.5 text-sm text-neutral-500 hover:text-primary-600 transition-colors mb-6">
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" />
-          </svg>
-          Volver a servicios
-        </a>
+        <Breadcrumbs items={[
+          { label: 'Inicio', href: '/' },
+          { label: 'Servicios', href: '/servicios' },
+          { label: title },
+        ]} />
         <Badge variant="primary" class="mb-4">{title}</Badge>
-        <h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-neutral-950 tracking-tight leading-tight mb-4">
+        <h1 class="text-3xl sm:text-4xl lg:text-5xl font-black uppercase text-neutral-950 tracking-tight leading-tight mb-4">
           {title}
         </h1>
-        <p class="text-lg text-neutral-600 leading-relaxed">
+        <p class="text-lg font-light text-accent-500 leading-relaxed">
           {description}
         </p>
       </div>
@@ -41,11 +60,11 @@ const otherServices = SERVICES.filter((s) => s.slug !== slug);
   </section>
 
   {/* Features */}
-  <section class="py-12 border-b border-neutral-100">
+  <section class="py-12 border-b-brutal">
     <Container>
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
         {features.map((f) => (
-          <div class="flex items-start gap-3 p-4 rounded-lg bg-neutral-50">
+          <div class="flex items-start gap-3 p-4 border-brutal bg-background">
             <svg class="w-5 h-5 text-primary-600 mt-0.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
               <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
             </svg>
@@ -88,22 +107,22 @@ const otherServices = SERVICES.filter((s) => s.slug !== slug);
   </section>
 
   {/* Other services */}
-  <section class="py-section bg-neutral-50">
+  <section class="py-section bg-surface-alt">
     <Container>
-      <h2 class="text-2xl font-bold text-neutral-900 mb-8">Otros servicios</h2>
+      <h2 class="text-2xl font-black uppercase text-neutral-950 mb-8">Otros servicios</h2>
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         {otherServices.map((s) => (
           <a
             href={`/servicios/${s.slug}`}
-            class="flex items-center gap-3 p-4 rounded-xl bg-white border border-neutral-200/60 hover:border-primary-200 hover:shadow-sm transition-all group"
+            class="flex items-center gap-3 p-4 border-brutal bg-white hover-bg-brand group"
           >
-            <div class="w-10 h-10 rounded-lg bg-primary-50 flex items-center justify-center shrink-0 group-hover:bg-primary-100 transition-colors">
+            <div class="w-10 h-10 border-brutal bg-primary-50 flex items-center justify-center shrink-0">
               <svg class="w-5 h-5 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
               </svg>
             </div>
             <div>
-              <div class="text-sm font-semibold text-neutral-900 group-hover:text-primary-600 transition-colors">{s.title}</div>
+              <div class="text-sm font-semibold text-neutral-900">{s.title}</div>
               <div class="text-xs text-neutral-500 line-clamp-1">{s.short}</div>
             </div>
           </a>

@@ -3,7 +3,8 @@
 > Sitio web corporativo para Innovatech, startup subcontratista de construccion en Santiago de Chile.
 > Stack: Astro 6.1.5 + Tailwind CSS 4.2 + TypeScript strict | Deploy: Vercel (free tier)
 >
-> **Estado**: Fase 1 completada (2026-04-12) | Fase 2 pendiente
+> **Estado**: Fase 1-3 completadas (2026-04-13) | Dominio registrado (2026-04-18) | Fase 4 DNS propagando
+> **Dominio**: innovatechconstrucciones.cl (nameservers Vercel configurados, esperando propagación 24-48h)
 
 ---
 
@@ -63,12 +64,16 @@ npx astro add vercel
 
 **Aceptacion**: Navegacion funcional en desktop y mobile, WhatsApp visible
 
-### 1.4 Deploy Inicial (`deployment-patterns`)
-- Conectar repo a Vercel
-- Configurar dominio temporal (*.vercel.app)
-- Verificar build en produccion
+### 1.4 Deploy Inicial (`deployment-patterns`) — COMPLETADA 2026-04-18
+- [x] Conectar repo a Vercel
+- [x] Configurar dominio temporal (*.vercel.app) — https://innovatech-web-ten.vercel.app
+- [x] Verificar build en produccion
+- [x] Dominio custom registrado: innovatechconstrucciones.cl
+- [x] Nameservers Vercel configurados en NIC Chile
+- [ ] Agregar dominio a proyecto Vercel (Settings → Domains → Add Domain)
+- [ ] Verificar propagación DNS (24-48h)
 
-**Aceptacion**: Sitio accesible publicamente con layout base
+**Aceptacion**: Sitio accesible en innovatechconstrucciones.cl
 
 ---
 
@@ -258,12 +263,12 @@ Content collection con imagenes placeholder por ahora.
 
 **Aceptacion**: Lighthouse SEO 95+, structured data validada en Google Rich Results Test
 
-### 4.3 Performance Audit
-- Lighthouse Performance 90+
-- Imagenes optimizadas (Astro Image)
-- Fonts preloaded
-- CSS/JS minificado (Astro built-in)
-- Lazy loading en imagenes below-the-fold
+### 4.3 Performance Audit — COMPLETADA 2026-06-10
+- [x] Lighthouse Performance 90+ (Optimizado con SSG y dynamic imports de Lenis/VanillaTilt)
+- [x] Imagenes optimizadas (Dimensiones explícitas agregadas en logotipos y proyectos para evitar CLS)
+- [x] Fonts preloaded (Carga optimizada de Inter y JetBrains Mono)
+- [x] CSS/JS minificado (Astro built-in)
+- [x] Lazy loading en imagenes below-the-fold
 
 **Aceptacion**: Lighthouse Performance 90+, FCP < 1.5s, LCP < 2.5s
 

@@ -24,7 +24,7 @@ const alignClass = align === 'center' ? 'text-center mx-auto' : 'text-left';
   {label && (
     <span
       class:list={[
-        'inline-block text-sm font-semibold tracking-widest uppercase mb-3',
+        'inline-block text-sm font-bold tracking-widest uppercase mb-4',
         dark ? 'text-primary-400' : 'text-primary-600',
       ]}
     >
@@ -33,8 +33,8 @@ const alignClass = align === 'center' ? 'text-center mx-auto' : 'text-left';
   )}
   <h2
     class:list={[
-      'text-3xl sm:text-4xl font-bold tracking-tight leading-tight',
-      dark ? 'text-white' : 'text-neutral-900',
+      'text-3xl sm:text-4xl font-black uppercase tracking-tight leading-none',
+      dark ? 'text-background' : 'text-neutral-950',
     ]}
   >
     {title}
@@ -42,8 +42,8 @@ const alignClass = align === 'center' ? 'text-center mx-auto' : 'text-left';
   {description && (
     <p
       class:list={[
-        'mt-4 text-lg leading-relaxed',
-        dark ? 'text-neutral-400' : 'text-neutral-600',
+        'mt-4 text-lg font-light leading-relaxed',
+        dark ? 'text-neutral-400' : 'text-accent-500',
       ]}
     >
       {description}

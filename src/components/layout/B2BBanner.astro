@@ -1,0 +1,77 @@
+---
+// B2BBanner.astro — Floating B2B Lead Magnet Banner
+---
+
+<div
+  id="b2b-floating-banner"
+  class="fixed bottom-6 left-6 z-50 max-w-sm w-[calc(100vw-3rem)] bg-neutral-950 border-brutal-invert text-white p-5 transition-all duration-500 ease-out transform translate-y-10 opacity-0 pointer-events-none flex gap-4 pr-10"
+>
+  <!-- Close Button -->
+  <button
+    id="close-b2b-banner"
+    class="absolute top-3 right-3 text-neutral-400 hover:text-white transition-colors cursor-pointer"
+    aria-label="Cerrar banner"
+  >
+    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+    </svg>
+  </button>
+
+  <!-- Icon (Shield) -->
+  <div class="shrink-0 w-10 h-10 bg-primary-500/10 border border-primary-500/30 text-primary-500 flex items-center justify-center">
+    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+    </svg>
+  </div>
+
+  <!-- Content -->
+  <div class="flex-1">
+    <h3 class="text-sm font-bold text-neutral-50 mb-1 leading-snug">
+      ¿Contratando Subcontratistas?
+    </h3>
+    <p class="text-xs text-neutral-400 mb-3.5 leading-relaxed">
+      Evita multas laborales de hasta 150 UTM. Descarga gratis el checklist de control de obra en Chile.
+    </p>
+    <a
+      href="/recursos/checklist-subcontratistas"
+      class="inline-flex items-center gap-1.5 bg-primary-600 text-white text-xs font-semibold px-4 py-2 rounded-lg hover:bg-primary-500 transition-colors shadow-lg shadow-primary-600/20"
+    >
+      Ver Checklist Gratis
+      <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+      </svg>
+    </a>
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const banner = document.getElementById('b2b-floating-banner');
+    const closeBtn = document.getElementById('close-b2b-banner');
+
+    if (!banner || !closeBtn) return;
+
+    // Check if user has already dismissed the banner in this browser session/localstorage
+    if (localStorage.getItem('hide-b2b-banner') === 'true') {
+      return;
+    }
+
+    // Scroll trigger logic
+    const handleScroll = () => {
+      if (window.scrollY > 350) {
+        banner.classList.remove('opacity-0', 'pointer-events-none', 'translate-y-10');
+        banner.classList.add('opacity-100', 'pointer-events-auto', 'translate-y-0');
+        window.removeEventListener('scroll', handleScroll);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+
+    // Dismiss logic
+    closeBtn.addEventListener('click', () => {
+      banner.classList.remove('opacity-100', 'pointer-events-auto', 'translate-y-0');
+      banner.classList.add('opacity-0', 'pointer-events-none', 'translate-y-10');
+      localStorage.setItem('hide-b2b-banner', 'true');
+    });
+  });
+</script>

@@ -1,0 +1,160 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Container from '../../components/ui/Container.astro';
+import Breadcrumbs from '../../components/ui/Breadcrumbs.astro';
+
+const checklist = [
+  { num: '01', title: 'RUT activo en SII con giro de construcción', detail: 'Verifica en sii.cl que la empresa tenga su RUT activo y giro en actividades 4100–4299 (construcción de edificios) o 4520. Sin giro correcto, no puede emitir facturas con validez tributaria.', tag: 'Legal' },
+  { num: '02', title: 'Contratos de trabajo de todos los trabajadores en obra', detail: 'El Art. 183-C te da derecho a solicitar esta información antes de que inicien faenas. Exige copia de los contratos firmados de cada trabajador que estará en tu proyecto.', tag: 'Legal' },
+  { num: '03', title: 'Liquidaciones de sueldo del mes anterior al día', detail: 'El Art. 183-D te permite retener pagos si detectas deudas laborales pendientes. Para ejercer ese derecho, debes haber pedido previamente el certificado de cumplimiento.', tag: 'Legal' },
+  { num: '04', title: 'Afiliación vigente a mutualidad de seguridad', detail: 'Todos los trabajadores de construcción deben estar afiliados a ACHS, ISL o Mutual de Seguridad CChC (Ley 16.744). Pide la nómina con mutualidad asignada antes del primer día de obra.', tag: 'Seguridad' },
+  { num: '05', title: 'EPP propio para todos los trabajadores', detail: 'Casco, zapatos con punta de acero, guantes, lentes y arnés (si hay trabajo en altura). El D.S. N°594 obliga al empleador a proveer EPP. Un subcontratista sin EPP propio te transfiere ese riesgo.', tag: 'Seguridad' },
+  { num: '06', title: 'Supervisor de obra propio en terreno', detail: 'No deberías tener que supervisar tú al subcontratista. Exige que lleguen con su propio encargado que coordine el equipo, reporte el avance y tome decisiones técnicas menores en terreno.', tag: 'Operacional' },
+  { num: '07', title: 'Presupuesto desglosado por partidas y escrito', detail: 'Debe especificar: listado de partidas, precio por unidad o jornada, plazo comprometido, condiciones de pago (% anticipo, hitos, saldo), y qué queda excluido (materiales, escombros, permisos).', tag: 'Operacional' },
+  { num: '08', title: 'Referencias verificables de proyectos anteriores', detail: 'Al menos 2 contactos de clientes anteriores a los que puedas llamar. Fotos de obras identificables (no de stock). Un buen subcontratista no duda en entregar referencias.', tag: 'Reputación' },
+  { num: '09', title: 'Capacidad para emitir factura electrónica', detail: 'Necesitas factura con IVA para recuperar crédito fiscal si la obra es parte de un proyecto comercial. Verifica que el contratista tenga habilitación de factura electrónica en el SII antes de comprometer el contrato.', tag: 'Tributario' },
+  { num: '10', title: 'Certificado mensual de cumplimiento laboral', detail: 'Durante toda la obra, exige el F30-1 del SII o certificado de la DT mensualmente. Esto documenta que cumpliste tu obligación de control como mandante y te protege en caso de fiscalización.', tag: 'Legal' },
+];
+---
+
+<BaseLayout
+  title="Checklist del Mandante: Contratar Subcontratistas sin Riesgo Legal | Innovatech"
+  description="Descarga gratis el checklist con los 10 puntos legales y operativos para contratar subcontratistas de construcción en Chile sin responsabilidad solidaria."
+>
+  <!-- Breadcrumbs -->
+  <div class="bg-background border-b-brutal">
+    <Container>
+      <div class="pt-4">
+        <Breadcrumbs items={[
+          { label: 'Inicio', href: '/' },
+          { label: 'Recursos' },
+          { label: 'Checklist Subcontratistas' }
+        ]} />
+      </div>
+    </Container>
+  </div>
+
+  <!-- Hero -->
+  <section class="py-14 sm:py-20 bg-neutral-950 text-white border-b-brutal-invert">
+    <Container>
+      <div class="max-w-3xl mx-auto text-center">
+        <span class="inline-block text-xs font-bold tracking-widest uppercase text-primary-500 mb-4 border-brutal-invert px-3 py-1">
+          Recurso gratuito para mandantes
+        </span>
+        <h1 class="text-3xl sm:text-4xl lg:text-5xl font-black uppercase leading-tight mb-6">
+          Checklist del Mandante:<br class="hidden sm:block" />
+          <span class="text-primary-500">Subcontratistas sin riesgo legal</span>
+        </h1>
+        <p class="text-lg text-neutral-300 font-light mb-8 max-w-xl mx-auto">
+          10 puntos para verificar antes de firmar cualquier subcontrato en Chile. Basado en el Código del Trabajo, Ley 20.123 y las mejores prácticas del sector de la construcción en RM.
+        </p>
+        <div class="flex flex-wrap gap-4 justify-center text-sm text-neutral-400">
+          <span class="flex items-center gap-1.5">
+            <svg class="w-4 h-4 text-green-400" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+            Para empresas constructoras e inmobiliarias
+          </span>
+          <span class="flex items-center gap-1.5">
+            <svg class="w-4 h-4 text-green-400" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+            Basado en Art. 183-A Código del Trabajo
+          </span>
+          <span class="flex items-center gap-1.5">
+            <svg class="w-4 h-4 text-green-400" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+            Descarga o imprime en PDF
+          </span>
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- Checklist Content -->
+  <section class="py-16">
+    <Container>
+      <div class="max-w-3xl mx-auto">
+
+        <!-- Intro context -->
+        <div class="mb-10 p-5 border border-neutral-900 border-l-4 border-l-primary-600 bg-surface-alt">
+          <p class="text-sm text-neutral-950 font-bold mb-1">¿Por qué importa esto?</p>
+          <p class="text-sm text-accent-500">
+            El <strong>Artículo 183-A del Código del Trabajo</strong> establece responsabilidad solidaria del mandante sobre las obligaciones laborales del subcontratista. Si tu contratista no paga a sus trabajadores o no tiene mutualidad, tú puedes quedar expuesto a multas de <strong>5 a 150 UTM</strong> (CLP $310.000 – $9.350.000 aprox. 2026) más demandas laborales directas.
+          </p>
+        </div>
+
+        <!-- Checklist -->
+        <div class="space-y-5" id="checklist-content">
+          {checklist.map(({ num, title, detail, tag }) => (
+            <div class="flex gap-4 p-5 border-brutal bg-white hover-bg-brand transition-colors group print:border-neutral-300 print:break-inside-avoid">
+              <div class="shrink-0 w-10 h-10 border-brutal bg-neutral-950 text-white flex items-center justify-center text-xs font-mono font-bold">
+                {num}
+              </div>
+              <div class="flex-1 min-w-0">
+                <div class="flex flex-wrap items-start gap-2 mb-1.5">
+                  <h3 class="text-sm font-bold text-neutral-950 leading-snug">{title}</h3>
+                  <span class="text-[10px] font-bold uppercase px-2 py-0.5 border-brutal bg-primary-50 text-primary-700 shrink-0">{tag}</span>
+                </div>
+                <p class="text-sm font-light text-accent-500 leading-relaxed">{detail}</p>
+              </div>
+              <div class="shrink-0 hidden print:flex items-center">
+                <div class="w-5 h-5 border-2 border-neutral-400"></div>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <!-- Print / WhatsApp CTA -->
+        <div class="mt-12 grid sm:grid-cols-2 gap-4">
+          <button
+            onclick="window.print()"
+            class="flex items-center justify-center gap-2 px-6 py-3.5 border-brutal text-sm font-bold uppercase tracking-wide text-neutral-700 hover:bg-neutral-950 hover:text-white transition-colors cursor-pointer print:hidden"
+          >
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z" />
+            </svg>
+            Imprimir / Guardar como PDF
+          </button>
+          <a
+            href="https://wa.me/56938905488?text=Hola%20Innovatech%2C%20vi%20el%20checklist%20de%20subcontratistas%20y%20me%20gustar%C3%ADa%20saber%20c%C3%B3mo%20trabajan."
+            target="_blank"
+            rel="noopener noreferrer"
+            class="flex items-center justify-center gap-2 px-6 py-3.5 border-brutal bg-[#25D366] text-white text-sm font-bold uppercase tracking-wide hover:bg-neutral-950 transition-colors print:hidden"
+          >
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+            </svg>
+            Recibir asesoría por WhatsApp
+          </a>
+        </div>
+
+        <!-- B2B pitch -->
+        <div class="mt-14 p-6 border-brutal-invert bg-neutral-950 text-white">
+          <h2 class="text-lg font-black uppercase mb-2">¿Buscas un subcontratista que llegue con todo esto listo?</h2>
+          <p class="text-neutral-300 font-light text-sm mb-5">
+            En Innovatech cumplimos los 10 puntos de este checklist desde el primer día: contratos, mutualidad vigente, EPP propio, supervisor en terreno y factura electrónica. Trabajamos con empresas constructoras, inmobiliarias y project managers en toda la Región Metropolitana.
+          </p>
+          <div class="flex flex-wrap gap-3">
+            <a
+              href="/contacto"
+              class="inline-flex items-center gap-2 px-5 py-2.5 rounded-2xl bg-primary-600 text-white font-bold text-sm hover:bg-white hover:text-neutral-950 transition-colors"
+            >
+              Hablar con un asesor
+            </a>
+            <a
+              href="/cotizador"
+              class="inline-flex items-center gap-2 px-5 py-2.5 border-brutal-invert text-neutral-200 font-bold text-sm uppercase tracking-wide hover:bg-white/5 hover:text-white transition-colors"
+            >
+              Cotizar cuadrilla
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </Container>
+  </section>
+</BaseLayout>
+
+<style>
+  @media print {
+    header, footer, .print\:hidden { display: none !important; }
+    body { background: white; }
+    section { padding: 1rem 0; }
+  }
+</style>

@@ -15,19 +15,19 @@ const {
   ...rest
 } = Astro.props;
 
-const baseStyles = 'inline-flex items-center justify-center font-medium transition-all cursor-pointer rounded-lg focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500';
+const baseStyles = 'inline-flex items-center justify-center font-bold transition-colors duration-300 cursor-pointer focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500';
 
 const variants: Record<string, string> = {
   primary:
-    'bg-primary-600 text-white hover:bg-primary-700 active:bg-primary-800 shadow-sm hover:shadow-md',
+    'rounded-2xl bg-primary-600 text-white hover:bg-neutral-950 active:bg-neutral-900 shadow-lg shadow-primary-600/20',
   secondary:
-    'bg-neutral-900 text-white hover:bg-neutral-800 active:bg-neutral-700',
+    'rounded-none border-brutal bg-neutral-950 text-white hover:bg-primary-600',
   outline:
-    'border border-neutral-300 text-neutral-800 hover:bg-neutral-100 active:bg-neutral-200',
+    'rounded-none border-brutal bg-transparent text-neutral-950 hover:bg-neutral-950 hover:text-white',
   ghost:
-    'text-neutral-700 hover:bg-neutral-100 active:bg-neutral-200',
+    'rounded-none text-neutral-700 hover:bg-neutral-100 active:bg-neutral-200',
   accent:
-    'bg-accent-500 text-white hover:bg-accent-600 active:bg-accent-700 shadow-sm hover:shadow-md',
+    'rounded-none border-brutal bg-accent-600 text-white hover:bg-neutral-950',
 };
 
 const sizes: Record<string, string> = {

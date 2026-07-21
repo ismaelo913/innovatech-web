@@ -29,3 +29,5 @@ IMAGENES EMPRESA/
 
 # Firebase Credentials
 serviceAccountKey.json
+.aidesigner/*
+!.aidesigner/.gitkeep

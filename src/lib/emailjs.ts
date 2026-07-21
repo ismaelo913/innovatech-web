@@ -11,10 +11,10 @@
  */
 
 export const EMAILJS_CONFIG = {
-  publicKey: 'YOUR_PUBLIC_KEY',        // Dashboard > Account > API Keys
-  serviceId: 'YOUR_SERVICE_ID',        // Dashboard > Email Services
-  contactTemplateId: 'template_contact',
-  cotizadorTemplateId: 'template_cotizador',
+  publicKey: 'ysyCjp_cUiyHVhGxo',
+  serviceId: 'service_b8fu6ti',
+  contactTemplateId: 'template_u89vioi',
+  cotizadorTemplateId: 'template_8dmm616',
 } as const;
 
 /** Whether EmailJS is properly configured (not using placeholder keys) */

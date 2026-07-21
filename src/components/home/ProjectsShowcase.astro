@@ -13,11 +13,11 @@ const projects = [
     slug: 'condominio-colina',
   },
   {
-    title: 'Condominio Las Condes',
-    category: 'Terminaciones',
-    location: 'Las Condes, Santiago',
-    image: '/images/projects/las-condes-1.jpeg',
-    slug: 'condominio-las-condes',
+    title: 'Mina CMP Copiapó — Planta Pellet',
+    category: 'Montaje Eléctrico',
+    location: 'Copiapó, Atacama',
+    image: '/images/projects/mina-cmp-1.jpeg',
+    slug: 'mina-cmp-copiapo',
   },
   {
     title: 'Techumbre y Terminaciones',
@@ -50,20 +50,23 @@ const projects = [
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
       {projects.map((project, index) => (
         <a href={`/proyectos/${project.slug}`} class="group block reveal" style={`transition-delay: ${(index % 3) * 100}ms`}>
-          <div class="rounded-xl overflow-hidden border border-neutral-200/60 bg-white shadow-sm transition-all duration-300 group-hover:shadow-lg group-hover:-translate-y-0.5">
+          <div class="overflow-hidden border-brutal bg-white img-reveal-container">
             <div class="aspect-[4/3] bg-neutral-200 relative overflow-hidden">
               <img
                 src={project.image}
                 alt={project.title}
-                class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                width="400"
+                height="300"
+                class="absolute inset-0 w-full h-full object-cover"
                 loading="lazy"
+                decoding="async"
               />
               <div class="absolute inset-0 bg-primary-600/0 group-hover:bg-primary-600/10 transition-colors duration-300"></div>
             </div>
 
-            <div class="p-5">
+            <div class="p-5 border-t-brutal">
               <Badge variant="primary" class="mb-3">{project.category}</Badge>
-              <h3 class="text-lg font-semibold text-neutral-900 mb-2 group-hover:text-primary-600 transition-colors">
+              <h3 class="text-lg font-bold text-neutral-950 mb-2 group-hover:text-primary-600 transition-colors">
                 {project.title}
               </h3>
               <div class="flex items-center gap-4 text-sm text-neutral-500">

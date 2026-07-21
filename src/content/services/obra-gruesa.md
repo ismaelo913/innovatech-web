@@ -2,7 +2,7 @@
 title: Obra Gruesa
 description: Fundaciones, estructura, albanileria y hormigon armado. Equipos especializados para la etapa mas critica de tu proyecto.
 icon: hard-hat
-order: 3
+order: 2
 features:
   - Excavaciones y movimiento de tierra
   - Fundaciones y cimientos

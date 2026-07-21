@@ -2,7 +2,7 @@
 title: Terminaciones
 description: Revestimientos, pintura, pisos y cielos con precision milimetrica. El detalle final que define la calidad de tu proyecto.
 icon: paint-roller
-order: 4
+order: 3
 features:
   - Ceramica y porcelanato (pisos y muros)
   - Pintura interior y exterior

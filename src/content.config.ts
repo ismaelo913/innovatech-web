@@ -24,6 +24,7 @@ const projects = defineCollection({
       'obra-gruesa',
       'terminaciones',
       'ampliacion',
+      'montaje-electrico',
     ]),
     location: z.string().optional(),
     area: z.string().optional(),

@@ -1,0 +1,381 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Container from '../components/ui/Container.astro';
+
+const clientes = [
+  { nombre: 'Concreta — Grupo Inmobiliario', logo: '/images/clientes/concreta.png' },
+  { nombre: 'GPR Constructora & Inmobiliaria', logo: '/images/clientes/gpr.png' },
+  { nombre: 'Codelco — División El Teniente', logo: '/images/clientes/codelco.png' },
+  { nombre: 'EECOL', logo: '/images/clientes/eecol.png' },
+  { nombre: 'Sonepar', logo: '/images/clientes/sonepar.png' },
+  { nombre: 'Schneider Electric', logo: '/images/clientes/schneider.png' },
+  { nombre: 'Inproco', logo: '/images/clientes/inproco.png' },
+  { nombre: 'CMP', logo: '/images/clientes/cmp.png' },
+  { nombre: 'MIPSS', logo: '/images/clientes/mipss.png' },
+  { nombre: 'EATHON', logo: '/images/clientes/eathon.png' },
+];
+
+const icps = [
+  {
+    icon: '🏗️',
+    title: 'Constructoras y subcontratistas',
+    desc: 'Necesitas cuadrillas especializadas para partidas específicas: albanilería, terminaciones, estructura. Llegamos con contrato, mutualidad vigente, EPP propio y supervisor en terreno.',
+  },
+  {
+    icon: '🏢',
+    title: 'Inmobiliarias y project managers',
+    desc: 'Gestionas múltiples proyectos y necesitas subcontratistas que documenten, cumplan plazo y emitan factura electrónica. Trabajamos con F30-1 mensual y acceso directo al supervisor.',
+  },
+  {
+    icon: '🏪',
+    title: 'Empresas con locales y oficinas',
+    desc: 'Necesitas remodelar tu espacio comercial sin detener la operación. Planificamos en fases, trabajamos en horarios acordados y entregamos presupuesto escrito antes de empezar.',
+  },
+];
+
+const docs = [
+  { label: 'RUT activo SII + giro construcción', detail: 'Actividades 4100–4299 / 4520' },
+  { label: 'Contratos de trabajo firmados', detail: 'Todos los trabajadores en obra' },
+  { label: 'EPP completo propio', detail: 'Casco, zapatos, guantes, arnés' },
+  { label: 'Supervisor en terreno propio', detail: 'No depende del mandante para coordinar' },
+  { label: 'Factura electrónica habilitada', detail: 'Recupera crédito fiscal IVA' },
+  { label: 'F30-1 mensual disponible', detail: 'Cumplimiento laboral documentado' },
+];
+
+const steps = [
+  { num: '01', title: 'Cuéntanos el proyecto', desc: 'Llena el formulario o escríbenos directo. Describimos el alcance, las partidas y el plazo estimado.' },
+  { num: '02', title: 'Visita técnica gratuita', desc: 'Un supervisor va al lugar. Evalúa el estado actual y toma mediciones exactas sin costo.' },
+  { num: '03', title: 'Propuesta escrita en 48 h', desc: 'Desglose por partidas, precio total, plazo comprometido y condiciones de pago.' },
+  { num: '04', title: 'Inicio con contrato firmado', desc: 'Anticipo máximo 30%. Supervisor en terreno todos los días. Informes de avance cuando los necesitas.' },
+];
+
+const schema = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "serviceType": "Subcontrato de construcción para empresas",
+  "provider": {
+    "@type": "LocalBusiness",
+    "name": "Innovatech Construcciones",
+    "url": "https://innovatechconstrucciones.cl",
+    "telephone": "+56938905488",
+    "areaServed": "Región Metropolitana, Chile"
+  },
+  "description": "Cuadrillas especializadas para constructoras e inmobiliarias en Santiago. Documentación Art. 183-A, mutualidad, EPP y factura electrónica incluidos.",
+  "areaServed": "Santiago, Región Metropolitana"
+});
+---
+
+<BaseLayout
+  title="Subcontratista para Empresas Constructoras e Inmobiliarias | Innovatech Santiago"
+  description="Cuadrillas especializadas con documentación completa: contratos, mutualidad, EPP y factura electrónica. Cumplimos el Art. 183-A desde el primer día. Cotiza en Santiago RM."
+>
+  <script type="application/ld+json" set:html={schema} />
+
+  <!-- Hero B2B -->
+  <section class="py-20 sm:py-28 bg-neutral-950 text-white overflow-hidden relative border-b-brutal-invert">
+    <div class="absolute inset-0 bg-[linear-gradient(to_right,oklch(30%_0_0)_1px,transparent_1px),linear-gradient(to_bottom,oklch(30%_0_0)_1px,transparent_1px)] bg-[size:3rem_3rem] opacity-20 pointer-events-none"></div>
+    <Container>
+      <div class="max-w-3xl mx-auto text-center relative z-10">
+        <span class="inline-block text-xs font-bold tracking-widest uppercase text-primary-500 mb-5 border-brutal-invert px-3 py-1">
+          Para constructoras, inmobiliarias y empresas
+        </span>
+        <h1 class="text-3xl sm:text-4xl lg:text-5xl font-black uppercase tracking-tight leading-tight mb-6">
+          Obra que avanza.<br class="hidden sm:block" />
+          <span class="text-primary-500">Documentación que protege.</span>
+        </h1>
+        <p class="text-lg text-neutral-300 font-light max-w-2xl mx-auto mb-10 leading-relaxed">
+          Llegamos con contratos firmados, EPP propio, supervisor en terreno y factura electrónica. Trabajamos para constructoras, inmobiliarias y project managers en toda la Región Metropolitana.
+        </p>
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+          <a
+            href="#contacto-empresas"
+            class="inline-flex items-center gap-2 px-7 py-3.5 rounded-2xl bg-primary-600 text-white font-bold text-sm hover:bg-white hover:text-neutral-950 transition-colors"
+          >
+            Solicitar propuesta
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+            </svg>
+          </a>
+          <a
+            href="/recursos/checklist-subcontratistas"
+            class="inline-flex items-center gap-2 px-7 py-3.5 border-brutal-invert text-neutral-200 font-bold text-sm uppercase tracking-wide hover:bg-white/5 hover:text-white transition-colors"
+          >
+            Ver checklist legal gratuito
+          </a>
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- Stat bar -->
+  <section class="bg-neutral-950 text-white">
+    <div class="grid grid-cols-2 sm:grid-cols-4 divide-x divide-y sm:divide-y-0 divide-white/15">
+        {[
+          { stat: 'Art. 183-A', label: 'Documentación en regla desde día 1' },
+          { stat: 'F30-1', label: 'Certificado cumplimiento laboral disponible' },
+          { stat: 'EPP', label: 'Equipo de protección propio incluido' },
+          { stat: 'IVA', label: 'Factura electrónica incluida' },
+        ].map(({ stat, label }) => (
+          <div class="py-6 px-6 text-center">
+            <div class="text-2xl font-black text-primary-500 mb-1">{stat}</div>
+            <div class="text-xs text-neutral-400 leading-snug">{label}</div>
+          </div>
+        ))}
+    </div>
+  </section>
+
+  <!-- A quién servimos -->
+  <section class="py-16 sm:py-20 bg-surface-alt border-b-brutal">
+    <Container>
+      <div class="max-w-3xl mx-auto">
+        <div class="text-center mb-12">
+          <h2 class="text-2xl sm:text-3xl font-black uppercase text-neutral-950 mb-3">¿Para quién trabajamos?</h2>
+          <p class="text-accent-500 font-light">Entendemos que cada tipo de empresa tiene necesidades distintas.</p>
+        </div>
+        <div class="space-y-4">
+          {icps.map(({ icon, title, desc }) => (
+            <div class="flex gap-5 p-6 border-brutal bg-white hover-bg-brand transition-colors">
+              <div class="text-3xl shrink-0 mt-0.5">{icon}</div>
+              <div>
+                <h3 class="font-bold text-neutral-950 mb-1.5">{title}</h3>
+                <p class="text-sm font-light text-accent-500 leading-relaxed">{desc}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- Capacidad operacional -->
+  <section class="py-16 sm:py-20 border-b-brutal">
+    <Container>
+      <div class="max-w-3xl mx-auto">
+        <div class="text-center mb-12">
+          <h2 class="text-2xl sm:text-3xl font-black uppercase text-neutral-950 mb-3">Capacidad operacional</h2>
+          <p class="text-accent-500 font-light max-w-xl mx-auto">Lo que puedes esperar cuando trabajas con Innovatech como subcontratista.</p>
+        </div>
+        <div class="grid sm:grid-cols-2 gap-5">
+          {[
+            { title: 'Remodelaciones residenciales', detail: 'Cocinas, baños, living, dormitorios. Obras hasta 200 m².' },
+            { title: 'Remodelaciones comerciales', detail: 'Locales, oficinas y espacios corporativos.' },
+            { title: 'Obra gruesa', detail: 'Fundaciones, estructura, albañilería y hormigón.' },
+            { title: 'Terminaciones', detail: 'Revestimientos, pintura, pisos, cielos y carpintería.' },
+            { title: 'Ampliaciones', detail: 'Segundos pisos, extensiones y nuevas áreas.' },
+            { title: 'Electricidad y montaje eléctrico', detail: 'Salas eléctricas, tableros, baja y media tensión (BT/MT).' },
+            { title: 'Supervisión técnica', detail: 'Supervisor propio en terreno todos los días de obra.' },
+          ].map(({ title, detail }) => (
+            <div class="p-5 border-brutal bg-surface-alt">
+              <div class="font-bold text-neutral-950 text-sm mb-1">{title}</div>
+              <div class="text-xs text-accent-500">{detail}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- Documentación Art. 183-A -->
+  <section class="py-16 sm:py-20 bg-neutral-950 text-white border-y-brutal-invert">
+    <Container>
+      <div class="max-w-3xl mx-auto">
+        <div class="mb-10">
+          <span class="text-xs font-bold tracking-widest uppercase text-primary-500">Cumplimiento legal</span>
+          <h2 class="text-2xl sm:text-3xl font-black uppercase mt-2 mb-3">
+            Llegamos con la documentación que la ley exige
+          </h2>
+          <p class="text-neutral-400 font-light text-sm max-w-xl">
+            El Art. 183-A del Código del Trabajo te hace responsable solidario si tu subcontratista no cumple. Con Innovatech eso no ocurre — te entregamos cada documento antes de iniciar faenas.
+          </p>
+        </div>
+        <div class="grid sm:grid-cols-2 gap-3">
+          {docs.map(({ label, detail }) => (
+            <div class="flex items-start gap-3 p-4 border-brutal-invert bg-white/5">
+              <svg class="w-5 h-5 text-primary-500 shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+              </svg>
+              <div>
+                <div class="text-sm font-semibold text-white">{label}</div>
+                <div class="text-xs text-neutral-500 mt-0.5">{detail}</div>
+              </div>
+            </div>
+          ))}
+        </div>
+        <div class="mt-8 p-5 border border-white/15 border-l-4 border-l-primary-500 bg-white/5">
+          <p class="text-xs text-neutral-300 leading-relaxed">
+            <strong class="text-primary-500">Multas Art. 183-A:</strong> Un mandante sin control puede enfrentar sanciones de <strong>5 a 150 UTM</strong> (aprox. CLP $310.000 – $9.350.000 al 2026) más demandas laborales directas. Exige el F30-1 mensual a todos tus subcontratistas.
+          </p>
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- Cómo funciona -->
+  <section class="py-16 sm:py-20 border-b-brutal">
+    <Container>
+      <div class="max-w-3xl mx-auto">
+        <div class="text-center mb-12">
+          <h2 class="text-2xl sm:text-3xl font-black uppercase text-neutral-950 mb-3">Cómo funciona el proceso</h2>
+          <p class="text-accent-500 font-light">Sin demoras ni ambigüedades.</p>
+        </div>
+        <div class="grid sm:grid-cols-2 gap-6">
+          {steps.map(({ num, title, desc }) => (
+            <div class="flex gap-4">
+              <div class="shrink-0 w-10 h-10 border-brutal bg-neutral-950 text-white flex items-center justify-center text-xs font-mono font-bold">
+                {num}
+              </div>
+              <div>
+                <div class="font-bold text-neutral-950 text-sm mb-1">{title}</div>
+                <div class="text-xs text-accent-500 leading-relaxed">{desc}</div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- Formulario de contacto B2B -->
+  <section id="contacto-empresas" class="py-16 sm:py-20 border-b-brutal">
+    <Container>
+      <div class="max-w-2xl mx-auto">
+        <div class="mb-10">
+          <h2 class="text-2xl sm:text-3xl font-black uppercase text-neutral-950 mb-3">Solicita una propuesta</h2>
+          <p class="text-accent-500 font-light text-sm">Cuéntanos el proyecto. Un asesor te responde en menos de 24 horas hábiles.</p>
+        </div>
+
+        <form
+          id="b2b-form"
+          class="space-y-5"
+          action={`https://wa.me/56938905488`}
+          onsubmit="handleB2BSubmit(event)"
+        >
+          <div class="grid sm:grid-cols-2 gap-5">
+            <div>
+              <label for="b2b-empresa" class="block text-sm font-bold text-neutral-700 mb-1.5">Empresa</label>
+              <input type="text" id="b2b-empresa" name="empresa" required
+                class="w-full px-4 py-2.5 border-brutal text-sm focus:outline-none focus:ring-2 focus:ring-primary-400 bg-white"
+                placeholder="Constructora XYZ SpA" />
+            </div>
+            <div>
+              <label for="b2b-nombre" class="block text-sm font-bold text-neutral-700 mb-1.5">Tu nombre</label>
+              <input type="text" id="b2b-nombre" name="nombre" required
+                class="w-full px-4 py-2.5 border-brutal text-sm focus:outline-none focus:ring-2 focus:ring-primary-400 bg-white"
+                placeholder="Carlos Fuentes" />
+            </div>
+            <div>
+              <label for="b2b-telefono" class="block text-sm font-bold text-neutral-700 mb-1.5">Teléfono</label>
+              <input type="tel" id="b2b-telefono" name="telefono" required
+                class="w-full px-4 py-2.5 border-brutal text-sm focus:outline-none focus:ring-2 focus:ring-primary-400 bg-white"
+                placeholder="+56 9 1234 5678" />
+            </div>
+            <div>
+              <label for="b2b-email" class="block text-sm font-bold text-neutral-700 mb-1.5">Email</label>
+              <input type="email" id="b2b-email" name="email" required
+                class="w-full px-4 py-2.5 border-brutal text-sm focus:outline-none focus:ring-2 focus:ring-primary-400 bg-white"
+                placeholder="carlos@constructora.cl" />
+            </div>
+          </div>
+          <div>
+            <label for="b2b-tipo" class="block text-sm font-bold text-neutral-700 mb-1.5">Tipo de empresa</label>
+            <select id="b2b-tipo" name="tipo_empresa"
+              class="w-full px-4 py-2.5 border-brutal text-sm focus:outline-none focus:ring-2 focus:ring-primary-400 bg-white">
+              <option value="constructora">Empresa constructora</option>
+              <option value="inmobiliaria">Inmobiliaria</option>
+              <option value="pm">Project manager independiente</option>
+              <option value="empresa">Empresa con local / oficina</option>
+              <option value="otro">Otro</option>
+            </select>
+          </div>
+          <div>
+            <label for="b2b-proyecto" class="block text-sm font-bold text-neutral-700 mb-1.5">Describe el proyecto</label>
+            <textarea id="b2b-proyecto" name="proyecto" rows={4}
+              class="w-full px-4 py-2.5 border-brutal text-sm focus:outline-none focus:ring-2 focus:ring-primary-400 bg-white resize-y"
+              placeholder="Tipo de trabajo, m² aproximados, comuna, plazo estimado, partidas específicas que necesitas..."></textarea>
+          </div>
+          <div class="pt-2">
+            <button type="submit"
+              class="inline-flex items-center gap-2 px-7 py-3.5 rounded-2xl bg-primary-600 text-white font-bold text-sm hover:bg-neutral-950 transition-colors cursor-pointer">
+              Enviar solicitud por WhatsApp
+              <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+              </svg>
+            </button>
+            <p class="text-xs text-neutral-400 mt-3">Respondemos en menos de 24 horas hábiles. Sin costo ni compromiso.</p>
+          </div>
+        </form>
+      </div>
+    </Container>
+  </section>
+
+  <!-- Clientes que confían en Innovatech -->
+  <section class="py-16 sm:py-20 bg-surface-alt border-b-brutal">
+    <Container>
+      <div class="max-w-4xl mx-auto">
+        <div class="text-center mb-12">
+          <h2 class="text-2xl sm:text-3xl font-black uppercase text-neutral-950 mb-3">Empresas que han depositado su confianza en nosotros</h2>
+          <p class="text-accent-500 font-light text-sm">Trabajamos junto a constructoras, inmobiliarias, distribuidores eléctricos y empresas del sector industrial.</p>
+        </div>
+        <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 border-t-brutal border-l-brutal bg-white">
+          {clientes.map(({ nombre, logo }) => (
+            <div class="reveal flex flex-col items-center justify-between gap-3 p-5 border-r-brutal border-b-brutal min-h-[130px] group">
+              {logo ? (
+                <div class="w-full flex items-center justify-center flex-1 h-12">
+                  <img
+                    src={logo}
+                    alt={`Logo ${nombre}`}
+                    width="120"
+                    height="48"
+                    class="max-h-12 max-w-[120px] w-auto h-auto object-contain client-logo"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </div>
+              ) : null}
+              <span class={`text-[11px] font-medium text-center leading-tight w-full ${logo ? 'text-neutral-500 group-hover:text-neutral-800' : 'text-sm font-semibold text-neutral-700'} transition-colors`}>
+                {nombre}
+              </span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- Cross-link recursos -->
+  <section class="py-12 bg-surface-alt">
+    <Container>
+      <div class="max-w-2xl mx-auto text-center">
+        <p class="text-sm text-accent-500 mb-4">¿Quieres saber qué documentación exigirle a cualquier subcontratista?</p>
+        <a href="/recursos/checklist-subcontratistas"
+          class="inline-flex items-center gap-2 text-sm font-bold uppercase tracking-wide text-primary-600 hover:text-primary-700 transition-colors">
+          Descargar checklist gratuito del mandante
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+          </svg>
+        </a>
+      </div>
+    </Container>
+  </section>
+</BaseLayout>
+
+<script>
+  function handleB2BSubmit(e: Event) {
+    e.preventDefault();
+    const form = e.target as HTMLFormElement;
+    const fd = new FormData(form);
+
+    const empresa = fd.get('empresa') as string;
+    const nombre = fd.get('nombre') as string;
+    const telefono = fd.get('telefono') as string;
+    const email = fd.get('email') as string;
+    const tipo = fd.get('tipo_empresa') as string;
+    const proyecto = fd.get('proyecto') as string;
+
+    const msg = `Hola Innovatech, solicito una propuesta para empresa.\n\n🏢 Empresa: ${empresa}\n👤 Contacto: ${nombre}\n📱 Teléfono: ${telefono}\n📧 Email: ${email}\n🏷️ Tipo: ${tipo}\n\n📝 Proyecto:\n${proyecto || 'Sin descripción'}`;
+
+    window.open(`https://wa.me/56938905488?text=${encodeURIComponent(msg)}`, '_blank');
+  }
+
+  (window as any).handleB2BSubmit = handleB2BSubmit;
+</script>

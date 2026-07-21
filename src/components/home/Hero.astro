@@ -1,69 +1,110 @@
 ---
-import Container from '../ui/Container.astro';
 import Button from '../ui/Button.astro';
-import Badge from '../ui/Badge.astro';
 ---
 
-<section class="relative overflow-hidden py-20 sm:py-28 lg:py-36">
-  <!-- Background decoration -->
-  <div class="absolute inset-0 -z-10">
-    <div class="absolute top-0 right-0 w-[600px] h-[600px] bg-primary-100/40 rounded-full blur-3xl -translate-y-1/2 translate-x-1/4"></div>
-    <div class="absolute bottom-0 left-0 w-[400px] h-[400px] bg-accent-100/30 rounded-full blur-3xl translate-y-1/2 -translate-x-1/4"></div>
-    <!-- Grid pattern -->
-    <div class="absolute inset-0 bg-[linear-gradient(to_right,theme(--color-neutral-200)_1px,transparent_1px),linear-gradient(to_bottom,theme(--color-neutral-200)_1px,transparent_1px)] bg-[size:4rem_4rem] opacity-30"></div>
-  </div>
-
-  <Container>
-    <div class="max-w-4xl mx-auto text-center">
-      <Badge variant="primary" class="mb-6">
-        Subcontratista de construcción en Santiago
-      </Badge>
-
-      <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-neutral-950 leading-[1.1] mb-6">
-        Calidad que se ve,
-        <span class="relative inline-block">
-          <span class="relative z-10 text-primary-600">seguridad que se siente</span>
-          <span class="absolute bottom-1 left-0 w-full h-3 bg-primary-200/60 -z-0 rounded"></span>
+<section class="border-b-brutal">
+  <div class="grid grid-cols-1 lg:grid-cols-12">
+    <!-- Left: headline + copy -->
+    <div class="lg:col-span-6 p-8 sm:p-12 lg:p-16 flex flex-col justify-center border-b-brutal lg:border-b-0 lg:border-r-brutal bg-background min-h-[55vh] lg:min-h-[85vh]">
+      <div class="reveal delay-100">
+        <span class="inline-flex items-center gap-2 text-xs font-bold tracking-[0.2em] uppercase text-primary-600 mb-6">
+          <span class="w-6 h-px bg-primary-600"></span>
+          Construcción y Montaje Eléctrico · Santiago RM
         </span>
+      </div>
+
+      <h1
+        id="hero-headline"
+        data-splitting
+        style="opacity:0"
+        class="text-4xl sm:text-5xl lg:text-6xl font-black uppercase tracking-tight text-neutral-950 leading-[0.95] mb-6"
+      >
+        Obra eléctrica y construcción sin <span class="text-primary-600">el riesgo de siempre</span>
       </h1>
 
-      <p class="text-lg sm:text-xl text-neutral-600 max-w-2xl mx-auto mb-10 leading-relaxed">
-        Mano de obra cualificada, equipada y supervisada para cada etapa de tu obra. Trabajamos con el compromiso de que cada detalle se note.
+      <p id="hero-sub" style="opacity:0" class="text-lg sm:text-xl font-light text-accent-500 max-w-xl mb-10 leading-relaxed">
+        Precio por escrito antes de empezar, supervisor presente todos los días, sin anticipo exagerado. Ejecutamos obra gruesa, montaje eléctrico y salas eléctricas en Santiago — y sí, terminamos lo que empezamos.
       </p>
+      <noscript><style>#hero-headline, #hero-sub { opacity: 1 !important; }</style></noscript>
 
-      <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-        <Button href="/cotizador" size="lg" variant="accent">
+      <div class="reveal delay-400 flex flex-col sm:flex-row gap-4">
+        <Button href="/cotizador" size="lg" variant="primary" id="hero-a-cta-primary">
           Cotiza tu proyecto
           <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
             <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
           </svg>
         </Button>
-        <Button href="/servicios" size="lg" variant="outline">
+        <Button
+          href="/servicios"
+          size="lg"
+          variant="outline"
+          id="hero-a-cta-secondary"
+        >
           Conoce nuestros servicios
         </Button>
       </div>
+    </div>
 
-      <!-- Trust indicators -->
-      <div class="mt-16 flex flex-wrap items-center justify-center gap-x-8 gap-y-4 text-sm text-neutral-500">
-        <div class="flex items-center gap-2">
-          <svg class="w-4 h-4 text-green-500" fill="currentColor" viewBox="0 0 20 20">
-            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
-          </svg>
-          Personal equipado con EPPs
-        </div>
-        <div class="flex items-center gap-2">
-          <svg class="w-4 h-4 text-green-500" fill="currentColor" viewBox="0 0 20 20">
-            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
-          </svg>
-          Supervisión en cada obra
-        </div>
-        <div class="flex items-center gap-2">
-          <svg class="w-4 h-4 text-green-500" fill="currentColor" viewBox="0 0 20 20">
-            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
-          </svg>
-          Herramientas incluidas
+    <!-- Right: photo collage — obra real, no stock -->
+    <div class="lg:col-span-6 bg-surface-alt relative min-h-[50vh] lg:min-h-[85vh] overflow-hidden flex items-center justify-center p-8">
+      <div class="reveal-scale delay-300 relative w-full max-w-md lg:max-w-none">
+        <div class="relative aspect-[4/5] sm:aspect-[5/4] lg:aspect-[4/5]">
+          <div class="absolute inset-0 lg:inset-x-6 img-reveal-container border-brutal -rotate-2 bg-background">
+            <img
+              src="/images/projects/mina-cmp-1.jpeg"
+              alt="Montaje eléctrico en faena minera — Mina CMP Copiapó, Innovatech"
+              width="540"
+              height="960"
+              class="w-full h-full object-cover"
+              loading="eager"
+              fetchpriority="high"
+              decoding="async"
+            />
+          </div>
+          <div class="absolute -bottom-6 -left-2 sm:-left-6 w-[42%] aspect-[3/4] img-reveal-container border-brutal rotate-3 bg-background">
+            <img
+              src="/images/projects/mina-cmp-9.jpeg"
+              alt="Instalación de equipos de alta tensión — Mina CMP Copiapó, Innovatech"
+              width="720"
+              height="1280"
+              class="w-full h-full object-cover"
+              loading="eager"
+              decoding="async"
+            />
+          </div>
+          <div class="absolute -top-4 -right-2 sm:right-2 bg-primary-600 text-white text-xs sm:text-sm font-bold uppercase tracking-wide px-3 py-2 border-brutal rotate-2">
+            13 años en terreno
+          </div>
         </div>
       </div>
     </div>
-  </Container>
+  </div>
+
+  <!-- Stats band: marquee ticker + CountUp — datos reales del Portafolio Innovatech.pdf -->
+  <div class="bg-neutral-950 text-background">
+    <div class="marquee-container py-3 border-b-brutal-invert">
+      <div class="marquee-content text-primary-500 uppercase tracking-[0.2em] text-xs font-bold flex gap-12">
+        {Array.from({ length: 10 }).map(() => <span>13 años en terreno</span>)}
+      </div>
+    </div>
+    <div class="grid grid-cols-2 md:grid-cols-4 divide-x divide-y md:divide-y-0 divide-white/15 reveal delay-500">
+      <div class="p-6 lg:p-10">
+        <div class="text-3xl lg:text-5xl font-black countup" data-target="13" data-suffix=" años">0 años</div>
+        <div class="text-xs uppercase tracking-widest text-neutral-500 mt-1">De experiencia</div>
+      </div>
+      <div class="p-6 lg:p-10">
+        <div class="text-3xl lg:text-5xl font-black countup" data-target="60" data-suffix="+">0+</div>
+        <div class="text-xs uppercase tracking-widest text-neutral-500 mt-1">Trabajadores disponibles</div>
+      </div>
+      <div class="p-6 lg:p-10">
+        <div class="text-3xl lg:text-5xl font-black countup" data-target="6" data-suffix="">0</div>
+        <div class="text-xs uppercase tracking-widest text-neutral-500 mt-1">Tipos de servicio</div>
+      </div>
+      <div class="p-6 lg:p-10">
+        <div class="text-3xl lg:text-5xl font-black countup" data-target="100" data-suffix="%" data-prefix="">0%</div>
+        <div class="text-xs uppercase tracking-widest text-neutral-500 mt-1">Cumplimiento legal</div>
+      </div>
+    </div>
+  </div>
 </section>
+

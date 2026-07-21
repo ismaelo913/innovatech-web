@@ -2,7 +2,7 @@
 title: Remodelaciones Comerciales
 description: Oficinas, locales comerciales y espacios corporativos funcionales. Ejecucion rapida para minimizar tiempos de detencion de tu negocio.
 icon: building
-order: 2
+order: 5
 features:
   - Oficinas corporativas y coworking
   - Locales comerciales y retail

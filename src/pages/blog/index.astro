@@ -3,6 +3,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import Container from '../../components/ui/Container.astro';
 import SectionHeading from '../../components/ui/SectionHeading.astro';
 import Badge from '../../components/ui/Badge.astro';
+import Breadcrumbs from '../../components/ui/Breadcrumbs.astro';
 import { getCollection } from 'astro:content';
 
 const posts = (await getCollection('blog')).sort(
@@ -14,7 +15,15 @@ const posts = (await getCollection('blog')).sort(
   title="Blog"
   description="Artículos sobre construcción, remodelaciones y buenas prácticas de subcontrato en Chile. Consejos del equipo Innovatech."
 >
-  <section class="py-16 sm:py-20 bg-neutral-50 border-b border-neutral-200/60">
+  <div class="bg-background border-b-brutal">
+    <Container>
+      <div class="pt-4">
+        <Breadcrumbs items={[{ label: 'Inicio', href: '/' }, { label: 'Blog' }]} />
+      </div>
+    </Container>
+  </div>
+
+  <section class="py-16 sm:py-20 bg-background border-b-brutal">
     <Container>
       <SectionHeading
         label="Blog"
@@ -29,13 +38,13 @@ const posts = (await getCollection('blog')).sort(
       <div class="space-y-8">
         {posts.map((post) => (
           <a href={`/blog/${post.id}`} class="group block">
-            <article class="p-6 sm:p-8 rounded-xl border border-neutral-200/60 bg-white hover:shadow-md hover:-translate-y-0.5 transition-all duration-300">
+            <article class="p-6 sm:p-8 border-brutal bg-white hover:bg-surface-alt transition-colors duration-300">
               <div class="flex flex-wrap gap-2 mb-3">
                 {post.data.tags.map((tag) => (
                   <Badge>{tag}</Badge>
                 ))}
               </div>
-              <h2 class="text-xl sm:text-2xl font-bold text-neutral-900 group-hover:text-primary-600 transition-colors mb-2">
+              <h2 class="text-xl sm:text-2xl font-black uppercase text-neutral-950 group-hover:text-primary-600 transition-colors mb-2">
                 {post.data.title}
               </h2>
               <p class="text-neutral-600 leading-relaxed mb-4">

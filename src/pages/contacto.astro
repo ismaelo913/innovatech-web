@@ -38,16 +38,16 @@ const contactInfo = [
   description="Contáctanos para conversar sobre tu proyecto de construcción en Santiago. Calidad que se ve, seguridad que se siente."
 >
   {/* Hero */}
-  <section class="py-16 sm:py-20 bg-neutral-50 border-b border-neutral-200/60">
+  <section class="py-16 sm:py-20 bg-background border-b-brutal">
     <Container>
       <div class="max-w-3xl mx-auto text-center">
-        <span class="inline-block text-sm font-semibold tracking-widest uppercase text-primary-600 mb-4">
+        <span class="inline-block text-sm font-bold tracking-widest uppercase text-primary-600 mb-4">
           Contacto
         </span>
-        <h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-neutral-950 tracking-tight leading-tight mb-6">
+        <h1 class="text-3xl sm:text-4xl lg:text-5xl font-black uppercase text-neutral-950 tracking-tight leading-tight mb-6">
           Estamos para ayudarte
         </h1>
-        <p class="text-lg text-neutral-600 leading-relaxed">
+        <p class="text-lg font-light text-accent-500 leading-relaxed">
           Cuéntanos qué necesitas y te respondemos pronto. Nos gusta conocer cada proyecto antes de dar el primer paso.
         </p>
       </div>
@@ -60,17 +60,17 @@ const contactInfo = [
       <div class="grid grid-cols-1 lg:grid-cols-5 gap-12 lg:gap-16">
         {/* Form — React Island */}
         <div class="lg:col-span-3">
-          <h2 class="text-2xl font-bold text-neutral-900 mb-6">Enviar mensaje</h2>
+          <h2 class="text-2xl font-black uppercase text-neutral-950 mb-6">Enviar mensaje</h2>
           <ContactForm client:visible />
         </div>
 
         {/* Contact info */}
         <div class="lg:col-span-2">
-          <h2 class="text-2xl font-bold text-neutral-900 mb-6">Información de contacto</h2>
+          <h2 class="text-2xl font-black uppercase text-neutral-950 mb-6">Información de contacto</h2>
           <div class="space-y-5 mb-8">
             {contactInfo.map((info) => (
               <div class="flex items-start gap-4">
-                <div class="w-10 h-10 rounded-lg bg-primary-50 flex items-center justify-center shrink-0">
+                <div class="w-10 h-10 border-brutal bg-primary-50 flex items-center justify-center shrink-0">
                   <svg class="w-5 h-5 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
                     <path stroke-linecap="round" stroke-linejoin="round" d={info.icon} />
                   </svg>
@@ -78,11 +78,11 @@ const contactInfo = [
                 <div>
                   <div class="text-sm font-medium text-neutral-500">{info.label}</div>
                   {info.href ? (
-                    <a href={info.href} class="text-neutral-900 hover:text-primary-600 transition-colors">
+                    <a href={info.href} class="text-neutral-950 hover:text-primary-600 transition-colors">
                       {info.value}
                     </a>
                   ) : (
-                    <span class="text-neutral-900">{info.value}</span>
+                    <span class="text-neutral-950">{info.value}</span>
                   )}
                 </div>
               </div>
@@ -90,14 +90,14 @@ const contactInfo = [
           </div>
 
           {/* WhatsApp CTA */}
-          <div class="p-6 rounded-xl bg-green-50 border border-green-200">
-            <h3 class="font-semibold text-green-900 mb-2">Respuesta rápida por WhatsApp</h3>
-            <p class="text-sm text-green-700 mb-4">Escríbenos directamente y te respondemos al instante.</p>
+          <div class="p-6 border border-neutral-900 border-l-4 border-l-[#25D366] bg-surface-alt">
+            <h3 class="font-bold uppercase text-neutral-950 mb-2">Respuesta rápida por WhatsApp</h3>
+            <p class="text-sm text-accent-500 mb-4">Escríbenos directamente y te respondemos al instante.</p>
             <a
               href={whatsappUrl(SITE.whatsapp, 'Hola, quiero consultar sobre un proyecto de construcción.')}
               target="_blank"
               rel="noopener noreferrer"
-              class="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-[#25D366] text-white font-medium text-sm hover:bg-[#1fb855] transition-colors"
+              class="inline-flex items-center gap-2 px-5 py-2.5 border-brutal bg-[#25D366] text-white font-bold text-sm hover:bg-neutral-950 transition-colors"
             >
               <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
                 <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
@@ -112,14 +112,15 @@ const contactInfo = [
 
   {/* Map */}
   <section id="mapa" class="border-t border-neutral-200/60">
-    <div class="aspect-[21/9] bg-neutral-200 flex items-center justify-center">
-      <div class="text-center p-8">
-        <svg class="w-12 h-12 text-neutral-400 mx-auto mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M9 6.75V15m6-6v8.25m.503 3.498l4.875-2.437c.381-.19.622-.58.622-1.006V4.82c0-.836-.88-1.38-1.628-1.006l-3.869 1.934c-.317.159-.69.159-1.006 0L9.503 3.252a1.125 1.125 0 00-1.006 0L3.622 5.689C3.24 5.88 3 6.27 3 6.695V19.18c0 .836.88 1.38 1.628 1.006l3.869-1.934c.317-.159.69-.159 1.006 0l4.994 2.497c.317.158.69.158 1.006 0z" />
-        </svg>
-        <p class="text-neutral-500 font-medium">Mapa de Google Maps</p>
-        <p class="text-sm text-neutral-400">Se integrará con la dirección real de Innovatech</p>
-      </div>
-    </div>
+    <iframe
+      src="https://www.google.com/maps?q=Canto+General+0400,+La+Granja,+Santiago,+Chile&output=embed"
+      width="100%"
+      height="450"
+      style="border:0; display:block;"
+      allowfullscreen=""
+      loading="lazy"
+      referrerpolicy="no-referrer-when-downgrade"
+      title="Ubicación Innovatech — Canto General 0400, La Granja, Santiago"
+    ></iframe>
   </section>
 </BaseLayout>

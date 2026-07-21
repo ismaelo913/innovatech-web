@@ -1,0 +1,88 @@
+---
+import Container from '../ui/Container.astro';
+
+const steps = [
+  {
+    num: '01',
+    tag: 'Presupuesto',
+    title: 'Precio por escrito',
+    desc: 'Presupuesto formal desglosado por partidas antes de firmar cualquier contrato. Sin sorpresas a mitad de obra.',
+  },
+  {
+    num: '02',
+    tag: 'Legal',
+    title: 'Cero riesgo legal',
+    desc: 'Cumplimos al 100% las normativas laborales (Art. 183-A DT) de subcontrato en Chile.',
+  },
+  {
+    num: '03',
+    tag: 'Terreno',
+    title: 'Supervisor en obra',
+    desc: 'Un profesional a cargo de coordinar, liderar y reportar el avance diario, todos los días.',
+  },
+];
+---
+
+<section class="relative bg-neutral-950 border-y-brutal-invert process-pin-wrapper">
+  <div class="sticky top-0 h-screen flex items-center overflow-hidden">
+    <!-- blueprint grid backdrop -->
+    <div class="absolute inset-0 -z-10 bg-[linear-gradient(rgba(255,255,255,0.04)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.04)_1px,transparent_1px)] bg-[size:44px_44px]"></div>
+
+    <Container>
+      <div class="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+        <div class="order-2 lg:order-1 flex items-center justify-center">
+          <svg viewBox="0 0 400 300" class="w-full max-w-md" xmlns="http://www.w3.org/2000/svg">
+            <path
+              id="blueprint-path"
+              d="M40,260 L360,260 M80,260 L80,140 L200,60 L320,140 L320,260 M180,260 L180,190 L220,190 L220,260 M100,220 L140,220 L140,180 L100,180 Z M195,58 L205,58 M80,280 L80,286 M320,280 L320,286 M80,283 L320,283"
+              fill="none"
+              stroke-width="1.75"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              style={`stroke: oklch(70% 0.18 42);`}
+            />
+          </svg>
+        </div>
+
+        <div class="order-1 lg:order-2">
+          <span class="inline-flex items-center gap-2 text-xs font-bold tracking-[0.2em] uppercase text-primary-500 mb-4">
+            <span class="w-6 h-px bg-primary-500"></span>
+            Cómo trabajamos
+          </span>
+          <div class="space-y-2">
+            {steps.map((step) => (
+              <div class="process-step py-6 border-b-brutal-invert opacity-30 transition-opacity duration-300" data-step={step.num}>
+                <div class="text-xs font-bold tracking-[0.2em] text-primary-500 mb-2">{step.num} — {step.tag.toUpperCase()}</div>
+                <h3 class="text-xl sm:text-2xl font-black uppercase text-background mb-2">{step.title}</h3>
+                <p class="text-neutral-400 font-light text-sm sm:text-base leading-relaxed max-w-md">{step.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </Container>
+  </div>
+</section>
+
+<style>
+  .process-pin-wrapper {
+    height: 320vh;
+  }
+  .process-step.is-active {
+    opacity: 1;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .process-pin-wrapper {
+      height: auto;
+    }
+    .process-pin-wrapper .sticky {
+      position: static;
+      height: auto;
+      padding: 4rem 0;
+    }
+    .process-step {
+      opacity: 1 !important;
+    }
+  }
+</style>
+

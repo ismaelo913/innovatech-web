@@ -1,0 +1,105 @@
+---
+import Container from '../ui/Container.astro';
+import Button from '../ui/Button.astro';
+---
+
+<section class="py-section bg-neutral-950 text-white border-y-brutal-invert">
+  <Container>
+    <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+
+      <!-- Left: Pitch B2B -->
+      <div class="reveal-left">
+
+        <span class="inline-block text-xs font-bold tracking-widest uppercase text-primary-500 mb-4">
+          Para empresas constructoras e inmobiliarias
+        </span>
+        <h2 class="text-3xl sm:text-4xl font-black uppercase leading-tight mb-5">
+          Subcontrato con documentación<br class="hidden sm:block" />
+          <span class="text-primary-500">en regla desde el primer día</span>
+        </h2>
+        <p class="text-neutral-300 font-light text-lg mb-6 leading-relaxed">
+          El Artículo 183-A del Código del Trabajo establece responsabilidad solidaria del mandante sobre las obligaciones laborales del subcontratista. Trabajar con Innovatech elimina ese riesgo.
+        </p>
+
+        <!-- Pillars -->
+        <div class="space-y-4 mb-8">
+          {[
+            {
+              icon: 'M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z',
+              title: 'Documentación legal completa',
+              desc: 'Contratos de trabajo firmados, liquidaciones y F30-1 mensual. Sin que tengas que perseguir los papeles.'
+            },
+            {
+              icon: 'M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z',
+              title: 'Cuadrillas equipadas y supervisadas',
+              desc: 'EPP propio para todos los trabajadores. Supervisor en terreno incluido. No dependes de nuestro equipo para coordinar.'
+            },
+            {
+              icon: 'M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2',
+              title: 'Factura electrónica con IVA',
+              desc: 'RUT activo en SII con giro de construcción. Facturación formal para tu contabilidad y crédito fiscal.'
+            }
+          ].map(({ icon, title, desc }) => (
+            <div class="flex gap-4">
+              <div class="shrink-0 w-10 h-10 bg-primary-500/10 border-brutal-invert flex items-center justify-center">
+                <svg class="w-5 h-5 text-primary-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+                  <path stroke-linecap="round" stroke-linejoin="round" d={icon} />
+                </svg>
+              </div>
+              <div>
+                <p class="font-bold text-white text-sm mb-0.5">{title}</p>
+                <p class="text-neutral-400 font-light text-sm leading-relaxed">{desc}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <div class="flex flex-wrap gap-3">
+          <Button href="/contacto" variant="primary">
+            Hablar con un asesor
+          </Button>
+          <a
+            href="/recursos/checklist-subcontratistas"
+            class="inline-flex items-center gap-2 px-5 py-2.5 border-brutal-invert text-neutral-200 font-bold uppercase tracking-wide text-sm hover:bg-white/5 hover:text-white transition-colors"
+          >
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+            </svg>
+            Checklist del mandante
+          </a>
+        </div>
+      </div>
+
+      <!-- Right: Stats / Social proof -->
+      <div class="lg:pl-8 reveal-right delay-200">
+
+        <div class="grid grid-cols-2 gap-4 mb-6">
+          {[
+            { value: 'Art. 183-A', label: 'Documentación en regla', sub: 'Responsabilidad solidaria cubierta' },
+            { value: 'F30-1', label: 'Certificado mensual DT', sub: 'Disponible cuando lo necesitas' },
+            { value: 'EPP', label: 'Equipo propio incluido', sub: 'Sin costo adicional para el mandante' },
+            { value: 'IVA', label: 'Factura electrónica', sub: 'Recupera crédito fiscal' },
+          ].map(({ value, label, sub }) => (
+            <div class="p-4 bg-white/5 border-brutal-invert">
+              <div class="text-xl font-black text-primary-500 mb-1">{value}</div>
+              <div class="text-xs font-bold text-white mb-0.5">{label}</div>
+              <div class="text-xs text-neutral-500">{sub}</div>
+            </div>
+          ))}
+        </div>
+
+        <div class="p-5 bg-white/5 border border-white/15 border-l-4 border-l-primary-500">
+          <p class="text-sm text-neutral-300 font-medium mb-2">¿Buscas subcontratistas para tu próxima obra?</p>
+          <p class="text-xs text-neutral-400 leading-relaxed">Trabajamos con constructoras, inmobiliarias y project managers en toda la RM. Cotiza sin compromiso.</p>
+          <a href="/empresas" class="inline-flex items-center gap-1.5 mt-3 text-xs font-bold uppercase tracking-wide text-primary-500 hover:text-primary-400 transition-colors">
+            Ver página para empresas
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+            </svg>
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </Container>
+</section>

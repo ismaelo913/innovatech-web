@@ -1,0 +1,48 @@
+---
+import Container from '../ui/Container.astro';
+
+// Clientes reales — fuente: Portafolio Innovatech.pdf
+const clientes = [
+  { nombre: 'Concreta — Grupo Inmobiliario', logo: '/images/clientes/concreta.png' },
+  { nombre: 'GPR Constructora & Inmobiliaria', logo: '/images/clientes/gpr.png' },
+  { nombre: 'Codelco — División El Teniente', logo: '/images/clientes/codelco.png' },
+  { nombre: 'EECOL', logo: '/images/clientes/eecol.png' },
+  { nombre: 'Sonepar', logo: '/images/clientes/sonepar.png' },
+  { nombre: 'Schneider Electric', logo: '/images/clientes/schneider.png' },
+  { nombre: 'Inproco', logo: '/images/clientes/inproco.png' },
+  { nombre: 'CMP', logo: '/images/clientes/cmp.png' },
+  { nombre: 'MIPSS', logo: '/images/clientes/mipss.png' },
+  { nombre: 'EATHON', logo: '/images/clientes/eathon.png' },
+];
+---
+
+<section class="border-b-brutal bg-surface-alt pt-section pb-section">
+  <Container class="mb-16 text-center max-w-3xl">
+    <p class="reveal text-sm font-bold tracking-widest uppercase text-primary-600 mb-4">
+      13 años de trayectoria
+    </p>
+    <h2 class="reveal text-3xl sm:text-4xl font-black uppercase leading-tight text-neutral-950">
+      Empresas que han depositado su confianza en nosotros
+    </h2>
+    <p class="reveal text-lg font-light text-accent-500 mt-4">
+      Minería, distribuidoras eléctricas, constructoras e inmobiliarias para las que hemos ejecutado y supervisado obra en Santiago y regiones.
+    </p>
+  </Container>
+
+  <!-- Logo grid — lattice de bordes duros, altura fija para uniformidad -->
+  <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 border-t-brutal border-l-brutal bg-white reveal">
+    {clientes.map((c) => (
+      <div class="border-r-brutal border-b-brutal p-6 flex items-center justify-center min-h-[110px]">
+        <img
+          src={c.logo}
+          alt={`Logo ${c.nombre}`}
+          width="100"
+          height="40"
+          class="max-h-10 max-w-[100px] w-auto h-auto object-contain client-logo"
+          loading="lazy"
+          decoding="async"
+        />
+      </div>
+    ))}
+  </div>
+</section>

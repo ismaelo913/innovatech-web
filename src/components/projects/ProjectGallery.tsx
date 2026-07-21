@@ -47,7 +47,7 @@ export default function ProjectGallery({ images, alt }: Props) {
         {/* Main image */}
         <button
           onClick={() => openLightbox(0)}
-          className="aspect-[21/9] rounded-2xl overflow-hidden bg-neutral-200 cursor-zoom-in group relative"
+          className="aspect-[21/9] border-brutal overflow-hidden bg-neutral-200 cursor-zoom-in group relative"
         >
           <img
             src={images[0]}
@@ -55,8 +55,8 @@ export default function ProjectGallery({ images, alt }: Props) {
             className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.02]"
           />
           <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300 flex items-center justify-center">
-            <span className="opacity-0 group-hover:opacity-100 transition-opacity bg-white/90 backdrop-blur-sm rounded-full px-4 py-2 text-sm font-medium text-neutral-900 shadow-lg">
-              🔍 Ver galería ({images.length} fotos)
+            <span className="opacity-0 group-hover:opacity-100 transition-opacity bg-primary-600 border-brutal px-4 py-2 text-sm font-bold uppercase tracking-wide text-white">
+              Ver galería ({images.length} fotos)
             </span>
           </div>
         </button>
@@ -68,7 +68,7 @@ export default function ProjectGallery({ images, alt }: Props) {
               <button
                 key={img}
                 onClick={() => openLightbox(i + 1)}
-                className="aspect-[4/3] rounded-xl overflow-hidden bg-neutral-200 cursor-zoom-in group relative"
+                className="aspect-[4/3] border-brutal overflow-hidden bg-neutral-200 cursor-zoom-in group relative"
               >
                 <img
                   src={img}
@@ -155,7 +155,7 @@ export default function ProjectGallery({ images, alt }: Props) {
                       : 'opacity-50 hover:opacity-80'
                   }`}
                 >
-                  <img src={img} alt={`Miniatura ${index + 1}`} className="w-full h-full object-cover" />
+                  <img src={img} alt={`Miniatura ${i + 1}`} className="w-full h-full object-cover" />
                 </button>
               ))}
             </div>

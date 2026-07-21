@@ -2,7 +2,7 @@
 title: Remodelaciones Residenciales
 description: Transformamos cocinas, banos y espacios interiores con acabados de calidad profesional. Mano de obra especializada para renovar tu hogar.
 icon: home
-order: 1
+order: 6
 features:
   - Cocinas completas (demolicion, instalaciones, terminaciones)
   - Banos y toilettes (ceramica, griferia, sanitarios)

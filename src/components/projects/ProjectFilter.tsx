@@ -33,10 +33,10 @@ export default function ProjectFilter({ projects, categoryLabels }: Props) {
             <button
               key={cat}
               onClick={() => setActiveFilter(cat)}
-              className={`px-4 py-2 rounded-lg text-sm font-medium transition-all cursor-pointer ${
+              className={`px-4 py-2 border-brutal text-sm font-bold uppercase tracking-wide transition-colors cursor-pointer ${
                 isActive
-                  ? 'bg-[oklch(70%_0.18_50)] text-white shadow-md'
-                  : 'bg-white text-neutral-600 border border-neutral-200 hover:border-[oklch(79%_0.14_55)] hover:text-[oklch(62%_0.18_45)]'
+                  ? 'bg-primary-600 text-white'
+                  : 'bg-white text-neutral-700 hover:bg-neutral-950 hover:text-white'
               }`}
             >
               {label}
@@ -49,21 +49,24 @@ export default function ProjectFilter({ projects, categoryLabels }: Props) {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {filtered.map((project) => (
           <a key={project.id} href={`/proyectos/${project.id}`} className="group block">
-            <div className="rounded-xl overflow-hidden border border-neutral-200/60 bg-white shadow-sm transition-all duration-300 group-hover:shadow-lg group-hover:-translate-y-0.5">
+            <div className="img-reveal-container border-brutal bg-white">
               <div className="aspect-[4/3] relative overflow-hidden bg-neutral-200">
                 <img
                   src={project.image}
                   alt={project.title}
-                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  className="absolute inset-0 w-full h-full object-cover"
                   loading="lazy"
+                  decoding="async"
+                  width="800"
+                  height="600"
                 />
-                <div className="absolute inset-0 bg-[oklch(70%_0.18_50/0)] group-hover:bg-[oklch(70%_0.18_50/0.1)] transition-colors duration-300" />
+                <div className="absolute inset-0 bg-primary-600/0 group-hover:bg-primary-600/10 transition-colors duration-300" />
               </div>
-              <div className="p-5">
-                <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-[oklch(97%_0.02_65)] text-[oklch(62%_0.18_45)] border border-[oklch(87%_0.10_58)] mb-3">
+              <div className="p-5 border-t-brutal">
+                <span className="inline-flex items-center px-3 py-1 text-xs font-bold uppercase tracking-widest border-brutal bg-primary-50 text-primary-700 mb-3">
                   {categoryLabels[project.category] || project.category}
                 </span>
-                <h3 className="text-lg font-semibold text-neutral-900 mb-2 group-hover:text-[oklch(62%_0.18_45)] transition-colors">
+                <h3 className="text-lg font-bold text-neutral-950 mb-2 group-hover:text-primary-600 transition-colors">
                   {project.title}
                 </h3>
                 {project.location && (

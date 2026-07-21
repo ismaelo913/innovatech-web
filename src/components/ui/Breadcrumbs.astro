@@ -1,0 +1,44 @@
+---
+import { SITE } from '../../lib/constants';
+
+interface BreadcrumbItem {
+  label: string;
+  href?: string;
+}
+
+interface Props {
+  items: BreadcrumbItem[];
+  class?: string;
+}
+
+const { items, class: className = '' } = Astro.props;
+
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: items.map((item, i) => ({
+    '@type': 'ListItem',
+    position: i + 1,
+    name: item.label,
+    ...(item.href ? { item: new URL(item.href, SITE.url).href } : {}),
+  })),
+};
+---
+
+<nav aria-label="Ruta de navegación" class={`flex flex-wrap items-center gap-x-1 gap-y-1 text-sm text-neutral-500 mb-6 ${className}`}>
+  {items.map((item, i) => (
+    <span class="flex items-center gap-1">
+      {i > 0 && (
+        <svg class="w-3.5 h-3.5 text-neutral-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+        </svg>
+      )}
+      {item.href
+        ? <a href={item.href} class="hover:text-primary-600 transition-colors">{item.label}</a>
+        : <span class="text-neutral-700 font-medium" aria-current="page">{item.label}</span>
+      }
+    </span>
+  ))}
+</nav>
+
+<script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
