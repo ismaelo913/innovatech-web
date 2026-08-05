@@ -3,6 +3,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import Container from '../../components/ui/Container.astro';
 import SectionHeading from '../../components/ui/SectionHeading.astro';
 import ServiceCard from '../../components/services/ServiceCard.astro';
+import FeaturedServiceCard from '../../components/services/FeaturedServiceCard.astro';
 import CTASection from '../../components/home/CTASection.astro';
 import Breadcrumbs from '../../components/ui/Breadcrumbs.astro';
 import { getCollection } from 'astro:content';
@@ -10,6 +11,7 @@ import { getCollection } from 'astro:content';
 const services = (await getCollection('services')).sort(
   (a, b) => a.data.order - b.data.order,
 );
+const [featured, secondary, ...rest] = services;
 ---
 
 <BaseLayout
@@ -34,10 +36,30 @@ const services = (await getCollection('services')).sort(
     </Container>
   </section>
 
+  {featured && (
+    <FeaturedServiceCard
+      title={featured.data.title}
+      short={featured.data.description}
+      slug={featured.id}
+      image={featured.data.image ?? '/images/projects/montaje-electrico-1.jpeg'}
+    />
+  )}
+
   <section class="py-section">
     <Container>
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {services.map((service) => (
+        {secondary && (
+          <ServiceCard
+            title={secondary.data.title}
+            description={secondary.data.description}
+            icon={secondary.data.icon}
+            slug={secondary.id}
+            features={secondary.data.features}
+            size="lg"
+            class="md:col-span-2"
+          />
+        )}
+        {rest.map((service) => (
           <ServiceCard
             title={service.data.title}
             description={service.data.description}
@@ -52,3 +74,5 @@ const services = (await getCollection('services')).sort(
 
   <CTASection />
 </BaseLayout>
+
+<script src="../../scripts/services-animations.js"></script>

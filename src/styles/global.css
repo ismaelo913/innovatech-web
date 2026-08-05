@@ -58,6 +58,14 @@
   --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
   --font-mono: 'JetBrains Mono', ui-monospace, monospace;
 
+  /* — Display industrial: SOLO para H1/H2. Big Shoulders está diseñada
+     evocando vigas de acero y arquitectura industrial — refuerza "obra",
+     no decora porque sí. Stencil (marcaje de fábrica/contenedor) para
+     números y etiquetas de alto impacto: stats, badges, numeración de
+     proceso. Cuerpo de texto se mantiene 100% Inter. — */
+  --font-display: 'Big Shoulders Display', 'Inter', system-ui, sans-serif;
+  --font-stencil: 'Big Shoulders Stencil Display', 'JetBrains Mono', monospace;
+
   --text-xs: clamp(0.75rem, 0.7rem + 0.15vw, 0.8125rem);
   --text-sm: clamp(0.8125rem, 0.78rem + 0.2vw, 0.875rem);
   --text-base: clamp(0.9375rem, 0.88rem + 0.3vw, 1.0625rem);
@@ -150,6 +158,14 @@ body {
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
+
+  /* Excepción deliberada: el ticker "13 años en terreno" es decorativo
+     (aria-hidden en el marcado) y sin movimiento se ve roto/estático en vez
+     de ausente — se mantiene animado incluso con reduced-motion activo. */
+  .marquee-content {
+    animation-duration: 30s !important;
+    animation-iteration-count: infinite !important;
+  }
 }
 
 /* Smooth image rendering */
@@ -223,7 +239,7 @@ img {
 
 /* Client logo: grayscale hasta hover */
 .client-logo {
-  filter: grayscale(100%) opacity(0.6);
+  filter: grayscale(100%) opacity(0.9);
   transition: filter var(--duration-normal) var(--ease-out);
   mix-blend-mode: multiply;
 }
@@ -237,7 +253,7 @@ img {
   white-space: nowrap;
 }
 .marquee-content {
-  display: inline-block;
+  display: inline-flex;
   animation: marquee 30s linear infinite;
 }
 @keyframes marquee {
@@ -264,12 +280,24 @@ img {
    de cualquier @layer) le gana a esos utilities sin importar el orden. */
 .img-reveal-container {
   overflow: hidden;
+  background: linear-gradient(110deg, var(--color-neutral-200) 8%, var(--color-neutral-100) 18%, var(--color-neutral-200) 33%);
+  background-size: 200% 100%;
+  animation: img-skeleton-shimmer 1.4s linear infinite;
 }
 .img-reveal-container img {
-  transition: transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+  transition: transform 0.8s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.5s ease;
 }
 .img-reveal-container:hover img {
   transform: scale(1.05);
+}
+@keyframes img-skeleton-shimmer {
+  to { background-position-x: -200%; }
+}
+/* El shimmer del contenedor se apaga una vez la imagen carga
+   (el <img> recibe .img-loaded desde su onload inline). */
+.img-reveal-container:has(img.img-loaded) {
+  animation: none;
+  background: none;
 }
 
 /* CountUp number animation */
@@ -279,6 +307,21 @@ img {
 }
 .countup-done {
   animation: count-flash 0.4s var(--ease-out) forwards;
+}
+
+/* ============================================
+   Textura y profundidad
+   ============================================ */
+
+/* Grano sutil para secciones oscuras (bg-neutral-950) — sin esto, el negro
+   plano se ve a pantalla/vector, no a concreto/acero. El ruido va en la capa
+   de background-image (detrás de todo el contenido por naturaleza del CSS,
+   sin pelear con z-index), la opacidad ya está horneada en el SVG (alpha 0.05
+   por canal) para no necesitar una capa extra. */
+.texture-grain {
+  background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPScyMjAnIGhlaWdodD0nMjIwJz48ZmlsdGVyIGlkPSduJz48ZmVUdXJidWxlbmNlIHR5cGU9J2ZyYWN0YWxOb2lzZScgYmFzZUZyZXF1ZW5jeT0nMC44NScgbnVtT2N0YXZlcz0nMicgc3RpdGNoVGlsZXM9J3N0aXRjaCcgcmVzdWx0PSd0Jy8+PGZlQ29sb3JNYXRyaXggaW49J3QnIHR5cGU9J21hdHJpeCcgdmFsdWVzPScwIDAgMCAwIDEgIDAgMCAwIDAgMSAgMCAwIDAgMCAxICAwIDAgMCAwLjA1IDAnLz48L2ZpbHRlcj48cmVjdCB3aWR0aD0nMTAwJScgaGVpZ2h0PScxMDAlJyBmaWx0ZXI9J3VybCgjbiknLz48L3N2Zz4=");
+  background-repeat: repeat;
+  background-size: 220px 220px;
 }
 
 /* Gradient text utility */

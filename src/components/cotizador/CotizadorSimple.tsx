@@ -164,7 +164,7 @@ export default function CotizadorSimple({ onSuccess }: Props) {
         <button
           type="submit"
           disabled={status === 'sending'}
-          className="inline-flex items-center gap-2 px-6 py-3 rounded-2xl bg-primary-600 text-white font-bold text-sm hover:bg-neutral-950 disabled:opacity-50 disabled:cursor-not-allowed transition-colors cursor-pointer"
+          className="inline-flex items-center gap-2 px-6 py-3 rounded-none border-brutal bg-primary-600 text-white font-bold text-sm shadow-[4px_4px_0_0_var(--color-neutral-950)] hover:bg-neutral-950 hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[2px_2px_0_0_var(--color-neutral-950)] disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:translate-x-0 disabled:hover:translate-y-0 disabled:hover:shadow-[4px_4px_0_0_var(--color-neutral-950)] transition-[background-color,transform,box-shadow] duration-200 ease-[var(--ease-out)] cursor-pointer"
         >
           {status === 'sending' ? (
             <>

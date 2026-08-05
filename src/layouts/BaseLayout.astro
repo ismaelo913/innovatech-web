@@ -69,6 +69,13 @@ const canonicalUrl = new URL(Astro.url.pathname, SITE.url);
       media="print"
       onload="this.media='all'"
     />
+    <!-- Display industrial: solo para H1/H2 — evoca vigas de acero / marcaje de fábrica -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800;900&family=Big+Shoulders+Stencil+Display:wght@700;900&display=swap"
+      rel="stylesheet"
+      media="print"
+      onload="this.media='all'"
+    />
 
     <!-- Animation libs via CDN: evita que esbuild tenga que empaquetarlas
          para el entrypoint del servidor (causaba fallos de build intermitentes
@@ -76,6 +83,8 @@ const canonicalUrl = new URL(Astro.url.pathname, SITE.url);
          window.ScrollTrigger, window.Lenis, window.Splitting, window.VanillaTilt. -->
     <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
     <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <!-- CustomEase: registra las curvas propias "de precisión industrial" (ver src/scripts/eases.js) -->
+    <script defer src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/CustomEase.min.js"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/splitting@1.1.0/dist/splitting.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/splitting@1.1.0/dist/splitting.css" />
@@ -102,15 +111,16 @@ const canonicalUrl = new URL(Astro.url.pathname, SITE.url);
       <script type="application/ld+json" set:html={JSON.stringify(schema)} />
     )}
 
-    <!-- Structured Data: LocalBusiness -->
+    <!-- Structured Data: LocalBusiness / GeneralContractor -->
     <script type="application/ld+json" set:html={JSON.stringify({
       "@context": "https://schema.org",
-      "@type": "LocalBusiness",
+      "@type": ["LocalBusiness", "GeneralContractor"],
       "name": SITE.name,
       "description": SITE.description,
       "url": SITE.url,
       "telephone": SITE.phone,
       "email": SITE.email,
+      "sameAs": [SITE.socials.linkedin, SITE.socials.instagram],
       "address": {
         "@type": "PostalAddress",
         "addressLocality": "Santiago",
@@ -122,6 +132,7 @@ const canonicalUrl = new URL(Astro.url.pathname, SITE.url);
         "latitude": -33.4489,
         "longitude": -70.6693
       },
+      "areaServed": ["Santiago", "Región Metropolitana"],
       "image": new URL("/images/logo/logo-full.jpeg", SITE.url).href,
       "slogan": SITE.tagline,
       "serviceArea": {

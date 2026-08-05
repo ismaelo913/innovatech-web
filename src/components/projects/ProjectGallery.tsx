@@ -92,17 +92,17 @@ export default function ProjectGallery({ images, alt }: Props) {
           {/* Close button */}
           <button
             onClick={closeLightbox}
-            className="absolute top-4 right-4 z-10 w-12 h-12 rounded-full bg-white/10 hover:bg-white/20 backdrop-blur-sm flex items-center justify-center transition-colors"
+            className="absolute top-4 right-4 z-10 w-11 h-11 border-brutal-invert bg-neutral-950/80 hover:bg-primary-600 flex items-center justify-center transition-[background-color] duration-200 ease-[var(--ease-out)] cursor-pointer"
             aria-label="Cerrar galería"
           >
-            <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
+            <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
               <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
             </svg>
           </button>
 
           {/* Counter */}
-          <div className="absolute top-4 left-4 z-10 px-3 py-1.5 rounded-full bg-white/10 backdrop-blur-sm text-white text-sm font-medium">
-            {currentIndex + 1} / {images.length}
+          <div className="absolute top-4 left-4 z-10 px-3 py-2 border-brutal-invert bg-neutral-950/80 text-white font-mono text-sm tracking-wider">
+            {String(currentIndex + 1).padStart(2, '0')} / {String(images.length).padStart(2, '0')}
           </div>
 
           {/* Main image */}
@@ -113,7 +113,7 @@ export default function ProjectGallery({ images, alt }: Props) {
             <img
               src={images[currentIndex]}
               alt={`${alt} - Foto ${currentIndex + 1}`}
-              className="max-w-full max-h-[85vh] object-contain rounded-lg select-none"
+              className="max-w-full max-h-[85vh] object-contain border-brutal-invert select-none"
               draggable={false}
             />
           </div>
@@ -123,19 +123,19 @@ export default function ProjectGallery({ images, alt }: Props) {
             <>
               <button
                 onClick={(e) => { e.stopPropagation(); goPrev(); }}
-                className="absolute left-4 top-1/2 -translate-y-1/2 z-10 w-12 h-12 rounded-full bg-white/10 hover:bg-white/25 backdrop-blur-sm flex items-center justify-center transition-colors"
+                className="absolute left-4 top-1/2 -translate-y-1/2 z-10 w-11 h-11 border-brutal-invert bg-neutral-950/80 hover:bg-primary-600 flex items-center justify-center transition-[background-color] duration-200 ease-[var(--ease-out)] cursor-pointer"
                 aria-label="Foto anterior"
               >
-                <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
+                <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
                 </svg>
               </button>
               <button
                 onClick={(e) => { e.stopPropagation(); goNext(); }}
-                className="absolute right-4 top-1/2 -translate-y-1/2 z-10 w-12 h-12 rounded-full bg-white/10 hover:bg-white/25 backdrop-blur-sm flex items-center justify-center transition-colors"
+                className="absolute right-4 top-1/2 -translate-y-1/2 z-10 w-11 h-11 border-brutal-invert bg-neutral-950/80 hover:bg-primary-600 flex items-center justify-center transition-[background-color] duration-200 ease-[var(--ease-out)] cursor-pointer"
                 aria-label="Foto siguiente"
               >
-                <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
+                <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
                 </svg>
               </button>
@@ -144,15 +144,15 @@ export default function ProjectGallery({ images, alt }: Props) {
 
           {/* Thumbnail strip */}
           {images.length > 1 && (
-            <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm">
+            <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2 p-2 border-brutal-invert bg-neutral-950/80">
               {images.map((img, i) => (
                 <button
                   key={img}
                   onClick={(e) => { e.stopPropagation(); setCurrentIndex(i); }}
-                  className={`w-12 h-8 rounded overflow-hidden transition-all ${
+                  className={`w-12 h-8 border overflow-hidden transition-[opacity,transform,border-color] duration-200 ease-[var(--ease-out)] cursor-pointer ${
                     i === currentIndex
-                      ? 'ring-2 ring-white opacity-100 scale-110'
-                      : 'opacity-50 hover:opacity-80'
+                      ? 'border-primary-500 opacity-100 scale-105'
+                      : 'border-transparent opacity-50 hover:opacity-80'
                   }`}
                 >
                   <img src={img} alt={`Miniatura ${i + 1}`} className="w-full h-full object-cover" />

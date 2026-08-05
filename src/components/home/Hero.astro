@@ -1,5 +1,6 @@
 ---
 import Button from '../ui/Button.astro';
+import BlueprintMarks from '../ui/BlueprintMarks.astro';
 ---
 
 <section class="border-b-brutal">
@@ -17,7 +18,7 @@ import Button from '../ui/Button.astro';
         id="hero-headline"
         data-splitting
         style="opacity:0"
-        class="text-4xl sm:text-5xl lg:text-6xl font-black uppercase tracking-tight text-neutral-950 leading-[0.95] mb-6"
+        class="font-display text-5xl sm:text-6xl lg:text-7xl font-black uppercase text-neutral-950 leading-tight mb-6"
       >
         Obra eléctrica y construcción sin <span class="text-primary-600">el riesgo de siempre</span>
       </h1>
@@ -47,33 +48,39 @@ import Button from '../ui/Button.astro';
 
     <!-- Right: photo collage — obra real, no stock -->
     <div class="lg:col-span-6 bg-surface-alt relative min-h-[50vh] lg:min-h-[85vh] overflow-hidden flex items-center justify-center p-8">
-      <div class="reveal-scale delay-300 relative w-full max-w-md lg:max-w-none">
-        <div class="relative aspect-[4/5] sm:aspect-[5/4] lg:aspect-[4/5]">
-          <div class="absolute inset-0 lg:inset-x-6 img-reveal-container border-brutal -rotate-2 bg-background">
+      <BlueprintMarks variant="light" />
+      <div class="reveal-scale delay-300 relative w-full max-w-lg mx-auto lg:mx-0 lg:w-auto lg:h-[82vh] aspect-[3/4]">
+          <div class="absolute inset-0 lg:inset-x-4 img-reveal-container border-brutal -rotate-2 bg-background overflow-hidden">
             <img
+              data-hero-parallax="main"
               src="/images/projects/mina-cmp-1.jpeg"
               alt="Montaje eléctrico en faena minera — Mina CMP Copiapó, Innovatech"
               width="540"
               height="960"
-              class="w-full h-full object-cover"
+              style="object-position: center 62%"
+              class="w-full h-full object-cover opacity-0 transition-opacity duration-500"
               loading="eager"
               fetchpriority="high"
               decoding="async"
+              onload="this.classList.remove('opacity-0');this.classList.add('img-loaded')"
             />
           </div>
-          <div class="absolute -bottom-6 -left-2 sm:-left-6 w-[42%] aspect-[3/4] img-reveal-container border-brutal rotate-3 bg-background">
+          <div class="absolute -bottom-6 -left-2 sm:-left-6 w-[48%] aspect-[3/4] img-reveal-container border-brutal rotate-3 bg-background overflow-hidden shadow-lg">
             <img
+              data-hero-parallax="corner"
               src="/images/projects/mina-cmp-9.jpeg"
               alt="Instalación de equipos de alta tensión — Mina CMP Copiapó, Innovatech"
-              width="720"
-              height="1280"
-              class="w-full h-full object-cover"
+              width="1200"
+              height="1600"
+              class="w-full h-full object-cover object-center opacity-0 transition-opacity duration-500"
               loading="eager"
               decoding="async"
+              onload="this.classList.remove('opacity-0');this.classList.add('img-loaded')"
             />
           </div>
-          <div class="absolute -top-4 -right-2 sm:right-2 bg-primary-600 text-white text-xs sm:text-sm font-bold uppercase tracking-wide px-3 py-2 border-brutal rotate-2">
-            13 años en terreno
+          <div class="absolute -top-5 -right-3 sm:right-1 bg-primary-600 text-white border-brutal rotate-2 px-4 py-2.5 flex items-baseline gap-2">
+            <span class="font-stencil text-3xl sm:text-4xl font-black leading-none">13</span>
+            <span class="text-[10px] sm:text-xs font-bold uppercase tracking-widest leading-tight max-w-[4.5rem]">Años<br />en terreno</span>
           </div>
         </div>
       </div>
@@ -81,28 +88,28 @@ import Button from '../ui/Button.astro';
   </div>
 
   <!-- Stats band: marquee ticker + CountUp — datos reales del Portafolio Innovatech.pdf -->
-  <div class="bg-neutral-950 text-background">
-    <div class="marquee-container py-3 border-b-brutal-invert">
+  <div class="bg-neutral-950 texture-grain text-background">
+    <div class="marquee-container py-3 border-b-brutal-invert" aria-hidden="true">
       <div class="marquee-content text-primary-500 uppercase tracking-[0.2em] text-xs font-bold flex gap-12">
-        {Array.from({ length: 10 }).map(() => <span>13 años en terreno</span>)}
+        {Array.from({ length: 16 }).map(() => <span>13 años en terreno</span>)}
       </div>
     </div>
     <div class="grid grid-cols-2 md:grid-cols-4 divide-x divide-y md:divide-y-0 divide-white/15 reveal delay-500">
       <div class="p-6 lg:p-10">
-        <div class="text-3xl lg:text-5xl font-black countup" data-target="13" data-suffix=" años">0 años</div>
-        <div class="text-xs uppercase tracking-widest text-neutral-500 mt-1">De experiencia</div>
+        <div class="font-stencil text-4xl lg:text-6xl font-black leading-none countup" data-target="13" data-suffix=" años">13 años</div>
+        <div class="text-xs font-bold uppercase tracking-widest text-neutral-300 mt-3 pt-2 border-t border-white/10">De experiencia</div>
       </div>
       <div class="p-6 lg:p-10">
-        <div class="text-3xl lg:text-5xl font-black countup" data-target="60" data-suffix="+">0+</div>
-        <div class="text-xs uppercase tracking-widest text-neutral-500 mt-1">Trabajadores disponibles</div>
+        <div class="font-stencil text-4xl lg:text-6xl font-black leading-none countup" data-target="60" data-suffix="+">60+</div>
+        <div class="text-xs font-bold uppercase tracking-widest text-neutral-300 mt-3 pt-2 border-t border-white/10">Trabajadores disponibles</div>
       </div>
       <div class="p-6 lg:p-10">
-        <div class="text-3xl lg:text-5xl font-black countup" data-target="6" data-suffix="">0</div>
-        <div class="text-xs uppercase tracking-widest text-neutral-500 mt-1">Tipos de servicio</div>
+        <div class="font-stencil text-4xl lg:text-6xl font-black leading-none countup" data-target="6" data-suffix="">6</div>
+        <div class="text-xs font-bold uppercase tracking-widest text-neutral-300 mt-3 pt-2 border-t border-white/10">Tipos de servicio</div>
       </div>
       <div class="p-6 lg:p-10">
-        <div class="text-3xl lg:text-5xl font-black countup" data-target="100" data-suffix="%" data-prefix="">0%</div>
-        <div class="text-xs uppercase tracking-widest text-neutral-500 mt-1">Cumplimiento legal</div>
+        <div class="font-stencil text-4xl lg:text-6xl font-black leading-none countup" data-target="100" data-suffix="%" data-prefix="">100%</div>
+        <div class="text-xs font-bold uppercase tracking-widest text-neutral-300 mt-3 pt-2 border-t border-white/10">Cumplimiento legal</div>
       </div>
     </div>
   </div>

@@ -2,6 +2,7 @@
 title: Electricidad y Montaje Eléctrico
 description: Instalaciones eléctricas industriales y comerciales. Salas eléctricas, tableros, baja y media tensión.
 icon: zap
+image: /images/projects/montaje-electrico-1.jpeg
 order: 1
 features:
   - Montaje e instalación de salas eléctricas

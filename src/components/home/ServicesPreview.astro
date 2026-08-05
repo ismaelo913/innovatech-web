@@ -1,6 +1,7 @@
 ---
 import Container from '../ui/Container.astro';
 import SectionHeading from '../ui/SectionHeading.astro';
+import FeaturedServiceCard from '../services/FeaturedServiceCard.astro';
 import { SERVICES } from '../../lib/constants';
 
 const featured = SERVICES.find((s) => s.slug === 'electricidad-montaje-electrico');
@@ -20,49 +21,22 @@ const rest = SERVICES.filter((s) => s.slug !== 'electricidad-montaje-electrico')
 
   <div class="border-t-brutal">
     {featured && (
-      <a href={`/servicios/${featured.slug}`} class="group reveal block relative overflow-hidden border-b-brutal min-h-[60vh]">
-        <img
-          src="/images/projects/montaje-electrico-1.jpeg"
-          alt="Montaje eléctrico industrial — Innovatech"
-          width="1280"
-          height="720"
-          class="absolute inset-0 w-full h-full object-cover grayscale-[30%] transition-all duration-[1.5s] group-hover:scale-105 group-hover:grayscale-0"
-          loading="lazy"
-          decoding="async"
-        />
-        <div class="absolute inset-0 bg-gradient-to-t from-neutral-950 via-neutral-950/60 to-transparent"></div>
-        <div class="relative h-full flex flex-col md:flex-row md:items-end md:justify-between gap-6 p-6 sm:p-8 lg:p-12 min-h-[60vh]">
-          <div class="text-white max-w-2xl">
-            <span class="bg-primary-600 text-white text-[10px] uppercase font-bold px-3 py-1 mb-4 inline-block tracking-widest">Servicio destacado</span>
-            <h3 class="text-3xl sm:text-4xl lg:text-5xl font-black mb-4">
-              {featured.title}
-            </h3>
-            <p class="text-base sm:text-lg text-white/80 font-light max-w-xl leading-relaxed">
-              {featured.short}
-            </p>
-          </div>
-          <div class="flex-shrink-0 flex items-center gap-3 text-white group-hover:text-primary-400 transition-colors">
-            <span class="text-sm font-bold uppercase tracking-widest">Ver más</span>
-            <div class="w-11 h-11 rounded-full border border-white flex items-center justify-center shrink-0">
-              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
-              </svg>
-            </div>
-          </div>
-        </div>
-      </a>
+      <FeaturedServiceCard title={featured.title} short={featured.short} slug={featured.slug} image="/images/projects/montaje-electrico-1.jpeg" />
     )}
 
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 border-l-brutal">
-      {rest.map((service) => (
+      {rest.map((service, i) => (
         <a
           href={`/servicios/${service.slug}`}
-          class="group block reveal h-full border-r-brutal border-b-brutal hover-bg-brand p-8 flex flex-col"
+          class:list={[
+            'group block reveal h-full border-r-brutal border-b-brutal hover-bg-brand p-8 flex flex-col',
+            i === 0 && 'sm:col-span-2 bg-primary-50/60',
+          ]}
         >
-          <h3 class="text-xl font-bold mb-4">
+          <h3 class:list={['font-bold mb-4', i === 0 ? 'text-2xl sm:text-3xl' : 'text-xl']}>
             {service.title}
           </h3>
-          <p class="text-sm font-light text-accent-500 leading-relaxed flex-grow mb-8">
+          <p class:list={['font-light text-accent-500 leading-relaxed flex-grow mb-8', i === 0 ? 'text-base max-w-md' : 'text-sm']}>
             {service.short}
           </p>
           <div class="mt-auto flex items-center gap-2 text-sm font-bold uppercase tracking-wider">

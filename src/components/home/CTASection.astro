@@ -1,5 +1,6 @@
 ---
 import Button from '../ui/Button.astro';
+import BlueprintMarks from '../ui/BlueprintMarks.astro';
 import { SITE } from '../../lib/constants';
 import { whatsappUrl } from '../../lib/utils';
 
@@ -9,7 +10,7 @@ const waUrl = whatsappUrl(SITE.whatsapp, 'Hola, me interesa cotizar un proyecto 
 <section class="border-b-brutal grid grid-cols-1 lg:grid-cols-2">
   <!-- Main CTA -->
   <div class="p-8 lg:p-20 flex flex-col justify-center border-b-brutal lg:border-b-0 lg:border-r-brutal bg-background">
-    <h2 class="text-4xl sm:text-5xl lg:text-6xl font-black uppercase leading-[0.95] tracking-tight text-neutral-950 mb-8 max-w-xl">
+    <h2 class="font-display text-5xl sm:text-6xl lg:text-7xl font-black uppercase leading-tight text-neutral-950 mb-8 max-w-xl">
       Hablemos de tu próximo proyecto
     </h2>
     <p class="text-lg font-light text-accent-500 mb-10 max-w-md leading-relaxed">
@@ -35,7 +36,8 @@ const waUrl = whatsappUrl(SITE.whatsapp, 'Hola, me interesa cotizar un proyecto 
   </div>
 
   <!-- Lead magnet: checklist mandante -->
-  <div class="p-8 lg:p-20 bg-neutral-950 text-white flex flex-col justify-center relative overflow-hidden">
+  <div class="p-8 lg:p-20 bg-neutral-950 texture-grain text-white flex flex-col justify-center relative overflow-hidden">
+    <BlueprintMarks variant="dark" />
     <div class="relative z-10">
       <div class="inline-block bg-primary-600 text-white px-4 py-2 font-bold uppercase tracking-widest text-xs mb-8">Recurso Gratuito</div>
       <h3 class="text-3xl lg:text-4xl font-black uppercase mb-6 leading-tight">¿Contratando Subcontratistas?</h3>

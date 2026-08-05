@@ -1,8 +1,14 @@
-// Animaciones de la home: Hero (reveal + counters), Process (blueprint SVG),
-// Services (tilt 3D), Projects (crossfade). GSAP/Splitting/VanillaTilt se
-// cargan por CDN (ver BaseLayout.astro) y quedan disponibles como globals
-// (window.gsap, window.ScrollTrigger, window.Splitting, window.VanillaTilt) —
-// así esbuild nunca tiene que empaquetarlas para el entrypoint del servidor.
+// Animaciones de la home: Hero (reveal + counters + parallax), Process
+// (blueprint SVG), Services (tilt 3D), Projects (crossfade). GSAP/Splitting/
+// VanillaTilt se cargan por CDN (ver BaseLayout.astro) y quedan disponibles
+// como globals (window.gsap, window.ScrollTrigger, window.Splitting,
+// window.VanillaTilt) — así esbuild nunca tiene que empaquetarlas para el
+// entrypoint del servidor.
+import { INDUSTRIAL_OUT, INDUSTRIAL_IN_OUT, registerIndustrialEases } from './eases.js';
+
+const easesReady = registerIndustrialEases();
+const easeOut = easesReady ? INDUSTRIAL_OUT : 'power4.out';
+const easeInOut = easesReady ? INDUSTRIAL_IN_OUT : 'power2.inOut';
 
 {
   // --- Hero: headline reveal + stat counters ---
@@ -34,13 +40,45 @@
         opacity: 0,
         y: 30,
         rotateX: -35,
-        stagger: 0.055,
-        duration: 0.7,
-        ease: 'power3.out',
+        stagger: 0.05,
+        duration: 0.65,
+        ease: easeOut,
       })
-      .to(sub, { opacity: 1, y: 0, duration: 0.6 }, '-=0.3');
+      .to(sub, { opacity: 1, y: 0, duration: 0.5, ease: easeOut }, '-=0.3');
   }
   initHeadlineReveal();
+
+  // Parallax sutil en el collage de fotos: las dos imágenes se desplazan a
+  // velocidades distintas ligadas al scroll — la sensación de profundidad
+  // que el CSS .reveal-scale (una sola vez, al entrar) no puede dar.
+  function initHeroParallax() {
+    if (reduceMotion || !window.gsap || !window.ScrollTrigger) return;
+    const gsap = window.gsap;
+    const ScrollTrigger = window.ScrollTrigger;
+    gsap.registerPlugin(ScrollTrigger);
+
+    const heroSection = document.getElementById('hero-headline')?.closest('section');
+    const mainPhoto = heroSection?.querySelector('[data-hero-parallax="main"]');
+    const cornerPhoto = heroSection?.querySelector('[data-hero-parallax="corner"]');
+    if (!heroSection || !mainPhoto) return;
+
+    gsap.to(mainPhoto, {
+      yPercent: 8,
+      ease: 'none',
+      scrollTrigger: { trigger: heroSection, start: 'top top', end: 'bottom top', scrub: 0.6 },
+    });
+    if (cornerPhoto) {
+      gsap.to(cornerPhoto, {
+        yPercent: -10,
+        ease: 'none',
+        scrollTrigger: { trigger: heroSection, start: 'top top', end: 'bottom top', scrub: 0.6 },
+      });
+    }
+
+    const lenis = window.__lenis;
+    if (lenis) lenis.on('scroll', ScrollTrigger.update);
+  }
+  initHeroParallax();
 
   const countEls = document.querySelectorAll('.countup');
   const countObserver = new IntersectionObserver((entries) => {
@@ -140,18 +178,18 @@
 }
 
 {
-  // --- Services: tilt 3D en las tarjetas ---
+  // --- Services: tilt 3D en las tarjetas — sutil y mate, sin glare
+  // (el brillo especular lee como plástico pulido, no concreto/acero) ---
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   if (!reduceMotion && window.matchMedia('(hover: hover) and (min-width: 768px)').matches && window.VanillaTilt) {
     const cards = document.querySelectorAll('.service-tilt-card');
     if (cards.length > 0) {
       window.VanillaTilt.init(cards, {
-        max: 6,
-        speed: 400,
-        glare: true,
-        'max-glare': 0.15,
+        max: 4,
+        speed: 250,
+        glare: false,
         scale: 1.01,
-        perspective: 900,
+        perspective: 1000,
       });
     }
   }
@@ -191,8 +229,21 @@
       });
 
       frames.forEach((frame, i) => {
+        const img = frame.querySelector('img');
+        if (img) {
+          gsap.to(img, {
+            yPercent: 6,
+            ease: 'none',
+            scrollTrigger: {
+              trigger: wrapper,
+              start: 'top top',
+              end: 'bottom bottom',
+              scrub: 0.5,
+            },
+          });
+        }
         if (i > 0) {
-          tl.to(frames[i - 1], { opacity: 0, duration: 0.3 }, i - 0.15).to(frame, { opacity: 1, duration: 0.3 }, i - 0.15);
+          tl.to(frames[i - 1], { opacity: 0, duration: 0.3, ease: easeInOut }, i - 0.15).to(frame, { opacity: 1, duration: 0.3, ease: easeInOut }, i - 0.15);
         }
       });
 
