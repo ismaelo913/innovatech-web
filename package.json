@@ -21,10 +21,10 @@
     "@tailwindcss/vite": "^4.2.2",
     "@vercel/analytics": "^2.0.1",
     "astro": "^6.1.5",
-    "framer-motion": "^12.40.0",
     "react": "^19.2.5",
     "react-dom": "^19.2.5",
-    "tailwindcss": "^4.2.2"
+    "tailwindcss": "^4.2.2",
+    "three": "^0.169.0"
   },
   "devDependencies": {
     "puppeteer": "^25.3.0"

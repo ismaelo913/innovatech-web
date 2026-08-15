@@ -1,0 +1,47 @@
+---
+// Sección de testimonios — solo renderiza si existen entradas reales y
+// consentidas en src/content/testimonials/ (ver README en esa carpeta).
+// Con la colección vacía, este componente no imprime nada: es intencional,
+// no un placeholder con datos inventados.
+import { getCollection } from 'astro:content';
+import Container from '../ui/Container.astro';
+
+const allTestimonials = await getCollection('testimonials');
+const testimonials = allTestimonials
+  .filter((t) => t.data.consentObtained)
+  .sort((a, b) => (b.data.featured ? 1 : 0) - (a.data.featured ? 1 : 0));
+---
+
+{testimonials.length > 0 && (
+  <section class="border-b-brutal bg-background pt-section pb-section">
+    <Container>
+      <div class="max-w-2xl mb-12">
+        <p class="reveal text-sm font-bold tracking-widest uppercase text-primary-700 mb-4">
+          Lo que dicen quienes ya trabajaron con nosotros
+        </p>
+        <h2 class="reveal font-display text-4xl sm:text-5xl font-black uppercase leading-tight text-neutral-950">
+          Testimonios
+        </h2>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 reveal">
+        {testimonials.map(async (entry) => {
+          const { Content } = await entry.render();
+          return (
+            <figure class="border-brutal bg-surface-alt p-6 flex flex-col">
+              <blockquote class="text-base font-medium text-neutral-800 leading-relaxed flex-1 [&_p]:mb-0">
+                <Content />
+              </blockquote>
+              <figcaption class="mt-6 pt-4 border-t border-neutral-300">
+                <span class="block font-bold text-neutral-950">{entry.data.author}</span>
+                <span class="block text-sm text-accent-500">
+                  {entry.data.role ? `${entry.data.role} · ` : ''}{entry.data.company}
+                </span>
+              </figcaption>
+            </figure>
+          );
+        })}
+      </div>
+    </Container>
+  </section>
+)}

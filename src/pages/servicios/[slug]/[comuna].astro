@@ -1,0 +1,133 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Container from '../../../components/ui/Container.astro';
+import Badge from '../../../components/ui/Badge.astro';
+import Button from '../../../components/ui/Button.astro';
+import Breadcrumbs from '../../../components/ui/Breadcrumbs.astro';
+import { getCollection } from 'astro:content';
+import { SITE } from '../../../lib/constants';
+import { COMUNA_LANDINGS, findComunaLanding } from '../../../lib/comunas';
+
+export async function getStaticPaths() {
+  const services = await getCollection('services');
+  return COMUNA_LANDINGS.map((landing) => {
+    const service = services.find((s) => s.id === landing.serviceSlug);
+    return {
+      params: { slug: landing.serviceSlug, comuna: landing.comunaSlug },
+      props: { service, landing },
+    };
+  }).filter((p) => p.props.service);
+}
+
+const { service, landing } = Astro.props;
+const { title, description, features } = service!.data;
+
+const pageTitle = `${title} en ${landing.comuna} | Innovatech`;
+const pageDescription = `${title} en ${landing.comuna}, Santiago. ${landing.context} Presupuesto por escrito, supervisor en terreno, EPP propio.`;
+
+const serviceSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  name: `${title} en ${landing.comuna}`,
+  description: pageDescription,
+  serviceType: title,
+  provider: {
+    '@type': 'LocalBusiness',
+    name: SITE.name,
+    url: SITE.url,
+  },
+  areaServed: {
+    '@type': 'City',
+    name: landing.comuna,
+    containedInPlace: { '@type': 'State', name: 'Región Metropolitana' },
+  },
+  url: new URL(`/servicios/${landing.serviceSlug}/${landing.comunaSlug}`, SITE.url).href,
+};
+---
+
+<BaseLayout title={pageTitle} description={pageDescription} schema={serviceSchema}>
+  <section class="py-16 sm:py-20 bg-background border-b-brutal">
+    <Container>
+      <div class="max-w-3xl">
+        <Breadcrumbs items={[
+          { label: 'Inicio', href: '/' },
+          { label: 'Servicios', href: '/servicios' },
+          { label: title, href: `/servicios/${landing.serviceSlug}` },
+          { label: landing.comuna },
+        ]} />
+        <Badge variant="primary" class="mb-4">{landing.comuna}</Badge>
+        <h1 class="text-3xl sm:text-4xl lg:text-5xl font-black uppercase text-neutral-950 tracking-tight leading-tight mb-4">
+          {title} en {landing.comuna}
+        </h1>
+        <p class="text-lg font-light text-accent-500 leading-relaxed">
+          {landing.context}
+        </p>
+      </div>
+    </Container>
+  </section>
+
+  <section class="py-12 border-b-brutal">
+    <Container>
+      <h2 class="text-xl font-black uppercase text-neutral-950 mb-6">
+        Tipos de proyecto que ejecutamos en {landing.comuna}
+      </h2>
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-10">
+        {landing.projectTypes.map((pt) => (
+          <div class="flex items-start gap-3 p-4 border-brutal bg-background">
+            <svg class="w-5 h-5 text-primary-600 mt-0.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            <span class="text-sm font-medium text-neutral-700">{pt}</span>
+          </div>
+        ))}
+      </div>
+
+      <h2 class="text-xl font-black uppercase text-neutral-950 mb-6">
+        Qué incluye el servicio
+      </h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        {features.map((f: string) => (
+          <div class="flex items-start gap-3 p-4 border-brutal bg-background">
+            <svg class="w-5 h-5 text-primary-600 mt-0.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            <span class="text-sm font-medium text-neutral-700">{f}</span>
+          </div>
+        ))}
+      </div>
+    </Container>
+  </section>
+
+  <section class="py-16 bg-primary-600">
+    <Container>
+      <div class="flex flex-col sm:flex-row items-center justify-between gap-6">
+        <div>
+          <h2 class="text-2xl font-bold text-white mb-2">
+            ¿Tienes un proyecto en {landing.comuna}?
+          </h2>
+          <p class="text-white">
+            Coordinamos una visita técnica gratuita y te entregamos presupuesto por escrito en 24-48h.
+          </p>
+        </div>
+        <Button href="/cotizador" size="lg" variant="accent" class="shrink-0">
+          Cotizar ahora
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+          </svg>
+        </Button>
+      </div>
+    </Container>
+  </section>
+
+  <section class="py-12 bg-surface-alt">
+    <Container>
+      <p class="text-sm text-neutral-600">
+        ¿Buscas otro servicio o comuna? Revisa el detalle completo de{' '}
+        <a href={`/servicios/${landing.serviceSlug}`} class="font-bold text-neutral-950 hover:text-primary-600 underline">
+          {title}
+        </a>{' '}o vuelve a{' '}
+        <a href="/servicios" class="font-bold text-neutral-950 hover:text-primary-600 underline">todos los servicios</a>.
+      </p>
+    </Container>
+  </section>
+</BaseLayout>

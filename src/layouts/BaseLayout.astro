@@ -77,18 +77,25 @@ const canonicalUrl = new URL(Astro.url.pathname, SITE.url);
       onload="this.media='all'"
     />
 
-    <!-- Animation libs via CDN: evita que esbuild tenga que empaquetarlas
-         para el entrypoint del servidor (causaba fallos de build intermitentes
-         en la máquina de build de Vercel). Disponibles como globals: window.gsap,
-         window.ScrollTrigger, window.Lenis, window.Splitting, window.VanillaTilt. -->
-    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <!-- Animation libs auto-hospedadas en /public/vendor (2026-08-15): antes
+         se cargaban desde cdnjs/jsdelivr. Se mantienen como <script> clásicos
+         (no import npm en el bundle) a propósito — esa fue la causa documentada
+         de fallos de build intermitentes en Vercel al intentar que esbuild las
+         empaquetara para el entrypoint del servidor. Auto-hospedarlas como
+         estáticos resuelve la dependencia de un CDN externo (punto único de
+         falla, riesgo de bloqueadores de contenido) sin tocar el pipeline de
+         build: son los mismos binarios .min.js (versión fijada, ver
+         public/vendor/README.txt), solo que servidos desde el propio dominio.
+         Disponibles como globals: window.gsap, window.ScrollTrigger,
+         window.Lenis, window.Splitting, window.VanillaTilt. -->
+    <script defer src="/vendor/gsap.min.js"></script>
+    <script defer src="/vendor/ScrollTrigger.min.js"></script>
     <!-- CustomEase: registra las curvas propias "de precisión industrial" (ver src/scripts/eases.js) -->
-    <script defer src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/CustomEase.min.js"></script>
-    <script defer src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
-    <script defer src="https://cdn.jsdelivr.net/npm/splitting@1.1.0/dist/splitting.min.js"></script>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/splitting@1.1.0/dist/splitting.css" />
-    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.1/vanilla-tilt.min.js"></script>
+    <script defer src="/vendor/CustomEase.min.js"></script>
+    <script defer src="/vendor/lenis.min.js"></script>
+    <script defer src="/vendor/splitting.min.js"></script>
+    <link rel="stylesheet" href="/vendor/splitting.css" />
+    <script defer src="/vendor/vanilla-tilt.min.js"></script>
 
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="/favicon.ico?v=2" />
@@ -105,6 +112,25 @@ const canonicalUrl = new URL(Astro.url.pathname, SITE.url);
         y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
       })(window, document, "clarity", "script", "wkz71eh3u9");
     </script>
+
+    <!-- Google Analytics 4: se activa solo si PUBLIC_GA4_MEASUREMENT_ID está
+         definido en las variables de entorno de Vercel (Project Settings →
+         Environment Variables). Mientras no exista, este bloque no renderiza
+         nada — no se envían eventos vacíos ni se rompe nada por su ausencia.
+         Crear la propiedad GA4 y pegar el Measurement ID (formato G-XXXXXXX)
+         requiere la cuenta de Google del negocio, así que ese paso queda para
+         el equipo de Innovatech. -->
+    {import.meta.env.PUBLIC_GA4_MEASUREMENT_ID && (
+      <>
+        <script async src={`https://www.googletagmanager.com/gtag/js?id=${import.meta.env.PUBLIC_GA4_MEASUREMENT_ID}`}></script>
+        <script define:vars={{ gaId: import.meta.env.PUBLIC_GA4_MEASUREMENT_ID }}>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){ dataLayer.push(arguments); }
+          gtag('js', new Date());
+          gtag('config', gaId);
+        </script>
+      </>
+    )}
 
     <!-- Structured Data: Page-specific -->
     {schema && (
@@ -173,16 +199,41 @@ const canonicalUrl = new URL(Astro.url.pathname, SITE.url);
     <!-- Scroll Reveal: vanilla JS, all devices -->
     <script>
       document.addEventListener('DOMContentLoaded', () => {
+        const reveal = (el) => el.classList.add('is-visible');
+
+        // Fix (2026-08-15): elementos .reveal* que ya están dentro del
+        // viewport en el primer pintado (ej. el collage de fotos del hero)
+        // podían quedar en opacity:0 "para siempre" hasta el primer scroll
+        // del usuario, porque dependían por completo del primer callback
+        // asíncrono del IntersectionObserver. Verificado en vivo: el wrapper
+        // .reveal-scale del hero permanecía sin la clase is-visible incluso
+        // 5s después de cargar sin ninguna interacción. Ahora, si el elemento
+        // ya es visible al momento de observarlo, lo revelamos de inmediato
+        // en vez de esperar al observer — el observer sigue a cargo de todo
+        // lo que está debajo del pliegue.
+        const isAlreadyVisible = (el) => {
+          const rect = el.getBoundingClientRect();
+          const vh = window.innerHeight || document.documentElement.clientHeight;
+          const vw = window.innerWidth || document.documentElement.clientWidth;
+          if (rect.width === 0 && rect.height === 0) return false;
+          return rect.top < vh * 0.92 && rect.bottom > 0 && rect.left < vw && rect.right > 0;
+        };
+
         const observer = new IntersectionObserver((entries) => {
           entries.forEach((entry) => {
             if (entry.isIntersecting) {
-              entry.target.classList.add('is-visible');
+              reveal(entry.target);
               observer.unobserve(entry.target);
             }
           });
         }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+
         document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale').forEach((el) => {
-          observer.observe(el);
+          if (isAlreadyVisible(el)) {
+            reveal(el);
+          } else {
+            observer.observe(el);
+          }
         });
       });
     </script>

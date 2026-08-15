@@ -89,6 +89,7 @@ const currentPath = Astro.url.pathname;
     id="mobile-menu"
     class="lg:hidden fixed inset-x-0 top-18 bottom-0 bg-background/98 backdrop-blur-lg border-t-brutal -translate-x-full transition-transform duration-300 ease-out z-40"
     aria-hidden="true"
+    inert
   >
     <Container>
       <ul class="flex flex-col gap-1 pt-6">
@@ -131,6 +132,7 @@ const currentPath = Astro.url.pathname;
     menu.classList.toggle('-translate-x-full', !isOpen);
     menu.classList.toggle('translate-x-0', isOpen);
     menu.setAttribute('aria-hidden', String(!isOpen));
+    menu.toggleAttribute('inert', !isOpen);
     toggle.setAttribute('aria-expanded', String(isOpen));
     iconOpen.classList.toggle('hidden', isOpen);
     iconClose.classList.toggle('hidden', !isOpen);

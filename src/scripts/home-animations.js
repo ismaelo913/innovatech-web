@@ -1,6 +1,7 @@
 // Animaciones de la home: Hero (reveal + counters + parallax), Process
 // (blueprint SVG), Services (tilt 3D), Projects (crossfade). GSAP/Splitting/
-// VanillaTilt se cargan por CDN (ver BaseLayout.astro) y quedan disponibles
+// VanillaTilt se sirven como estáticos auto-hospedados desde /public/vendor
+// (ver BaseLayout.astro y public/vendor/README.txt) y quedan disponibles
 // como globals (window.gsap, window.ScrollTrigger, window.Splitting,
 // window.VanillaTilt) — así esbuild nunca tiene que empaquetarlas para el
 // entrypoint del servidor.
