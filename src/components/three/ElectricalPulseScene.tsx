@@ -48,7 +48,7 @@ export default function ElectricalPulseScene() {
         const camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 100);
         camera.position.set(0, 0, 8);
 
-        let renderer: InstanceType<typeof THREE.WebGLRenderer>;
+        let renderer: any;
         try {
           renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
         } catch {
@@ -121,9 +121,7 @@ export default function ElectricalPulseScene() {
             knot.rotation.x += delta * 0.12;
             knot.rotation.y += delta * 0.18;
 
-            const posAttr = particlesGeo.getAttribute('position') as InstanceType<
-              typeof THREE.BufferAttribute
-            >;
+            const posAttr: any = particlesGeo.getAttribute('position');
             for (let i = 0; i < particleCount; i++) {
               const offset = (particleOffsets[i] + t * 0.3) % 1;
               torusKnotPoint(offset, tmp);
