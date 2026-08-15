@@ -1,34 +1,78 @@
 import os
 import json
+import time
 from datetime import datetime
 from io import BytesIO
+import requests
 from flask import Flask, request, send_file, jsonify
 from fpdf import FPDF
-import firebase_admin
-from firebase_admin import credentials, firestore
+from google.oauth2 import service_account
+from google.auth.transport.requests import Request as GoogleAuthRequest
 
 app = Flask(__name__)
 
-# Configurar Firebase BBDD (Cotizador PWA)
-db = None
+# Configurar Firebase BBDD (Cotizador PWA) — vía REST de Firestore en vez de
+# firebase-admin. firebase-admin arrastra grpcio + google-api-python-client
+# (protobuf, googleapiclient discovery docs, etc.), lo que hacía que el
+# tamaño de esta función serverless superara el límite de 225MB de Vercel
+# (llegó a pesar 253MB). google-auth + requests logra lo mismo (leer un
+# documento en Firestore) con una fracción del peso.
+FIRESTORE_SCOPES = ["https://www.googleapis.com/auth/datastore"]
+_credentials = None
+_project_id = None
+_token_cache = {"token": None, "expiry": 0}
+
+
+def _load_service_account_info():
+    # 1. Tratar ambiente Vercel
+    cred_json = os.environ.get('FIREBASE_CREDENTIALS_JSON')
+    if cred_json:
+        return json.loads(cred_json)
+    # 2. Local fallback
+    cred_path = os.path.join(os.path.dirname(__file__), '..', 'serviceAccountKey.json')
+    with open(cred_path, 'r', encoding='utf-8') as f:
+        return json.load(f)
+
 
 def init_firebase():
-    global db
-    if not firebase_admin._apps:
-        try:
-            # 1. Tratar ambiente Vercel
-            cred_json = os.environ.get('FIREBASE_CREDENTIALS_JSON')
-            if cred_json:
-                cred = credentials.Certificate(json.loads(cred_json))
-            else:
-                # 2. Local fallback
-                cred_path = os.path.join(os.path.dirname(__file__), '..', 'serviceAccountKey.json')
-                cred = credentials.Certificate(cred_path)
-            firebase_admin.initialize_app(cred)
-        except Exception as e:
-            print(f"Error init firebase: {e}")
-    if db is None and len(firebase_admin._apps) > 0:
-        db = firestore.client()
+    global _credentials, _project_id
+    if _credentials is not None:
+        return
+    try:
+        info = _load_service_account_info()
+        _credentials = service_account.Credentials.from_service_account_info(
+            info, scopes=FIRESTORE_SCOPES
+        )
+        _project_id = info.get('project_id')
+    except Exception as e:
+        print(f"Error init firebase: {e}")
+
+
+def _get_access_token():
+    if _credentials is None:
+        return None
+    if _token_cache["token"] and _token_cache["expiry"] - time.time() > 60:
+        return _token_cache["token"]
+    _credentials.refresh(GoogleAuthRequest())
+    _token_cache["token"] = _credentials.token
+    _token_cache["expiry"] = (
+        _credentials.expiry.timestamp() if _credentials.expiry else time.time() + 3000
+    )
+    return _token_cache["token"]
+
+
+def _parse_firestore_value(value):
+    if not value:
+        return None
+    if 'doubleValue' in value:
+        return value['doubleValue']
+    if 'integerValue' in value:
+        return int(value['integerValue'])
+    if 'stringValue' in value:
+        return value['stringValue']
+    if 'booleanValue' in value:
+        return value['booleanValue']
+    return None
 
 class CotizacionPDF(FPDF):
     def header(self):
@@ -48,16 +92,44 @@ class CotizacionPDF(FPDF):
         self.cell(0, 10, f'Página {self.page_no()}', 0, 0, 'C')
 
 def get_item_price(product_name, fallback):
-    """Obtiene el precio exacto de un item MINVU APU o similar en la DB"""
+    """Obtiene el precio exacto de un item MINVU APU o similar en la DB, vía
+    la API REST de Firestore (ver nota sobre firebase-admin más arriba)."""
     init_firebase()
-    if not db:
+    token = _get_access_token()
+    if not token or not _project_id:
         return fallback
     try:
-        # Buscar por nombre exacto en la colección
-        docs = db.collection('products').where('producto', '==', product_name).limit(1).stream()
-        for d in docs:
-            data = d.to_dict()
-            return float(data.get('precio_unitario_neto', fallback))
+        url = (
+            f"https://firestore.googleapis.com/v1/projects/{_project_id}"
+            f"/databases/(default)/documents:runQuery"
+        )
+        body = {
+            "structuredQuery": {
+                "from": [{"collectionId": "products"}],
+                "where": {
+                    "fieldFilter": {
+                        "field": {"fieldPath": "producto"},
+                        "op": "EQUAL",
+                        "value": {"stringValue": product_name},
+                    }
+                },
+                "limit": 1,
+            }
+        }
+        resp = requests.post(
+            url,
+            headers={"Authorization": f"Bearer {token}", "Content-Type": "application/json"},
+            data=json.dumps(body),
+            timeout=8,
+        )
+        resp.raise_for_status()
+        for r in resp.json():
+            doc = r.get('document')
+            if not doc:
+                continue
+            precio = _parse_firestore_value(doc.get('fields', {}).get('precio_unitario_neto'))
+            if precio is not None:
+                return float(precio)
         return fallback
     except Exception as e:
         print(f"Error fetching {product_name}: {e}")
