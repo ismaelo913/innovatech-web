@@ -8,6 +8,10 @@ export const SITE = {
   email: 'administracion@innovatechconstrucciones.cl',
   address: 'Santiago, Región Metropolitana, Chile',
   whatsapp: '56938905488',
+  socials: {
+    linkedin: 'https://www.linkedin.com/company/innovatech-construcciones-chile',
+    instagram: 'https://www.instagram.com/innovatechconstrucciones.cl',
+  },
 } as const;
 
 export const NAV_LINKS = [
