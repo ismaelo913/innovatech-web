@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://innovatech.cl/sitemap-index.xml
+Sitemap: https://innovatechconstrucciones.cl/sitemap-index.xml

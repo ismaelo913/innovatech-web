@@ -1,6 +1,6 @@
 ---
 title: Electricidad y Montaje Eléctrico
-description: Instalaciones eléctricas industriales y comerciales. Salas eléctricas, tableros, baja y media tensión.
+description: Instalaciones eléctricas sin sorpresas en el certificado final. Salas eléctricas, tableros, baja y media tensión — ejecutado y coordinado con tu ITO, con la misma supervisión diaria de cualquier obra Innovatech.
 icon: zap
 image: /images/projects/montaje-electrico-1.jpeg
 order: 1
@@ -16,7 +16,7 @@ features:
 
 ## Mano de obra eléctrica para proyectos industriales y comerciales
 
-Ejecutamos instalaciones eléctricas desde el montaje de tableros y salas eléctricas hasta la habilitación completa de sistemas de baja y media tensión. Trabajamos como subcontratistas eléctricos para constructoras, empresas industriales y mandantes que requieren personal cualificado en terreno.
+Ejecutamos instalaciones eléctricas desde el montaje de tableros y salas eléctricas hasta la habilitación completa de sistemas de baja y media tensión, con el mismo supervisor presente todos los días que tiene cualquier obra Innovatech. Trabajamos como subcontratistas eléctricos para constructoras, empresas industriales y mandantes que requieren personal cualificado en terreno.
 
 ### Lo que ejecutamos
 

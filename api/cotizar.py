@@ -175,7 +175,7 @@ def cotizar():
             if k.lower() in servicio_raw.lower():
                 receta_id = k
                 break
-        
+
         items_calculados = []
         subtotal_items = 0
 
@@ -203,11 +203,11 @@ def cotizar():
         # --- GENERACION PDF ---
         pdf = CotizacionPDF()
         pdf.add_page()
-        
+
         pdf.set_font('Helvetica', 'B', 14)
         pdf.set_text_color(0, 0, 0)
         pdf.cell(0, 10, f'Presupuesto Preliminar: {receta_id}', 0, 1)
-        
+
         pdf.set_font('Helvetica', '', 11)
         pdf.cell(0, 6, f'Cliente: {nombre}', 0, 1)
         pdf.cell(0, 6, f'Área: {area} m2', 0, 1)
@@ -249,12 +249,12 @@ def cotizar():
         pdf.cell(150, 8, 'Subtotal Neto:', align='R')
         pdf.cell(40, 8, f'${int(total_neto):,}', align='R')
         pdf.ln(8)
-        
+
         pdf.set_font('Helvetica', '', 11)
         pdf.cell(150, 8, 'IVA (19%):', align='R')
         pdf.cell(40, 8, f'${int(iva):,}', align='R')
         pdf.ln(8)
-        
+
         pdf.set_font('Helvetica', 'B', 12)
         pdf.set_text_color(232, 115, 12)
         pdf.cell(150, 10, 'TOTAL COTIZACIÓN:', align='R')
@@ -263,9 +263,10 @@ def cotizar():
 
         pdf.set_font('Helvetica', 'I', 8)
         pdf.set_text_color(100, 100, 100)
-        nota = (f"Nota: Este presupuesto se ha calculado utilizando el modelo de Análisis de Precios Unitarios (APU) "
+        nota = (f"Nota: Esta es una estimación preliminar calculada con el modelo de Análisis de Precios Unitarios (APU) "
                 f"conectado a nuestra base de datos de materiales con precios reales de mercado (Sodimac, Easy, Kupfer, MINVU). "
-                f"Proporción de Mano de Obra estimada al 40%. Válido por 5 días.")
+                f"Proporción de Mano de Obra estimada al 40%. El precio final queda por escrito y confirmado después de la "
+                f"visita técnica a tu proyecto — sin sorpresas ni cambios respecto a lo cotizado aquí. Válido por 5 días.")
         pdf.multi_cell(0, 4, nota)
 
         # Exportar a Bytes IO
@@ -282,4 +283,3 @@ def cotizar():
     except Exception as e:
         print(f"Error procesando: {e}")
         return jsonify({'error': str(e)}), 500
-
