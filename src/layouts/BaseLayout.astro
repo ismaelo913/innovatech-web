@@ -12,6 +12,8 @@ interface Props {
   description?: string;
   ogImage?: string;
   schema?: Record<string, unknown>;
+  /** Ruta canónica si difiere de la URL actual (ej. variantes A/B → '/'). */
+  canonical?: string;
 }
 
 const {
@@ -19,10 +21,11 @@ const {
   description = SITE.description,
   ogImage = '/images/og-default.jpg',
   schema,
+  canonical,
 } = Astro.props;
 
 const pageTitle = title === SITE.name ? title : `${title} | ${SITE.name}`;
-const canonicalUrl = new URL(Astro.url.pathname, SITE.url);
+const canonicalUrl = new URL(canonical ?? Astro.url.pathname, SITE.url);
 ---
 
 <!doctype html>

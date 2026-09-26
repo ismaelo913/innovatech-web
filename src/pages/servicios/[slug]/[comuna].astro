@@ -22,7 +22,7 @@ export async function getStaticPaths() {
 const { service, landing } = Astro.props;
 const { title, description, features } = service!.data;
 
-const pageTitle = `${title} en ${landing.comuna} | Innovatech`;
+const pageTitle = `${title} en ${landing.comuna}`;
 const pageDescription = `${title} en ${landing.comuna}, Santiago. ${landing.context} Presupuesto por escrito, supervisor en terreno, EPP propio.`;
 
 const serviceSchema = {
