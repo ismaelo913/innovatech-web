@@ -3,21 +3,25 @@
 // para el servicio de mayor prioridad de negocio (electricidad y montaje
 // eléctrico): debe ser lo primero y más llamativo que se vea en /servicios
 // y en el home.
+import { Image } from 'astro:assets';
+import { projectPhoto } from '../../lib/projectPhotos';
+
 interface Props {
   title: string;
   short: string;
   slug: string;
+  /** Nombre de archivo en src/assets/projects. */
   image: string;
 }
 const { title, short, slug, image } = Astro.props;
 ---
 
 <a href={`/servicios/${slug}`} class="group reveal block relative overflow-hidden border-b-brutal min-h-[60vh]">
-  <img
-    src={image}
+  <Image
+    src={projectPhoto(image)}
+    widths={[640, 960, 1280]}
+    sizes="100vw"
     alt={`${title} — Innovatech`}
-    width="1280"
-    height="720"
     class="absolute inset-0 w-full h-full object-cover grayscale-[30%] transition-all duration-[1.5s] group-hover:scale-105 group-hover:grayscale-0"
     loading="lazy"
     decoding="async"

@@ -6,6 +6,7 @@ import Button from '../../components/ui/Button.astro';
 import Breadcrumbs from '../../components/ui/Breadcrumbs.astro';
 import ProjectGallery from '../../components/projects/ProjectGallery.tsx';
 import { getCollection, render } from 'astro:content';
+import { responsivePhoto } from '../../lib/projectPhotos';
 
 export async function getStaticPaths() {
   const projects = await getCollection('projects');
@@ -27,30 +28,20 @@ const categoryLabels: Record<string, string> = {
   'montaje-electrico':        'Montaje Eléctrico',
 };
 
+// Fotos de cada proyecto (archivos en src/assets/projects)
 const projectImages: Record<string, string[]> = {
-  'condominio-colina': [
-    '/images/projects/colina-1.jpeg',
-    '/images/projects/colina-2.jpeg',
-    '/images/projects/colina-3.jpeg',
-  ],
-  'condominio-las-condes': [
-    '/images/projects/las-condes-1.jpeg',
-    '/images/projects/las-condes-2.jpeg',
-    '/images/projects/las-condes-3.jpeg',
-    '/images/projects/las-condes-4.jpeg',
-  ],
-  'techumbre-terminaciones': [
-    '/images/projects/techumbre-1.jpeg',
-    '/images/projects/techumbre-2.jpeg',
-  ],
-  'mina-cmp-copiapo': Array.from({ length: 10 }, (_, i) => `/images/projects/mina-cmp-${i + 1}.jpeg`),
-  'tableros-electricos-armados': Array.from({ length: 12 }, (_, i) => `/images/projects/tableros-${i + 1}.jpeg`),
-  'montaje-electrico-industrial': [
-    '/images/projects/montaje-electrico-1.jpeg',
-    '/images/projects/montaje-electrico-2.jpeg',
-  ],
+  'condominio-colina': ['colina-1.jpeg', 'colina-2.jpeg', 'colina-3.jpeg'],
+  'condominio-las-condes': ['las-condes-1.jpeg', 'las-condes-2.jpeg', 'las-condes-3.jpeg', 'las-condes-4.jpeg'],
+  'techumbre-terminaciones': ['techumbre-1.jpeg', 'techumbre-2.jpeg'],
+  'mina-cmp-copiapo': Array.from({ length: 10 }, (_, i) => `mina-cmp-${i + 1}.jpeg`),
+  'tableros-electricos-armados': Array.from({ length: 12 }, (_, i) => `tableros-${i + 1}.jpeg`),
+  'montaje-electrico-industrial': ['montaje-electrico-1.jpeg', 'montaje-electrico-2.jpeg'],
 };
-const images = projectImages[project.id] || ['/images/projects/colina-1.jpeg'];
+// Un solo srcset por foto sirve a la portada, las miniaturas y el lightbox:
+// cada <img> declara su propio `sizes` y el navegador elige el ancho.
+const images = await Promise.all(
+  (projectImages[project.id] || ['colina-1.jpeg']).map((file) => responsivePhoto(file, [480, 960, 1600])),
+);
 
 const allDetails = [
   { label: 'Ubicación', value: project.data.location },

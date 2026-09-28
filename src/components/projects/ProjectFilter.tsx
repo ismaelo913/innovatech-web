@@ -1,11 +1,12 @@
 import { useState } from 'react';
+import type { ResponsivePhoto } from '../../lib/projectPhotos';
 
 interface Project {
   id: string;
   title: string;
   category: string;
   location?: string;
-  image: string;
+  image: ResponsivePhoto;
 }
 
 interface Props {
@@ -52,13 +53,15 @@ export default function ProjectFilter({ projects, categoryLabels }: Props) {
             <div className="img-reveal-container border-brutal bg-white">
               <div className="aspect-[4/3] relative overflow-hidden bg-neutral-200">
                 <img
-                  src={project.image}
+                  src={project.image.src}
+                  srcSet={project.image.srcset}
+                  sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
                   alt={project.title}
                   className="absolute inset-0 w-full h-full object-cover"
                   loading="lazy"
                   decoding="async"
-                  width="800"
-                  height="600"
+                  width={project.image.width}
+                  height={project.image.height}
                 />
                 <div className="absolute inset-0 bg-primary-600/0 group-hover:bg-primary-600/10 transition-colors duration-300" />
               </div>

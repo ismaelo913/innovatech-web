@@ -1,6 +1,8 @@
 ---
+import { Image } from 'astro:assets';
 import Button from '../ui/Button.astro';
 import BlueprintMarks from '../ui/BlueprintMarks.astro';
+import { projectPhoto } from '../../lib/projectPhotos';
 
 // El titular se divide en palabras al compilar (antes lo hacía Splitting.js en
 // el navegador, con el <h1> oculto hasta que cargaba el JS). Así el texto —el
@@ -58,12 +60,12 @@ const headlineAccent = ['el', 'riesgo', 'de', 'siempre'];
       <BlueprintMarks variant="light" />
       <div class="reveal-scale delay-300 relative w-full max-w-lg mx-auto lg:mx-0 lg:w-auto lg:h-[82vh] aspect-[3/4]">
           <div class="absolute inset-0 lg:inset-x-4 img-reveal-container border-brutal -rotate-2 bg-background overflow-hidden">
-            <img
+            <Image
               data-hero-parallax="main"
-              src="/images/projects/mina-cmp-1.jpeg"
+              src={projectPhoto('mina-cmp-1.jpeg')}
+              widths={[360, 540]}
+              sizes="(min-width: 1024px) 40vw, 90vw"
               alt="Montaje eléctrico en faena minera — Mina CMP Copiapó, Innovatech"
-              width="540"
-              height="960"
               style="object-position: center 62%"
               class="w-full h-full object-cover opacity-0 transition-opacity duration-500"
               loading="eager"
@@ -73,12 +75,12 @@ const headlineAccent = ['el', 'riesgo', 'de', 'siempre'];
             />
           </div>
           <div class="absolute -bottom-6 -left-2 sm:-left-6 w-[48%] aspect-[3/4] img-reveal-container border-brutal rotate-3 bg-background overflow-hidden shadow-lg">
-            <img
+            <Image
               data-hero-parallax="corner"
-              src="/images/projects/mina-cmp-9-thumb.jpeg"
+              src={projectPhoto('mina-cmp-9-thumb.jpeg')}
+              widths={[320, 640]}
+              sizes="(min-width: 1024px) 20vw, 45vw"
               alt="Instalación de equipos de alta tensión — Mina CMP Copiapó, Innovatech"
-              width="640"
-              height="853"
               class="w-full h-full object-cover object-center opacity-0 transition-opacity duration-500"
               loading="eager"
               decoding="async"
