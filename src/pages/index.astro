@@ -11,11 +11,22 @@ import B2BSection from '../components/home/B2BSection.astro';
 import ProjectsReveal from '../components/home/ProjectsReveal.astro';
 import CTASection from '../components/home/CTASection.astro';
 import { SITE } from '../lib/constants';
+
+// Google usa WebSite (solo en la home) para el nombre del sitio que muestra
+// en los resultados.
+const websiteSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  name: SITE.fullName,
+  alternateName: [SITE.name, 'innovatechconstrucciones.cl'],
+  url: `${SITE.url}/`,
+};
 ---
 
 <BaseLayout
   title="Construcción y Montaje Eléctrico en Santiago"
   description={SITE.description}
+  schema={websiteSchema}
 >
   <Hero />
   <ProcessBlueprint />

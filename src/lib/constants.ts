@@ -1,5 +1,9 @@
 export const SITE = {
   name: 'Innovatech',
+  // Nombre completo, igual al del Perfil de Negocio de Google. Va en los datos
+  // estructurados y en og:site_name para que Google no lo confunda con otras
+  // "Innovatech"; los títulos de página siguen usando `name`.
+  fullName: 'Innovatech Construcciones',
   tagline: 'Calidad que se ve, seguridad que se siente',
   description:
     'Innovatech es una empresa subcontratista de construcción y montaje eléctrico en Santiago de Chile. Calidad que se ve, seguridad que se siente. Mano de obra cualificada, equipada y supervisada.',

@@ -46,7 +46,7 @@ const canonicalUrl = new URL(canonical ?? Astro.url.pathname, SITE.url);
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonicalUrl} />
     <meta property="og:image" content={new URL(ogImage, SITE.url)} />
-    <meta property="og:site_name" content={SITE.name} />
+    <meta property="og:site_name" content={SITE.fullName} />
     <meta property="og:locale" content="es_CL" />
 
     <!-- Twitter -->
@@ -148,7 +148,8 @@ const canonicalUrl = new URL(canonical ?? Astro.url.pathname, SITE.url);
     <script type="application/ld+json" set:html={JSON.stringify({
       "@context": "https://schema.org",
       "@type": ["LocalBusiness", "GeneralContractor"],
-      "name": SITE.name,
+      "name": SITE.fullName,
+      "alternateName": SITE.name,
       "description": SITE.description,
       "url": SITE.url,
       "telephone": SITE.phone,
@@ -167,6 +168,13 @@ const canonicalUrl = new URL(canonical ?? Astro.url.pathname, SITE.url);
       },
       "areaServed": ["Santiago", "Región Metropolitana"],
       "image": new URL("/images/logo/logo-full.jpeg", SITE.url).href,
+      "logo": new URL("/images/logo/logo-square.png", SITE.url).href,
+      "openingHoursSpecification": [{
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+        "opens": "08:00",
+        "closes": "18:00"
+      }],
       "slogan": SITE.tagline,
       "serviceArea": {
         "@type": "GeoCircle",
