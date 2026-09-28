@@ -6,6 +6,8 @@ interface Props {
   align?: 'left' | 'center';
   dark?: boolean;
   class?: string;
+  /** 'h1' cuando es el título principal de la página (listados de blog, proyectos, servicios). */
+  as?: 'h1' | 'h2';
 }
 
 const {
@@ -15,6 +17,7 @@ const {
   align = 'center',
   dark = false,
   class: className,
+  as: Heading = 'h2',
 } = Astro.props;
 
 const alignClass = align === 'center' ? 'text-center mx-auto' : 'text-left';
@@ -31,14 +34,14 @@ const alignClass = align === 'center' ? 'text-center mx-auto' : 'text-left';
       {label}
     </span>
   )}
-  <h2
+  <Heading
     class:list={[
       'font-display text-4xl sm:text-5xl font-black uppercase leading-tight',
       dark ? 'text-background' : 'text-neutral-950',
     ]}
   >
     {title}
-  </h2>
+  </Heading>
   {description && (
     <p
       class:list={[
