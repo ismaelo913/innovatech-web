@@ -8,8 +8,10 @@ import { projectPhoto } from '../../lib/projectPhotos';
 // el navegador, con el <h1> oculto hasta que cargaba el JS). Así el texto —el
 // elemento LCP de la home— se pinta desde el primer frame y la entrada
 // escalonada corre solo con CSS (.hero-word en global.css).
-const headline = ['Obra', 'eléctrica', 'y', 'construcción', 'sin'];
-const headlineAccent = ['el', 'riesgo', 'de', 'siempre'];
+const headline = [
+  ...['Obra', 'eléctrica', 'y', 'construcción', 'sin'].map((word) => ({ word, accent: false })),
+  ...['el', 'riesgo', 'de', 'siempre'].map((word) => ({ word, accent: true })),
+];
 ---
 
 <section class="border-b-brutal">
@@ -27,10 +29,9 @@ const headlineAccent = ['el', 'riesgo', 'de', 'siempre'];
         id="hero-headline"
         class="font-display text-5xl sm:text-6xl lg:text-7xl font-black uppercase text-neutral-950 leading-tight mb-6"
       >
-        {headline.map((word, i) => <><span class="hero-word" style={`--i:${i}`}>{word}</span>{' '}</>)}
-        <span class="text-primary-600">{headlineAccent.map((word, i) => (
-          <><span class="hero-word" style={`--i:${headline.length + i}`}>{word}</span>{i < headlineAccent.length - 1 && ' '}</>
-        ))}</span>
+        {headline.map(({ word, accent }, i) => (
+          <><span class:list={['hero-word', { 'text-primary-600': accent }]} style={`--i:${i}`}>{word}</span>{' '}</>
+        ))}
       </h1>
 
       <p id="hero-sub" class="hero-sub text-lg sm:text-xl font-light text-accent-500 max-w-xl mb-10 leading-relaxed">
@@ -94,7 +95,6 @@ const headlineAccent = ['el', 'riesgo', 'de', 'siempre'];
         </div>
       </div>
     </div>
-  </div>
 
   <!-- Stats band: marquee ticker + CountUp — datos reales del Portafolio Innovatech.pdf -->
   <div class="bg-neutral-950 texture-grain text-background">
