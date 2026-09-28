@@ -14,6 +14,11 @@ export default defineConfig({
   // Antes ('ignore') ambas versiones respondían 200 y Search Console las
   // reportaba como duplicadas / alternativas con canónica.
   trailingSlash: 'never',
+  // CSS incrustado en cada página: el navegador no espera una petición aparte
+  // para el primer pintado (~14 KB gzip; Lighthouse estimaba ~200 ms en móvil).
+  build: {
+    inlineStylesheets: 'always',
+  },
   adapter: vercel(),
   integrations: [
     react(),
