@@ -16,9 +16,11 @@ Origen de cada archivo (copiados desde node_modules/<paquete>/dist/ tras
   ScrollTrigger.min.js   gsap@3.12.5      (plugin, mismo paquete)
   CustomEase.min.js      gsap@3.12.5      (plugin, mismo paquete)
   lenis.min.js           lenis@1.1.13
-  splitting.min.js       splitting@1.1.0
-  splitting.css          splitting@1.1.0
   vanilla-tilt.min.js    vanilla-tilt@1.8.1
+
+Splitting.js (splitting.min.js + splitting.css) se eliminó el 2026-09-28:
+solo dividía el titular del hero, que ahora se divide al compilar
+(src/components/home/Hero.astro) y se anima con CSS para no retrasar el LCP.
 
 Para actualizar una versión: `npm install <paquete>@<nueva-version> --no-save`
 en un scratch dir, copiar el nuevo dist/*.min.js aquí, actualizar este

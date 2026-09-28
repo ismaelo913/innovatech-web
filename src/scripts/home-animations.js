@@ -1,53 +1,19 @@
-// Animaciones de la home: Hero (reveal + counters + parallax), Process
-// (blueprint SVG), Services (tilt 3D), Projects (crossfade). GSAP/Splitting/
-// VanillaTilt se sirven como estáticos auto-hospedados desde /public/vendor
-// (ver BaseLayout.astro y public/vendor/README.txt) y quedan disponibles
-// como globals (window.gsap, window.ScrollTrigger, window.Splitting,
+// Animaciones de la home: Hero (counters + parallax), Process (blueprint
+// SVG), Services (tilt 3D), Projects (crossfade). La entrada del titular del
+// hero es CSS puro (.hero-word en global.css) para no retrasar el LCP.
+// GSAP/VanillaTilt se sirven como estáticos auto-hospedados desde
+// /public/vendor (ver BaseLayout.astro y public/vendor/README.txt) y quedan
+// disponibles como globals (window.gsap, window.ScrollTrigger,
 // window.VanillaTilt) — así esbuild nunca tiene que empaquetarlas para el
 // entrypoint del servidor.
-import { INDUSTRIAL_OUT, INDUSTRIAL_IN_OUT, registerIndustrialEases } from './eases.js';
+import { INDUSTRIAL_IN_OUT, registerIndustrialEases } from './eases.js';
 
 const easesReady = registerIndustrialEases();
-const easeOut = easesReady ? INDUSTRIAL_OUT : 'power4.out';
 const easeInOut = easesReady ? INDUSTRIAL_IN_OUT : 'power2.inOut';
 
 {
-  // --- Hero: headline reveal + stat counters ---
+  // --- Hero: parallax + stat counters ---
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-  function initHeadlineReveal() {
-    const headline = document.getElementById('hero-headline');
-    const sub = document.getElementById('hero-sub');
-    if (!headline) return;
-
-    if (reduceMotion || !window.gsap || !window.Splitting) {
-      headline.style.opacity = '1';
-      if (sub) sub.style.opacity = '1';
-      return;
-    }
-
-    const gsap = window.gsap;
-    window.Splitting({ target: headline, by: 'words' });
-
-    // El <h1> mismo queda oculto (style="opacity:0") hasta que Splitting.js
-    // termine de envolver cada palabra — recién ahí lo mostramos y dejamos que
-    // las .word individuales animen su propia entrada.
-    headline.style.opacity = '1';
-
-    gsap.set(sub, { opacity: 0, y: 16 });
-    gsap
-      .timeline({ delay: 0.1 })
-      .from(headline.querySelectorAll('.word'), {
-        opacity: 0,
-        y: 30,
-        rotateX: -35,
-        stagger: 0.05,
-        duration: 0.65,
-        ease: easeOut,
-      })
-      .to(sub, { opacity: 1, y: 0, duration: 0.5, ease: easeOut }, '-=0.3');
-  }
-  initHeadlineReveal();
 
   // Parallax sutil en el collage de fotos: las dos imágenes se desplazan a
   // velocidades distintas ligadas al scroll — la sensación de profundidad

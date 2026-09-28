@@ -90,14 +90,12 @@ const canonicalUrl = new URL(canonical ?? Astro.url.pathname, SITE.url);
          build: son los mismos binarios .min.js (versión fijada, ver
          public/vendor/README.txt), solo que servidos desde el propio dominio.
          Disponibles como globals: window.gsap, window.ScrollTrigger,
-         window.Lenis, window.Splitting, window.VanillaTilt. -->
+         window.Lenis, window.VanillaTilt. -->
     <script defer src="/vendor/gsap.min.js"></script>
     <script defer src="/vendor/ScrollTrigger.min.js"></script>
     <!-- CustomEase: registra las curvas propias "de precisión industrial" (ver src/scripts/eases.js) -->
     <script defer src="/vendor/CustomEase.min.js"></script>
     <script defer src="/vendor/lenis.min.js"></script>
-    <script defer src="/vendor/splitting.min.js"></script>
-    <link rel="stylesheet" href="/vendor/splitting.css" />
     <script defer src="/vendor/vanilla-tilt.min.js"></script>
 
     <!-- Favicon -->
