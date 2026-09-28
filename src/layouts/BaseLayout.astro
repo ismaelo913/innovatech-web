@@ -126,7 +126,10 @@ const canonicalUrl = new URL(canonical ?? Astro.url.pathname, SITE.url);
         <script async src={`https://www.googletagmanager.com/gtag/js?id=${import.meta.env.PUBLIC_GA4_MEASUREMENT_ID}`}></script>
         <script define:vars={{ gaId: import.meta.env.PUBLIC_GA4_MEASUREMENT_ID }}>
           window.dataLayer = window.dataLayer || [];
-          function gtag(){ dataLayer.push(arguments); }
+          // En window y no como `function gtag()`: define:vars envuelve este
+          // script en una función, y los eventos de conversión
+          // (src/lib/analytics.ts) necesitan llamar a gtag desde afuera.
+          window.gtag = function gtag(){ dataLayer.push(arguments); };
           gtag('js', new Date());
           gtag('config', gaId);
         </script>
@@ -241,6 +244,12 @@ const canonicalUrl = new URL(canonical ?? Astro.url.pathname, SITE.url);
 
     <!-- Lenis smooth scroll: dynamic import, init solo en desktop, respeta prefers-reduced-motion -->
     <script src="../scripts/lenis-init.js"></script>
+
+    <!-- Conversiones GA4: clics a WhatsApp / teléfono / email (no hace nada si GA4 no está cargado) -->
+    <script>
+      import { trackContactLinks } from '../lib/analytics';
+      trackContactLinks();
+    </script>
   </body>
 </html>
 

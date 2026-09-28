@@ -360,6 +360,8 @@ const schema = JSON.stringify({
 </BaseLayout>
 
 <script>
+  import { trackLead } from '../lib/analytics';
+
   function handleB2BSubmit(e: Event) {
     e.preventDefault();
     const form = e.target as HTMLFormElement;
@@ -375,6 +377,7 @@ const schema = JSON.stringify({
     const msg = `Hola Innovatech, solicito una propuesta para empresa.\n\n🏢 Empresa: ${empresa}\n👤 Contacto: ${nombre}\n📱 Teléfono: ${telefono}\n📧 Email: ${email}\n🏷️ Tipo: ${tipo}\n\n📝 Proyecto:\n${proyecto || 'Sin descripción'}`;
 
     window.open(`https://wa.me/56938905488?text=${encodeURIComponent(msg)}`, '_blank');
+    trackLead('formulario_empresas');
   }
 
   (window as any).handleB2BSubmit = handleB2BSubmit;

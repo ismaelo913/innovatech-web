@@ -1,6 +1,7 @@
 import { useState, type FormEvent } from 'react';
 import emailjs from '@emailjs/browser';
 import { EMAILJS_CONFIG, isEmailConfigured } from '../../lib/emailjs';
+import { trackLead } from '../../lib/analytics';
 import { CATALOG, COMUNAS, INPUT_CLASS, type CatalogItem } from './catalog';
 
 interface CartItem {
@@ -152,6 +153,7 @@ export default function CotizadorAvanzado({ onSuccess }: Props) {
           { name, phone, email, service: 'Cotización Avanzada', comuna, description: message, urgency: 'No especificada', contact_preference: contactPref },
           { publicKey: EMAILJS_CONFIG.publicKey },
         );
+        trackLead('cotizador_avanzado');
         setStatus('success');
         onSuccess(cart);
         return;
@@ -162,6 +164,7 @@ export default function CotizadorAvanzado({ onSuccess }: Props) {
 
     const waMsg = `Hola Innovatech, quiero cotizar los siguientes trabajos:\n\n📋 *TRABAJOS SOLICITADOS:*\n${itemsList}\n\n📍 Comuna: ${comuna}\n👤 ${name}\n📱 ${phone}\n📧 ${email}\n✉️ Contactar por: ${contactPref}${notes ? `\n\n💬 Notas: ${notes}` : ''}`;
     window.open(`https://wa.me/56938905488?text=${encodeURIComponent(waMsg)}`, '_blank');
+    trackLead('cotizador_avanzado');
     setStatus('success');
     onSuccess(cart);
   }
