@@ -1,4 +1,6 @@
 @import "tailwindcss";
+/* Estilos de texto largo (clases prose) para blog, servicios y proyectos */
+@plugin "@tailwindcss/typography";
 
 /* ============================================
    INNOVATECH DESIGN SYSTEM — Tokens
