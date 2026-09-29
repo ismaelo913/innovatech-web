@@ -50,7 +50,8 @@ const blog = defineCollection({
 // explícito (idealmente por escrito) para usar su nombre/cargo/empresa en el
 // sitio. No crear entradas de ejemplo ni citas inventadas: una colección
 // vacía simplemente no renderiza la sección (ver TestimonialsSection.astro).
-// Ver src/content/testimonials/README.md para el procedimiento de alta.
+// Procedimiento de alta en docs/testimonios-como-agregar.md (no dejar un
+// README.md dentro de src/content/testimonials: se leería como testimonio).
 const testimonials = defineCollection({
   loader: glob({ pattern: '**/*.md', base: './src/content/testimonials' }),
   schema: z.object({

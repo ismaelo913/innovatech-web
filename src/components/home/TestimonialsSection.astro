@@ -1,15 +1,20 @@
 ---
 // Sección de testimonios — solo renderiza si existen entradas reales y
-// consentidas en src/content/testimonials/ (ver README en esa carpeta).
-// Con la colección vacía, este componente no imprime nada: es intencional,
-// no un placeholder con datos inventados.
-import { getCollection } from 'astro:content';
+// consentidas en src/content/testimonials/ (procedimiento en
+// docs/testimonios-como-agregar.md). Con la colección vacía, este componente
+// no imprime nada: es intencional, no un placeholder con datos inventados.
+import { getCollection, render } from 'astro:content';
 import Container from '../ui/Container.astro';
 
 const allTestimonials = await getCollection('testimonials');
-const testimonials = allTestimonials
-  .filter((t) => t.data.consentObtained)
-  .sort((a, b) => (b.data.featured ? 1 : 0) - (a.data.featured ? 1 : 0));
+// render(entry) es la API de Astro 5+; `entry.render()` ya no existe y
+// rompía la compilación en cuanto la colección tuviera un archivo.
+const testimonials = await Promise.all(
+  allTestimonials
+    .filter((t) => t.data.consentObtained)
+    .sort((a, b) => (b.data.featured ? 1 : 0) - (a.data.featured ? 1 : 0))
+    .map(async (entry) => ({ entry, Content: (await render(entry)).Content })),
+);
 ---
 
 {testimonials.length > 0 && (
@@ -25,22 +30,19 @@ const testimonials = allTestimonials
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 reveal">
-        {testimonials.map(async (entry) => {
-          const { Content } = await entry.render();
-          return (
-            <figure class="border-brutal bg-surface-alt p-6 flex flex-col">
-              <blockquote class="text-base font-medium text-neutral-800 leading-relaxed flex-1 [&_p]:mb-0">
-                <Content />
-              </blockquote>
-              <figcaption class="mt-6 pt-4 border-t border-neutral-300">
-                <span class="block font-bold text-neutral-950">{entry.data.author}</span>
-                <span class="block text-sm text-accent-500">
-                  {entry.data.role ? `${entry.data.role} · ` : ''}{entry.data.company}
-                </span>
-              </figcaption>
-            </figure>
-          );
-        })}
+        {testimonials.map(({ entry, Content }) => (
+          <figure class="border-brutal bg-surface-alt p-6 flex flex-col">
+            <blockquote class="text-base font-medium text-neutral-800 leading-relaxed flex-1 [&_p]:mb-0">
+              <Content />
+            </blockquote>
+            <figcaption class="mt-6 pt-4 border-t border-neutral-300">
+              <span class="block font-bold text-neutral-950">{entry.data.author}</span>
+              <span class="block text-sm text-accent-500">
+                {entry.data.role ? `${entry.data.role} · ` : ''}{entry.data.company}
+              </span>
+            </figcaption>
+          </figure>
+        ))}
       </div>
     </Container>
   </section>

@@ -1,8 +1,9 @@
 # Testimonios — cómo agregar uno
 
-Esta carpeta está **vacía a propósito**. `TestimonialsSection.astro` no
-renderiza nada si no hay archivos aquí, así que el sitio funciona
-perfectamente sin testimonios hasta que existan citas reales.
+Los testimonios viven en `src/content/testimonials/`, que hoy **no existe a
+propósito**. `TestimonialsSection.astro` no renderiza nada si no hay
+archivos ahí, así que el sitio funciona perfectamente sin testimonios hasta
+que existan citas reales.
 
 ## Regla no negociable
 
@@ -18,7 +19,9 @@ mismo ya esté documentado como caso público en `src/content/projects/`.
 1. Pide la cita al cliente (o pídele que la revise si la redactas tú a partir
    de una conversación) y confirma por escrito que autoriza publicarla con su
    nombre/cargo/empresa.
-2. Crea un archivo `<slug-cliente>.md` en esta carpeta con este formato:
+2. Crea el archivo `src/content/testimonials/<slug-cliente>.md` (crea la
+   carpeta si es el primero) con este formato. No pongas otros `.md` en esa
+   carpeta, como un README: el sitio los leería como testimonios.
 
 ```md
 ---
