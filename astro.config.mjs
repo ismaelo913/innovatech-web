@@ -19,12 +19,16 @@ export default defineConfig({
   build: {
     inlineStylesheets: 'always',
   },
+  // /index-b era la variante B de un test A/B de la home que nunca llegó a
+  // correr (la home es estática y el middleware no se ejecutaba). Google ya
+  // conocía la URL, así que se redirige en vez de dejarla en 404.
+  redirects: {
+    '/index-b': '/',
+  },
   adapter: vercel(),
   integrations: [
     react(),
-    // /index-b es la variante B del test A/B de la home: su canónica apunta
-    // a / y no debe declararse como página propia en el sitemap.
-    sitemap({ filter: (page) => !page.includes('/index-b') }),
+    sitemap(),
     keystatic(),
   ],
   vite: {

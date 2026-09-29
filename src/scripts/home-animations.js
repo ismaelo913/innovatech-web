@@ -85,12 +85,12 @@ const easeInOut = easesReady ? INDUSTRIAL_IN_OUT : 'power2.inOut';
 
   document.getElementById('hero-a-cta-primary')?.addEventListener('click', () => {
     if (typeof window.va === 'function') {
-      window.va('event', { name: 'hero_cta_click', data: { variant: 'a', cta: 'primary' } });
+      window.va('event', { name: 'hero_cta_click', data: { cta: 'primary' } });
     }
   });
   document.getElementById('hero-a-cta-secondary')?.addEventListener('click', () => {
     if (typeof window.va === 'function') {
-      window.va('event', { name: 'hero_cta_click', data: { variant: 'a', cta: 'secondary' } });
+      window.va('event', { name: 'hero_cta_click', data: { cta: 'secondary' } });
     }
   });
 }
