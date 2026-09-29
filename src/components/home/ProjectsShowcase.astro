@@ -1,29 +1,31 @@
 ---
+import { Image } from 'astro:assets';
 import Container from '../ui/Container.astro';
 import SectionHeading from '../ui/SectionHeading.astro';
 import Badge from '../ui/Badge.astro';
 import Button from '../ui/Button.astro';
+import { projectPhoto } from '../../lib/projectPhotos';
 
 const projects = [
   {
     title: 'Condominio Colina',
     category: 'Terminaciones',
     location: 'Colina, Santa Elena',
-    image: '/images/projects/colina-1.jpeg',
+    image: 'colina-1.jpeg',
     slug: 'condominio-colina',
   },
   {
     title: 'Mina CMP Copiapó — Planta Pellet',
     category: 'Montaje Eléctrico',
     location: 'Copiapó, Atacama',
-    image: '/images/projects/mina-cmp-1.jpeg',
+    image: 'mina-cmp-1.jpeg',
     slug: 'mina-cmp-copiapo',
   },
   {
     title: 'Techumbre y Terminaciones',
     category: 'Terminaciones',
     location: null,
-    image: '/images/projects/techumbre-1.jpeg',
+    image: 'techumbre-1.jpeg',
     slug: 'techumbre-terminaciones',
   },
 ];
@@ -52,11 +54,11 @@ const projects = [
         <a href={`/proyectos/${project.slug}`} class="group block reveal" style={`transition-delay: ${(index % 3) * 100}ms`}>
           <div class="overflow-hidden border-brutal bg-white img-reveal-container">
             <div class="aspect-[4/3] bg-neutral-200 relative overflow-hidden">
-              <img
-                src={project.image}
+              <Image
+                src={projectPhoto(project.image)}
+                widths={[400, 800]}
+                sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
                 alt={project.title}
-                width="400"
-                height="300"
                 class="absolute inset-0 w-full h-full object-cover"
                 loading="lazy"
                 decoding="async"

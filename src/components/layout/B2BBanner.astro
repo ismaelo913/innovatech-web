@@ -1,10 +1,13 @@
 ---
 // B2BBanner.astro — Floating B2B Lead Magnet Banner
+// En móvil ocupa casi todo el ancho, así que va sobre el botón flotante de
+// WhatsApp (bottom-24) en vez de taparlo; desde sm caben uno al lado del otro.
 ---
 
-<div
+<aside
   id="b2b-floating-banner"
-  class="fixed bottom-6 left-6 z-50 max-w-sm w-[calc(100vw-3rem)] bg-neutral-950 border-brutal-invert text-white p-5 transition-all duration-500 ease-out transform translate-y-10 opacity-0 pointer-events-none flex gap-4 pr-10"
+  aria-label="Checklist gratuito para empresas"
+  class="fixed bottom-24 sm:bottom-6 left-6 z-50 max-w-sm w-[calc(100vw-3rem)] bg-neutral-950 border-brutal-invert text-white p-5 transition-all duration-500 ease-out transform translate-y-10 opacity-0 pointer-events-none flex gap-4 pr-10"
 >
   <!-- Close Button -->
   <button
@@ -42,7 +45,7 @@
       </svg>
     </a>
   </div>
-</div>
+</aside>
 
 <script>
   document.addEventListener('DOMContentLoaded', () => {

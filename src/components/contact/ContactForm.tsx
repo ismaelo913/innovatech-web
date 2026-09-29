@@ -1,6 +1,7 @@
 import { useRef, useState, type FormEvent } from 'react';
 import emailjs from '@emailjs/browser';
 import { EMAILJS_CONFIG, isEmailConfigured } from '../../lib/emailjs';
+import { trackLead } from '../../lib/analytics';
 
 const services = [
   'Remodelación Residencial',
@@ -47,6 +48,7 @@ export default function ContactForm() {
           formRef.current,
           { publicKey: EMAILJS_CONFIG.publicKey },
         );
+        trackLead('formulario_contacto');
         setStatus('success');
         formRef.current.reset();
         return;
@@ -59,6 +61,7 @@ export default function ContactForm() {
     const waMsg = `Hola Innovatech, soy ${name}.\n\n📋 Servicio: ${service}\n📧 Email: ${email}\n📱 Teléfono: ${phone}\n\n💬 Mensaje:\n${message}`;
     const waUrl = `https://wa.me/56938905488?text=${encodeURIComponent(waMsg)}`;
     window.open(waUrl, '_blank');
+    trackLead('formulario_contacto');
     setStatus('success');
     formRef.current.reset();
   }

@@ -1,27 +1,29 @@
 ---
+import { Image } from 'astro:assets';
 import Container from '../ui/Container.astro';
 import Button from '../ui/Button.astro';
+import { projectPhoto } from '../../lib/projectPhotos';
 
 const frames = [
   {
     title: 'Mina CMP Copiapó — Planta Pellet',
     category: 'Montaje Eléctrico',
     location: 'Copiapó, Atacama',
-    image: '/images/projects/mina-cmp-1.jpeg',
+    image: 'mina-cmp-1.jpeg',
     slug: 'mina-cmp-copiapo',
   },
   {
     title: 'Montaje Eléctrico Industrial',
     category: 'Montaje Eléctrico',
     location: 'Región Metropolitana',
-    image: '/images/projects/montaje-electrico-2.jpeg',
+    image: 'montaje-electrico-2.jpeg',
     slug: 'montaje-electrico-industrial',
   },
   {
     title: 'Techumbre y Terminaciones',
     category: 'Obra Gruesa',
     location: null,
-    image: '/images/projects/techumbre-1.jpeg',
+    image: 'techumbre-1.jpeg',
     slug: 'techumbre-terminaciones',
   },
 ];
@@ -39,11 +41,11 @@ const frames = [
               style={`opacity: ${i === 0 ? 1 : 0}`}
               data-frame={i}
             >
-              <img
-                src={frame.image}
+              <Image
+                src={projectPhoto(frame.image)}
+                widths={[480, 800, 1280]}
+                sizes="(min-width: 1024px) 55vw, 100vw"
                 alt={frame.title}
-                width="1280"
-                height="800"
                 class="absolute inset-0 w-full h-full object-cover"
                 loading={i === 0 ? 'eager' : 'lazy'}
                 decoding="async"

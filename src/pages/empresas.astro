@@ -66,7 +66,7 @@ const schema = JSON.stringify({
 ---
 
 <BaseLayout
-  title="Subcontratista para Empresas Constructoras e Inmobiliarias | Innovatech Santiago"
+  title="Subcontratista para Empresas Constructoras e Inmobiliarias en Santiago"
   description="Cuadrillas especializadas con documentación completa: contratos, mutualidad, EPP y factura electrónica. Cumplimos el Art. 183-A desde el primer día. Cotiza en Santiago RM."
 >
   <script type="application/ld+json" set:html={schema} />
@@ -196,7 +196,7 @@ const schema = JSON.stringify({
               </svg>
               <div>
                 <div class="text-sm font-semibold text-white">{label}</div>
-                <div class="text-xs text-neutral-500 mt-0.5">{detail}</div>
+                <div class="text-xs text-neutral-400 mt-0.5">{detail}</div>
               </div>
             </div>
           ))}
@@ -348,7 +348,7 @@ const schema = JSON.stringify({
       <div class="max-w-2xl mx-auto text-center">
         <p class="text-sm text-accent-500 mb-4">¿Quieres saber qué documentación exigirle a cualquier subcontratista?</p>
         <a href="/recursos/checklist-subcontratistas"
-          class="inline-flex items-center gap-2 text-sm font-bold uppercase tracking-wide text-primary-600 hover:text-primary-700 transition-colors">
+          class="inline-flex items-center gap-2 text-sm font-bold uppercase tracking-wide text-primary-700 hover:text-primary-800 transition-colors">
           Descargar checklist gratuito del mandante
           <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
             <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
@@ -360,6 +360,8 @@ const schema = JSON.stringify({
 </BaseLayout>
 
 <script>
+  import { trackLead } from '../lib/analytics';
+
   function handleB2BSubmit(e: Event) {
     e.preventDefault();
     const form = e.target as HTMLFormElement;
@@ -375,6 +377,7 @@ const schema = JSON.stringify({
     const msg = `Hola Innovatech, solicito una propuesta para empresa.\n\n🏢 Empresa: ${empresa}\n👤 Contacto: ${nombre}\n📱 Teléfono: ${telefono}\n📧 Email: ${email}\n🏷️ Tipo: ${tipo}\n\n📝 Proyecto:\n${proyecto || 'Sin descripción'}`;
 
     window.open(`https://wa.me/56938905488?text=${encodeURIComponent(msg)}`, '_blank');
+    trackLead('formulario_empresas');
   }
 
   (window as any).handleB2BSubmit = handleB2BSubmit;

@@ -1,4 +1,6 @@
 @import "tailwindcss";
+/* Estilos de texto largo (clases prose) para blog, servicios y proyectos */
+@plugin "@tailwindcss/typography";
 
 /* ============================================
    INNOVATECH DESIGN SYSTEM — Tokens
@@ -212,6 +214,21 @@ img {
 .reveal-scale.is-visible {
   opacity: 1;
   transform: scale(1);
+}
+
+/* Hero de la home: entrada solo con movimiento, sin opacity:0. El titular y
+   el subtítulo son el elemento LCP; si parten ocultos, Google mide el LCP
+   recién cuando se ven (antes ~3 s, esperando a GSAP/Splitting). */
+.hero-word {
+  display: inline-block;
+  animation: hero-rise 0.65s var(--ease-out) both;
+  animation-delay: calc(0.1s + var(--i, 0) * 0.05s);
+}
+.hero-sub {
+  animation: hero-rise 0.5s var(--ease-out) 0.4s both;
+}
+@keyframes hero-rise {
+  from { transform: translateY(0.35em); }
 }
 
 /* Stagger delays */

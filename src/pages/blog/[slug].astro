@@ -17,27 +17,34 @@ export async function getStaticPaths() {
 const { post } = Astro.props;
 const { Content } = await render(post);
 
+const postUrl = new URL(`/blog/${post.id}`, SITE.url).href;
+const postImage = post.data.image ?? '/images/og-default.jpg';
+
 const articleSchema = {
   '@context': 'https://schema.org',
   '@type': 'BlogPosting',
   headline: post.data.title,
   description: post.data.description,
-  author: {
-    '@type': 'Person',
-    name: post.data.author,
-  },
+  image: new URL(postImage, SITE.url).href,
+  // "Equipo Innovatech" es la empresa, no una persona
+  author: post.data.author.startsWith('Equipo')
+    ? { '@type': 'Organization', name: post.data.author, url: SITE.url }
+    : { '@type': 'Person', name: post.data.author },
   publisher: {
     '@type': 'Organization',
-    name: SITE.name,
+    name: SITE.fullName,
     url: SITE.url,
+    logo: { '@type': 'ImageObject', url: new URL('/images/logo/logo-square.png', SITE.url).href },
   },
   datePublished: post.data.date.toISOString(),
-  url: new URL(`/blog/${post.id}`, SITE.url).href,
+  dateModified: post.data.date.toISOString(),
+  mainEntityOfPage: { '@type': 'WebPage', '@id': postUrl },
+  url: postUrl,
   keywords: post.data.tags.join(', '),
 };
 ---
 
-<BaseLayout title={post.data.title} description={post.data.description} schema={articleSchema}>
+<BaseLayout title={post.data.title} description={post.data.description} ogImage={postImage} schema={articleSchema}>
   <article>
     <section class="py-16 sm:py-20 bg-background border-b-brutal">
       <Container narrow>

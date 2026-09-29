@@ -29,6 +29,7 @@ const [featured, secondary, ...rest] = services;
   <section class="py-16 sm:py-20 bg-background border-b-brutal">
     <Container>
       <SectionHeading
+        as="h1"
         label="Nuestros servicios"
         title="Calidad en cada etapa de tu obra"
         description="Cubrimos cada fase de la construcción con un equipo preparado y comprometido con el resultado que esperas."
@@ -36,12 +37,13 @@ const [featured, secondary, ...rest] = services;
     </Container>
   </section>
 
+  <h2 class="sr-only">Todos los servicios</h2>
   {featured && (
     <FeaturedServiceCard
       title={featured.data.title}
       short={featured.data.description}
       slug={featured.id}
-      image={featured.data.image ?? '/images/projects/montaje-electrico-1.jpeg'}
+      image={featured.data.image ?? 'montaje-electrico-1.jpeg'}
     />
   )}
 

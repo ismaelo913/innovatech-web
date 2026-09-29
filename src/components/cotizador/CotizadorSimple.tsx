@@ -1,6 +1,7 @@
 import { useRef, useState, type FormEvent } from 'react';
 import emailjs from '@emailjs/browser';
 import { EMAILJS_CONFIG, isEmailConfigured } from '../../lib/emailjs';
+import { trackLead } from '../../lib/analytics';
 import { COMUNAS, INPUT_CLASS } from './catalog';
 
 const SERVICES = [
@@ -51,6 +52,7 @@ export default function CotizadorSimple({ onSuccess }: Props) {
           { name, phone, email, service, message },
           { publicKey: EMAILJS_CONFIG.publicKey },
         );
+        trackLead('cotizador_simple');
         formRef.current.reset();
         setSelectedService('');
         onSuccess();
@@ -62,6 +64,7 @@ export default function CotizadorSimple({ onSuccess }: Props) {
 
     const waMsg = `Hola Innovatech, solicito una visita técnica.\n\n👤 ${name}\n📱 ${phone}\n📧 ${email}\n\n🔧 Servicio: ${service}\n📍 Comuna: ${comuna}\n⏰ Urgencia: ${urgency || 'Flexible'}\n✉️ Contactar por: ${contactPref}\n\n📝 Descripción:\n${description || 'Sin descripción'}`;
     window.open(`https://wa.me/56938905488?text=${encodeURIComponent(waMsg)}`, '_blank');
+    trackLead('cotizador_simple');
     formRef.current.reset();
     setSelectedService('');
     onSuccess();

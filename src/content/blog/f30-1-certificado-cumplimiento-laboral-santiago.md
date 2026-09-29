@@ -8,7 +8,7 @@ tags: ["F30-1", "Art. 183-A", "responsabilidad solidaria", "Dirección del Traba
 
 Si tu empresa subcontrata mano de obra en Chile, hay tres letras y un número que deberías conocer tan bien como tu propio RUT: **F30-1**. Es el documento que la Dirección del Trabajo (DT) usa para certificar que un contratista está al día con sus obligaciones laborales y previsionales — y es, en la práctica, tu principal herramienta para protegerte de la responsabilidad solidaria que establece el Artículo 183-A del Código del Trabajo.
 
-En nuestra guía anterior sobre [cómo contratar un subcontratista confiable](/blog/como-contratar-subcontratista-construccion-confiable-santiago/) mencionamos el F30-1 como uno de los 8 puntos del checklist. Esta guía profundiza específicamente en ese documento: qué es, cómo se pide, qué hacer si un contratista no lo entrega, y cómo se conecta con tu derecho a retener pagos.
+En nuestra guía anterior sobre [cómo contratar un subcontratista confiable](/blog/como-contratar-subcontratista-construccion-confiable-santiago) mencionamos el F30-1 como uno de los 8 puntos del checklist. Esta guía profundiza específicamente en ese documento: qué es, cómo se pide, qué hacer si un contratista no lo entrega, y cómo se conecta con tu derecho a retener pagos.
 
 ---
 
@@ -51,7 +51,7 @@ Ninguno de los tres escenarios es aceptable para una empresa que subcontrata con
 
 ## F30-1 no reemplaza el resto del checklist
 
-El F30-1 certifica cumplimiento laboral y previsional, pero no certifica por sí solo que el contratista tenga RUT activo con giro de construcción, mutualidad vigente, EPP propio o un supervisor en terreno. Sigue siendo necesario revisar esos puntos por separado — puedes ver el checklist completo de 8 puntos en nuestra [guía de contratación de subcontratistas](/blog/como-contratar-subcontratista-construccion-confiable-santiago/), o descargar el [checklist imprimible gratuito](/recursos/checklist-subcontratistas).
+El F30-1 certifica cumplimiento laboral y previsional, pero no certifica por sí solo que el contratista tenga RUT activo con giro de construcción, mutualidad vigente, EPP propio o un supervisor en terreno. Sigue siendo necesario revisar esos puntos por separado — puedes ver el checklist completo de 8 puntos en nuestra [guía de contratación de subcontratistas](/blog/como-contratar-subcontratista-construccion-confiable-santiago), o descargar el [checklist imprimible gratuito](/recursos/checklist-subcontratistas).
 
 ## Cómo lo maneja Innovatech
 

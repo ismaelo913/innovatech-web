@@ -6,18 +6,20 @@ import ProjectFilter from '../../components/projects/ProjectFilter.tsx';
 import CTASection from '../../components/home/CTASection.astro';
 import Breadcrumbs from '../../components/ui/Breadcrumbs.astro';
 import { getCollection } from 'astro:content';
+import { responsivePhoto } from '../../lib/projectPhotos';
 
 const rawProjects = (await getCollection('projects')).sort(
   (a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime(),
 );
 
+// Portada de cada proyecto (archivos en src/assets/projects)
 const projectImages: Record<string, string> = {
-  'condominio-colina':              '/images/projects/colina-1.jpeg',
-  'condominio-las-condes':          '/images/projects/las-condes-1.jpeg',
-  'techumbre-terminaciones':        '/images/projects/techumbre-1.jpeg',
-  'mina-cmp-copiapo':               '/images/projects/mina-cmp-1.jpeg',
-  'tableros-electricos-armados':    '/images/projects/tableros-1.jpeg',
-  'montaje-electrico-industrial':   '/images/projects/montaje-electrico-1.jpeg',
+  'condominio-colina':              'colina-1.jpeg',
+  'condominio-las-condes':          'las-condes-1.jpeg',
+  'techumbre-terminaciones':        'techumbre-1.jpeg',
+  'mina-cmp-copiapo':               'mina-cmp-1.jpeg',
+  'tableros-electricos-armados':    'tableros-1.jpeg',
+  'montaje-electrico-industrial':   'montaje-electrico-1.jpeg',
 };
 
 const categoryLabels: Record<string, string> = {
@@ -30,13 +32,13 @@ const categoryLabels: Record<string, string> = {
 };
 
 // Serialize projects for the React island
-const projects = rawProjects.map((p) => ({
+const projects = await Promise.all(rawProjects.map(async (p) => ({
   id: p.id,
   title: p.data.title,
   category: p.data.category,
   location: p.data.location || undefined,
-  image: projectImages[p.id] || '/images/projects/colina-1.jpeg',
-}));
+  image: await responsivePhoto(projectImages[p.id] || 'colina-1.jpeg', [400, 800]),
+})));
 ---
 
 <BaseLayout
@@ -54,6 +56,7 @@ const projects = rawProjects.map((p) => ({
   <section class="py-16 sm:py-20 bg-background border-b-brutal">
     <Container>
       <SectionHeading
+        as="h1"
         label="Portafolio"
         title="Proyectos que reflejan nuestro compromiso"
         description="Cada obra es una oportunidad de demostrar que la calidad y la seguridad hacen la diferencia."
@@ -63,6 +66,7 @@ const projects = rawProjects.map((p) => ({
 
   <section class="py-section">
     <Container>
+      <h2 class="sr-only">Listado de proyectos</h2>
       <ProjectFilter client:load projects={projects} categoryLabels={categoryLabels} />
     </Container>
   </section>

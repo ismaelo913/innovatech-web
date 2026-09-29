@@ -1,7 +1,8 @@
 import { useState, useCallback, useEffect } from 'react';
+import type { ResponsivePhoto } from '../../lib/projectPhotos';
 
 interface Props {
-  images: string[];
+  images: ResponsivePhoto[];
   alt: string;
 }
 
@@ -50,9 +51,14 @@ export default function ProjectGallery({ images, alt }: Props) {
           className="aspect-[21/9] border-brutal overflow-hidden bg-neutral-200 cursor-zoom-in group relative"
         >
           <img
-            src={images[0]}
+            src={images[0].src}
+            srcSet={images[0].srcset}
+            sizes="(min-width: 1280px) 1200px, 100vw"
+            width={images[0].width}
+            height={images[0].height}
             alt={alt}
             className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.02]"
+            fetchPriority="high"
           />
           <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300 flex items-center justify-center">
             <span className="opacity-0 group-hover:opacity-100 transition-opacity bg-primary-600 border-brutal px-4 py-2 text-sm font-bold uppercase tracking-wide text-white">
@@ -66,12 +72,16 @@ export default function ProjectGallery({ images, alt }: Props) {
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
             {images.slice(1).map((img, i) => (
               <button
-                key={img}
+                key={img.src}
                 onClick={() => openLightbox(i + 1)}
                 className="aspect-[4/3] border-brutal overflow-hidden bg-neutral-200 cursor-zoom-in group relative"
               >
                 <img
-                  src={img}
+                  src={img.src}
+                  srcSet={img.srcset}
+                  sizes="(min-width: 768px) 25vw, 50vw"
+                  width={img.width}
+                  height={img.height}
                   alt={`${alt} - Foto ${i + 2}`}
                   className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
                   loading="lazy"
@@ -111,7 +121,9 @@ export default function ProjectGallery({ images, alt }: Props) {
             onClick={(e) => e.stopPropagation()}
           >
             <img
-              src={images[currentIndex]}
+              src={images[currentIndex].src}
+              srcSet={images[currentIndex].srcset}
+              sizes="90vw"
               alt={`${alt} - Foto ${currentIndex + 1}`}
               className="max-w-full max-h-[85vh] object-contain border-brutal-invert select-none"
               draggable={false}
@@ -147,7 +159,7 @@ export default function ProjectGallery({ images, alt }: Props) {
             <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2 p-2 border-brutal-invert bg-neutral-950/80">
               {images.map((img, i) => (
                 <button
-                  key={img}
+                  key={img.src}
                   onClick={(e) => { e.stopPropagation(); setCurrentIndex(i); }}
                   className={`w-12 h-8 border overflow-hidden transition-[opacity,transform,border-color] duration-200 ease-[var(--ease-out)] cursor-pointer ${
                     i === currentIndex
@@ -155,7 +167,7 @@ export default function ProjectGallery({ images, alt }: Props) {
                       : 'border-transparent opacity-50 hover:opacity-80'
                   }`}
                 >
-                  <img src={img} alt={`Miniatura ${i + 1}`} className="w-full h-full object-cover" />
+                  <img src={img.src} srcSet={img.srcset} sizes="48px" alt={`Miniatura ${i + 1}`} className="w-full h-full object-cover" />
                 </button>
               ))}
             </div>
