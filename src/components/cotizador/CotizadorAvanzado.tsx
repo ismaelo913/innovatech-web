@@ -2,6 +2,7 @@ import { useState, type FormEvent } from 'react';
 import emailjs from '@emailjs/browser';
 import { EMAILJS_CONFIG, isEmailConfigured } from '../../lib/emailjs';
 import { trackLead } from '../../lib/analytics';
+import WhatsAppFallback from '../contact/WhatsAppFallback';
 import { CATALOG, COMUNAS, INPUT_CLASS, type CatalogItem } from './catalog';
 
 interface CartItem {
@@ -9,7 +10,7 @@ interface CartItem {
   quantity: number;
 }
 
-type Status = 'idle' | 'sending' | 'success';
+type Status = 'idle' | 'sending' | 'success' | 'fallback';
 
 interface Props {
   onSuccess: (items: CartItem[]) => void;
@@ -103,6 +104,7 @@ export default function CotizadorAvanzado({ onSuccess }: Props) {
   const [cart, setCart] = useState<CartItem[]>([]);
   const [activeCategory, setActiveCategory] = useState('Todos');
   const [status, setStatus] = useState<Status>('idle');
+  const [waMessage, setWaMessage] = useState('');
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
   const [email, setEmail] = useState('');
@@ -133,9 +135,12 @@ export default function CotizadorAvanzado({ onSuccess }: Props) {
     return cart.find((c) => c.item.id === id);
   }
 
-  async function handleSubmit(e: FormEvent) {
+  async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     if (cart.length === 0) return;
+
+    const honey = e.currentTarget.querySelector<HTMLInputElement>('[name="_honey"]');
+    if (honey?.value) return;
 
     setStatus('sending');
 
@@ -162,15 +167,18 @@ export default function CotizadorAvanzado({ onSuccess }: Props) {
       }
     }
 
-    const waMsg = `Hola Innovatech, quiero cotizar los siguientes trabajos:\n\n📋 *TRABAJOS SOLICITADOS:*\n${itemsList}\n\n📍 Comuna: ${comuna}\n👤 ${name}\n📱 ${phone}\n📧 ${email}\n✉️ Contactar por: ${contactPref}${notes ? `\n\n💬 Notas: ${notes}` : ''}`;
-    window.open(`https://wa.me/56938905488?text=${encodeURIComponent(waMsg)}`, '_blank');
-    trackLead('cotizador_avanzado');
-    setStatus('success');
-    onSuccess(cart);
+    // Respaldo: el correo no salió; se pide enviar lo mismo por WhatsApp (ver
+    // WhatsAppFallback) y la lista de trabajos queda armada.
+    setWaMessage(`Hola Innovatech, quiero cotizar los siguientes trabajos:\n\n📋 *TRABAJOS SOLICITADOS:*\n${itemsList}\n\n📍 Comuna: ${comuna}\n👤 ${name}\n📱 ${phone}\n📧 ${email}\n✉️ Contactar por: ${contactPref}${notes ? `\n\n💬 Notas: ${notes}` : ''}`);
+    setStatus('fallback');
   }
 
   return (
     <form onSubmit={handleSubmit} className="space-y-8">
+      <div className="hidden" aria-hidden="true">
+        <input type="text" name="_honey" tabIndex={-1} autoComplete="off" />
+      </div>
+
       {/* Category filter */}
       <div>
         <h2 className="text-lg font-bold text-neutral-950 mb-1">1. Selecciona los trabajos</h2>
@@ -374,6 +382,10 @@ export default function CotizadorAvanzado({ onSuccess }: Props) {
           Te contactamos en menos de 24 horas hábiles para afinar los detalles y coordinar la visita en terreno.
         </p>
       </div>
+
+      {status === 'fallback' && (
+        <WhatsAppFallback message={waMessage} leadSource="cotizador_avanzado_whatsapp" />
+      )}
     </form>
   );
 }

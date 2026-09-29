@@ -84,3 +84,18 @@ export function findComunaLanding(serviceSlug: string, comunaSlug: string) {
     (l) => l.serviceSlug === serviceSlug && l.comunaSlug === comunaSlug,
   );
 }
+
+/** Landings de un servicio, para enlazarlas desde su página. */
+export function comunaLandingsFor(serviceSlug: string) {
+  return COMUNA_LANDINGS.filter((l) => l.serviceSlug === serviceSlug);
+}
+
+/** Categoría de src/content/projects que corresponde a cada servicio. */
+export const SERVICE_PROJECT_CATEGORY: Record<string, string> = {
+  'electricidad-montaje-electrico': 'montaje-electrico',
+  'obra-gruesa': 'obra-gruesa',
+  terminaciones: 'terminaciones',
+  ampliaciones: 'ampliacion',
+  'remodelaciones-comerciales': 'remodelacion-comercial',
+  'remodelaciones-residenciales': 'remodelacion-residencial',
+};

@@ -2,6 +2,7 @@ import { useRef, useState, type FormEvent } from 'react';
 import emailjs from '@emailjs/browser';
 import { EMAILJS_CONFIG, isEmailConfigured } from '../../lib/emailjs';
 import { trackLead } from '../../lib/analytics';
+import WhatsAppFallback from './WhatsAppFallback';
 
 const services = [
   'Remodelación Residencial',
@@ -12,11 +13,12 @@ const services = [
   'Otro',
 ];
 
-type FormStatus = 'idle' | 'sending' | 'success' | 'error';
+type FormStatus = 'idle' | 'sending' | 'success' | 'fallback';
 
 export default function ContactForm() {
   const formRef = useRef<HTMLFormElement>(null);
   const [status, setStatus] = useState<FormStatus>('idle');
+  const [waMessage, setWaMessage] = useState('');
 
   const inputClass =
     'w-full px-4 py-2.5 border border-neutral-900 bg-white text-neutral-950 text-sm placeholder:text-neutral-400 focus:ring-2 focus:ring-primary-400 transition-colors outline-none';
@@ -57,13 +59,11 @@ export default function ContactForm() {
       }
     }
 
-    // Fallback: open WhatsApp with pre-filled message
-    const waMsg = `Hola Innovatech, soy ${name}.\n\n📋 Servicio: ${service}\n📧 Email: ${email}\n📱 Teléfono: ${phone}\n\n💬 Mensaje:\n${message}`;
-    const waUrl = `https://wa.me/56938905488?text=${encodeURIComponent(waMsg)}`;
-    window.open(waUrl, '_blank');
-    trackLead('formulario_contacto');
-    setStatus('success');
-    formRef.current.reset();
+    // Respaldo: el correo no salió, así que se pide enviar el mismo mensaje
+    // por WhatsApp (ver WhatsAppFallback). Sin reset: los datos quedan por si
+    // la persona prefiere reintentar.
+    setWaMessage(`Hola Innovatech, soy ${name}.\n\n📋 Servicio: ${service}\n📧 Email: ${email}\n📱 Teléfono: ${phone}\n\n💬 Mensaje:\n${message}`);
+    setStatus('fallback');
   }
 
   if (status === 'success') {
@@ -169,10 +169,8 @@ export default function ContactForm() {
         )}
       </button>
 
-      {status === 'error' && (
-        <p className="text-sm text-red-600 mt-2">
-          Hubo un error al enviar. Intenta de nuevo o escríbenos por WhatsApp.
-        </p>
+      {status === 'fallback' && (
+        <WhatsAppFallback message={waMessage} leadSource="formulario_contacto_whatsapp" />
       )}
     </form>
   );

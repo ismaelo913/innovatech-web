@@ -9,12 +9,13 @@ import { SITE, NAV_LINKS } from '../lib/constants';
 <BaseLayout
   title="Página no encontrada"
   description="La página que buscas no existe o fue movida. Volvamos a terreno conocido."
+  fonts={['display', 'stencil']}
 >
   <section class="relative py-24 sm:py-32 bg-background overflow-hidden">
     <BlueprintMarks variant="light" class="hidden sm:block" />
     <Container narrow class="relative text-center">
-      <span class="inline-flex items-center gap-2 text-xs font-bold tracking-[0.2em] uppercase text-primary-600 mb-6">
-        <span class="w-6 h-px bg-primary-600"></span>
+      <span class="inline-flex items-center gap-2 text-xs font-bold tracking-[0.2em] uppercase text-primary-700 mb-6">
+        <span class="w-6 h-px bg-primary-700" aria-hidden="true"></span>
         Error 404
       </span>
 
@@ -40,7 +41,7 @@ import { SITE, NAV_LINKS } from '../lib/constants';
       </div>
 
       <div class="border-brutal bg-surface-alt p-6 sm:p-8 text-left max-w-2xl mx-auto">
-        <p class="text-xs font-bold tracking-[0.2em] uppercase text-neutral-500 mb-4">
+        <p class="text-xs font-bold tracking-[0.2em] uppercase text-neutral-600 mb-4">
           Páginas más buscadas
         </p>
         <ul class="grid grid-cols-2 sm:grid-cols-3 gap-3">

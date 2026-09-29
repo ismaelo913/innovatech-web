@@ -59,6 +59,11 @@
       return;
     }
 
+    const hide = () => {
+      banner.classList.remove('opacity-100', 'pointer-events-auto', 'translate-y-0');
+      banner.classList.add('opacity-0', 'pointer-events-none', 'translate-y-10');
+    };
+
     // Scroll trigger logic
     const handleScroll = () => {
       if (window.scrollY > 350) {
@@ -72,9 +77,17 @@
 
     // Dismiss logic
     closeBtn.addEventListener('click', () => {
-      banner.classList.remove('opacity-100', 'pointer-events-auto', 'translate-y-0');
-      banner.classList.add('opacity-0', 'pointer-events-none', 'translate-y-10');
+      hide();
       localStorage.setItem('hide-b2b-banner', 'true');
+    });
+
+    // Al empezar a llenar un formulario el banner se retira (sin recordarlo
+    // para otras páginas): en móvil ocupa casi todo el ancho y tapaba campos,
+    // el botón de envío y el aviso de respaldo por WhatsApp.
+    document.addEventListener('focusin', (event) => {
+      if (!(event.target as Element | null)?.closest?.('form')) return;
+      window.removeEventListener('scroll', handleScroll);
+      hide();
     });
   });
 </script>

@@ -3,7 +3,6 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import Container from '../components/ui/Container.astro';
 import SectionHeading from '../components/ui/SectionHeading.astro';
 import Card from '../components/ui/Card.astro';
-import Button from '../components/ui/Button.astro';
 import CTASection from '../components/home/CTASection.astro';
 
 const values = [
@@ -40,6 +39,7 @@ const differentiators = [
 <BaseLayout
   title="Nosotros"
   description="Conoce Innovatech: calidad que se ve, seguridad que se siente. Mano de obra cualificada, equipada y supervisada en Santiago de Chile."
+  fonts={['display', 'mono']}
 >
   {/* Hero */}
   <section class="py-16 sm:py-24 bg-background border-b-brutal">

@@ -12,13 +12,18 @@ export function trackLead(source: string): void {
   gtag?.('event', 'generate_lead', { lead_source: source });
 }
 
-/** Clics a WhatsApp, teléfono y email en cualquier enlace del sitio. */
+/**
+ * Clics a WhatsApp, teléfono y email en cualquier enlace del sitio. Un enlace
+ * puede precisar su origen con `data-lead-source` (ej. el respaldo por
+ * WhatsApp de un formulario, para distinguirlo del botón flotante).
+ */
 export function trackContactLinks(): void {
   document.addEventListener('click', (event) => {
     const link = (event.target as Element | null)?.closest?.('a[href]');
     const href = link?.getAttribute('href') ?? '';
-    if (href.startsWith('https://wa.me/')) trackLead('whatsapp');
-    else if (href.startsWith('tel:')) trackLead('telefono');
-    else if (href.startsWith('mailto:')) trackLead('email');
+    const source = link?.getAttribute('data-lead-source');
+    if (href.startsWith('https://wa.me/')) trackLead(source ?? 'whatsapp');
+    else if (href.startsWith('tel:')) trackLead(source ?? 'telefono');
+    else if (href.startsWith('mailto:')) trackLead(source ?? 'email');
   });
 }
