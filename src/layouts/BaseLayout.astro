@@ -4,6 +4,7 @@ import Footer from '../components/layout/Footer.astro';
 import WhatsAppButton from '../components/layout/WhatsAppButton.astro';
 import B2BBanner from '../components/layout/B2BBanner.astro';
 import Analytics from '@vercel/analytics/astro';
+import { Font } from 'astro:assets';
 import '../styles/global.css';
 import { SITE } from '../lib/constants';
 
@@ -12,6 +13,11 @@ interface Props {
   description?: string;
   ogImage?: string;
   schema?: Record<string, unknown>;
+  /**
+   * Fuentes que usa la página además de Inter (clases font-display,
+   * font-stencil, font-mono), para precargarlas. Ver <Font> más abajo.
+   */
+  fonts?: Array<'display' | 'stencil' | 'mono'>;
 }
 
 const {
@@ -19,6 +25,7 @@ const {
   description = SITE.description,
   ogImage = '/images/og-default.jpg',
   schema,
+  fonts = [],
 } = Astro.props;
 
 const pageTitle = title === SITE.name ? title : `${title} | ${SITE.name}`;
@@ -51,31 +58,19 @@ const canonicalUrl = new URL(Astro.url.pathname, SITE.url);
     <meta name="twitter:title" content={pageTitle} />
     <meta name="twitter:description" content={description} />
 
-    <!-- Fonts (optimized loading) -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      rel="preload"
-      as="style"
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
-      onload="this.rel='stylesheet'"
-    />
-    <noscript>
-      <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-    </noscript>
-    <link
-      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;700&display=swap"
-      rel="stylesheet"
-      media="print"
-      onload="this.media='all'"
-    />
+    <!-- Fuentes auto-hospedadas (config `fonts` en astro.config.mjs): el
+         @font-face va incrustado y cada familia es un solo archivo variable.
+         Se precargan solo las que usa la página (Inter siempre, el resto
+         según el prop `fonts`): igual se descargarían al primer layout, pero
+         precargadas llegan antes del primer pintado —sin salto al cambiar de
+         fuente— y con prioridad alta en vez de "muy alta", que Lighthouse
+         trata como bloqueante. Los respaldos locales vienen ajustados a las
+         métricas de cada fuente. -->
+    <Font cssVariable="--font-inter" preload />
     <!-- Display industrial: solo para H1/H2 — evoca vigas de acero / marcaje de fábrica -->
-    <link
-      href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800;900&family=Big+Shoulders+Stencil+Display:wght@700;900&display=swap"
-      rel="stylesheet"
-      media="print"
-      onload="this.media='all'"
-    />
+    <Font cssVariable="--font-big-shoulders" preload={fonts.includes('display')} />
+    <Font cssVariable="--font-big-shoulders-stencil" preload={fonts.includes('stencil')} />
+    <Font cssVariable="--font-jetbrains-mono" preload={fonts.includes('mono')} />
 
     <!-- Animation libs auto-hospedadas en /public/vendor (2026-08-15): antes
          se cargaban desde cdnjs/jsdelivr. Se mantienen como <script> clásicos
@@ -105,12 +100,18 @@ const canonicalUrl = new URL(Astro.url.pathname, SITE.url);
     <!-- Theme Color -->
     <meta name="theme-color" content="#e8730c" />
 
-    <!-- Microsoft Clarity -->
+    <!-- Microsoft Clarity: se carga cuando la página ya terminó de cargar, para
+         que no compita con el contenido. La cola `clarity(...)` existe desde
+         el inicio, así que las llamadas previas no se pierden. -->
     <script type="text/javascript">
       (function(c,l,a,r,i,t,y){
         c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+        function load(){
+          t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+          y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+        }
+        function idle(){ c.requestIdleCallback ? c.requestIdleCallback(load, { timeout: 3000 }) : setTimeout(load, 1); }
+        if (l.readyState === 'complete') idle(); else c.addEventListener('load', idle);
       })(window, document, "clarity", "script", "wkz71eh3u9");
     </script>
 

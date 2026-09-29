@@ -56,17 +56,19 @@
   --color-dark-surface: var(--color-neutral-900);
   --color-dark-text: var(--color-background);
 
-  /* — Typography Scale (fluid) — */
-  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
-  --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+  /* — Typography Scale (fluid) —
+     Las familias vienen de las variables que define <Font> (BaseLayout.astro),
+     con sus respaldos incluidos. */
+  --font-sans: var(--font-inter);
+  --font-mono: var(--font-jetbrains-mono);
 
   /* — Display industrial: SOLO para H1/H2. Big Shoulders está diseñada
      evocando vigas de acero y arquitectura industrial — refuerza "obra",
      no decora porque sí. Stencil (marcaje de fábrica/contenedor) para
      números y etiquetas de alto impacto: stats, badges, numeración de
      proceso. Cuerpo de texto se mantiene 100% Inter. — */
-  --font-display: 'Big Shoulders Display', 'Inter', system-ui, sans-serif;
-  --font-stencil: 'Big Shoulders Stencil Display', 'JetBrains Mono', monospace;
+  --font-display: var(--font-big-shoulders);
+  --font-stencil: var(--font-big-shoulders-stencil);
 
   --text-xs: clamp(0.75rem, 0.7rem + 0.15vw, 0.8125rem);
   --text-sm: clamp(0.8125rem, 0.78rem + 0.2vw, 0.875rem);
@@ -111,13 +113,6 @@
 /* ============================================
    Base Styles
    ============================================ */
-
-/* Ensure fonts swap immediately (anti-FOIT para mejor FCP mobile) */
-@font-face {
-  font-family: 'Inter';
-  font-display: swap;
-  src: local('Inter');
-}
 
 html {
   scroll-behavior: smooth;
