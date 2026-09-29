@@ -2,6 +2,7 @@ import { useRef, useState, type FormEvent } from 'react';
 import emailjs from '@emailjs/browser';
 import { EMAILJS_CONFIG, isEmailConfigured } from '../../lib/emailjs';
 import { trackLead } from '../../lib/analytics';
+import WhatsAppFallback from '../contact/WhatsAppFallback';
 import { COMUNAS, INPUT_CLASS } from './catalog';
 
 const SERVICES = [
@@ -12,7 +13,7 @@ const SERVICES = [
   { title: 'Ampliaciones', short: 'Segundos pisos, extensiones y nuevas áreas.' },
 ];
 
-type Status = 'idle' | 'sending' | 'error';
+type Status = 'idle' | 'sending' | 'fallback';
 
 interface Props {
   onSuccess: () => void;
@@ -21,6 +22,7 @@ interface Props {
 export default function CotizadorSimple({ onSuccess }: Props) {
   const formRef = useRef<HTMLFormElement>(null);
   const [status, setStatus] = useState<Status>('idle');
+  const [waMessage, setWaMessage] = useState('');
   const [selectedService, setSelectedService] = useState('');
 
   async function handleSubmit(e: FormEvent) {
@@ -62,12 +64,10 @@ export default function CotizadorSimple({ onSuccess }: Props) {
       }
     }
 
-    const waMsg = `Hola Innovatech, solicito una visita técnica.\n\n👤 ${name}\n📱 ${phone}\n📧 ${email}\n\n🔧 Servicio: ${service}\n📍 Comuna: ${comuna}\n⏰ Urgencia: ${urgency || 'Flexible'}\n✉️ Contactar por: ${contactPref}\n\n📝 Descripción:\n${description || 'Sin descripción'}`;
-    window.open(`https://wa.me/56938905488?text=${encodeURIComponent(waMsg)}`, '_blank');
-    trackLead('cotizador_simple');
-    formRef.current.reset();
-    setSelectedService('');
-    onSuccess();
+    // Respaldo: el correo no salió; se pide enviar lo mismo por WhatsApp (ver
+    // WhatsAppFallback) y el formulario conserva los datos.
+    setWaMessage(`Hola Innovatech, solicito una visita técnica.\n\n👤 ${name}\n📱 ${phone}\n📧 ${email}\n\n🔧 Servicio: ${service}\n📍 Comuna: ${comuna}\n⏰ Urgencia: ${urgency || 'Flexible'}\n✉️ Contactar por: ${contactPref}\n\n📝 Descripción:\n${description || 'Sin descripción'}`);
+    setStatus('fallback');
   }
 
   return (
@@ -194,8 +194,8 @@ export default function CotizadorSimple({ onSuccess }: Props) {
         </p>
       </div>
 
-      {status === 'error' && (
-        <p className="text-sm text-red-600">Hubo un error. Intenta de nuevo o escríbenos por WhatsApp.</p>
+      {status === 'fallback' && (
+        <WhatsAppFallback message={waMessage} leadSource="cotizador_simple_whatsapp" />
       )}
     </form>
   );
