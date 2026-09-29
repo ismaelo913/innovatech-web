@@ -211,7 +211,7 @@ const canonicalUrl = new URL(Astro.url.pathname, SITE.url);
     <!-- Scroll Reveal: vanilla JS, all devices -->
     <script>
       document.addEventListener('DOMContentLoaded', () => {
-        const reveal = (el) => el.classList.add('is-visible');
+        const reveal = (el: Element) => el.classList.add('is-visible');
 
         // Fix (2026-08-15): elementos .reveal* que ya están dentro del
         // viewport en el primer pintado (ej. el collage de fotos del hero)
@@ -223,7 +223,7 @@ const canonicalUrl = new URL(Astro.url.pathname, SITE.url);
         // ya es visible al momento de observarlo, lo revelamos de inmediato
         // en vez de esperar al observer — el observer sigue a cargo de todo
         // lo que está debajo del pliegue.
-        const isAlreadyVisible = (el) => {
+        const isAlreadyVisible = (el: Element) => {
           const rect = el.getBoundingClientRect();
           const vh = window.innerHeight || document.documentElement.clientHeight;
           const vw = window.innerWidth || document.documentElement.clientWidth;

@@ -24,7 +24,7 @@ interface Props {
   slug: string;
 }
 
-const { title, description, icon, features, slug } = Astro.props;
+const { title, description, features, slug } = Astro.props;
 
 const otherServices = SERVICES.filter((s) => s.slug !== slug);
 // Sin este enlace, las páginas por comuna solo eran visibles vía sitemap.
