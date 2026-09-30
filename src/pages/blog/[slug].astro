@@ -49,6 +49,7 @@ const articleSchema = {
   description={post.data.seoDescription || post.data.description}
   ogImage={postImage}
   schema={articleSchema}
+  article={{ publishedTime: post.data.date }}
 >
   <article>
     <section class="py-16 sm:py-20 bg-background border-b-brutal">
