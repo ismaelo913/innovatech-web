@@ -1,7 +1,6 @@
-const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+import { loadVendor, wantsDesktopMotion } from './load-vendor.js';
 
 function setupLenis() {
-  if (!window.Lenis) return;
   const lenis = new window.Lenis({
     duration: 1.2,
     easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
@@ -12,20 +11,19 @@ function setupLenis() {
     touchMultiplier: 2,
     infinite: false,
   });
-  // Expuesto globalmente para que otros componentes (GSAP ScrollTrigger)
-  // sincronicen su posición de scroll con Lenis.
   window.__lenis = lenis;
   function raf(time) {
     lenis.raf(time);
     requestAnimationFrame(raf);
   }
   requestAnimationFrame(raf);
+  return lenis;
 }
 
-if (!prefersReducedMotion && window.matchMedia('(hover: hover) and (min-width: 768px)').matches) {
-  if (window.Lenis) {
-    setupLenis();
-  } else {
-    document.addEventListener('DOMContentLoaded', setupLenis);
-  }
-}
+// Scroll suave solo en escritorio con mouse y sin "reducir movimiento"; en el
+// resto Lenis ni se descarga. window.__lenisReady resuelve con la instancia
+// (o null) para que GSAP ScrollTrigger se sincronice con Lenis cuando exista
+// (ver home-animations.js).
+window.__lenisReady = wantsDesktopMotion()
+  ? loadVendor('lenis.min.js').then(setupLenis).catch(() => null)
+  : Promise.resolve(null);

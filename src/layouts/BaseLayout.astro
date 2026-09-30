@@ -18,6 +18,8 @@ interface Props {
    * font-stencil, font-mono), para precargarlas. Ver <Font> más abajo.
    */
   fonts?: Array<'display' | 'stencil' | 'mono'>;
+  /** Carga GSAP + ScrollTrigger + CustomEase (solo la home los usa). */
+  gsap?: boolean;
 }
 
 const {
@@ -26,6 +28,7 @@ const {
   ogImage = '/images/og-default.jpg',
   schema,
   fonts = [],
+  gsap = false,
 } = Astro.props;
 
 const pageTitle = title === SITE.name ? title : `${title} | ${SITE.name}`;
@@ -81,14 +84,18 @@ const canonicalUrl = new URL(Astro.url.pathname, SITE.url);
          falla, riesgo de bloqueadores de contenido) sin tocar el pipeline de
          build: son los mismos binarios .min.js (versión fijada, ver
          public/vendor/README.txt), solo que servidos desde el propio dominio.
-         Disponibles como globals: window.gsap, window.ScrollTrigger,
-         window.Lenis, window.VanillaTilt. -->
-    <script defer src="/vendor/gsap.min.js"></script>
-    <script defer src="/vendor/ScrollTrigger.min.js"></script>
-    <!-- CustomEase: registra las curvas propias "de precisión industrial" (ver src/scripts/eases.js) -->
-    <script defer src="/vendor/CustomEase.min.js"></script>
-    <script defer src="/vendor/lenis.min.js"></script>
-    <script defer src="/vendor/vanilla-tilt.min.js"></script>
+         Solo se cargan donde se usan: GSAP en las páginas con el prop `gsap`
+         (la home); Lenis y VanillaTilt bajo demanda y solo en escritorio (ver
+         src/scripts/load-vendor.js). Antes las cinco se descargaban en todas
+         las páginas, también en móvil, donde Lenis y el tilt no corren. -->
+    {gsap && (
+      <>
+        <script defer src="/vendor/gsap.min.js"></script>
+        <script defer src="/vendor/ScrollTrigger.min.js"></script>
+        <!-- CustomEase: registra las curvas propias "de precisión industrial" (ver src/scripts/eases.js) -->
+        <script defer src="/vendor/CustomEase.min.js"></script>
+      </>
+    )}
 
     <!-- Favicon: Google Search pide un ícono cuadrado de 48×48 px o múltiplo
          de 48 (antes solo había un .ico de 16×16). Recorte ajustado al logo. -->

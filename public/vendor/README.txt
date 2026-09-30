@@ -18,10 +18,19 @@ Origen de cada archivo (copiados desde node_modules/<paquete>/dist/ tras
   lenis.min.js           lenis@1.1.13
   vanilla-tilt.min.js    vanilla-tilt@1.8.1
 
+Dónde se cargan (2026-09-30; antes, las cinco en todas las páginas):
+
+  gsap, ScrollTrigger, CustomEase  <script defer> en BaseLayout.astro, solo
+                                   en páginas con el prop `gsap` (la home).
+  lenis, vanilla-tilt              bajo demanda desde src/scripts/load-vendor.js,
+                                   solo en escritorio con mouse y sin "reducir
+                                   movimiento" (lenis-init.js y los scripts de
+                                   animación de la home y /servicios).
+
 Splitting.js (splitting.min.js + splitting.css) se eliminó el 2026-09-28:
 solo dividía el titular del hero, que ahora se divide al compilar
 (src/components/home/Hero.astro) y se anima con CSS para no retrasar el LCP.
 
 Para actualizar una versión: `npm install <paquete>@<nueva-version> --no-save`
-en un scratch dir, copiar el nuevo dist/*.min.js aquí, actualizar este
-README y las referencias de versión en BaseLayout.astro.
+en un scratch dir, copiar el nuevo dist/*.min.js aquí y anotar la versión en
+este README (las rutas de los scripts no la llevan).

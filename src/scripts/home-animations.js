@@ -2,11 +2,18 @@
 // SVG), Services (tilt 3D), Projects (crossfade). La entrada del titular del
 // hero es CSS puro (.hero-word en global.css) para no retrasar el LCP.
 // GSAP/VanillaTilt se sirven como estáticos auto-hospedados desde
-// /public/vendor (ver BaseLayout.astro y public/vendor/README.txt) y quedan
-// disponibles como globals (window.gsap, window.ScrollTrigger,
-// window.VanillaTilt) — así esbuild nunca tiene que empaquetarlas para el
-// entrypoint del servidor.
+// /public/vendor (ver public/vendor/README.txt) y quedan disponibles como
+// globals — así esbuild nunca tiene que empaquetarlas para el entrypoint del
+// servidor. GSAP (window.gsap, window.ScrollTrigger) lo carga BaseLayout solo
+// en la home (prop `gsap`); VanillaTilt se pide bajo demanda en escritorio.
 import { INDUSTRIAL_IN_OUT, registerIndustrialEases } from './eases.js';
+import { loadVendor, wantsDesktopMotion } from './load-vendor.js';
+
+// Sincroniza ScrollTrigger con el scroll suave de Lenis cuando está activo
+// (solo escritorio; se carga aparte, ver lenis-init.js).
+function syncWithLenis(ScrollTrigger) {
+  window.__lenisReady?.then((lenis) => lenis?.on('scroll', ScrollTrigger.update));
+}
 
 const easesReady = registerIndustrialEases();
 const easeInOut = easesReady ? INDUSTRIAL_IN_OUT : 'power2.inOut';
@@ -42,8 +49,7 @@ const easeInOut = easesReady ? INDUSTRIAL_IN_OUT : 'power2.inOut';
       });
     }
 
-    const lenis = window.__lenis;
-    if (lenis) lenis.on('scroll', ScrollTrigger.update);
+    syncWithLenis(ScrollTrigger);
   }
   initHeroParallax();
 
@@ -135,10 +141,7 @@ const easeInOut = easesReady ? INDUSTRIAL_IN_OUT : 'power2.inOut';
           });
         });
 
-        const lenis = window.__lenis;
-        if (lenis) {
-          lenis.on('scroll', ScrollTrigger.update);
-        }
+        syncWithLenis(ScrollTrigger);
       }
     }
   }
@@ -147,18 +150,19 @@ const easeInOut = easesReady ? INDUSTRIAL_IN_OUT : 'power2.inOut';
 {
   // --- Services: tilt 3D en las tarjetas — sutil y mate, sin glare
   // (el brillo especular lee como plástico pulido, no concreto/acero) ---
-  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if (!reduceMotion && window.matchMedia('(hover: hover) and (min-width: 768px)').matches && window.VanillaTilt) {
-    const cards = document.querySelectorAll('.service-tilt-card');
-    if (cards.length > 0) {
-      window.VanillaTilt.init(cards, {
-        max: 4,
-        speed: 250,
-        glare: false,
-        scale: 1.01,
-        perspective: 1000,
-      });
-    }
+  const cards = document.querySelectorAll('.service-tilt-card');
+  if (cards.length > 0 && wantsDesktopMotion()) {
+    loadVendor('vanilla-tilt.min.js')
+      .then(() => {
+        window.VanillaTilt.init(cards, {
+          max: 4,
+          speed: 250,
+          glare: false,
+          scale: 1.01,
+          perspective: 1000,
+        });
+      })
+      .catch(() => {});
   }
 }
 
@@ -214,10 +218,7 @@ const easeInOut = easesReady ? INDUSTRIAL_IN_OUT : 'power2.inOut';
         }
       });
 
-      const lenis = window.__lenis;
-      if (lenis) {
-        lenis.on('scroll', ScrollTrigger.update);
-      }
+      syncWithLenis(ScrollTrigger);
     }
   }
 }
