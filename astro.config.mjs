@@ -54,10 +54,11 @@ export default defineConfig({
   },
   fonts: [
     localFont('Inter', '--font-inter', 'inter-latin.woff2', [400, 500, 600, 700, 800], ['sans-serif']),
-    // Respaldo propio (ver "Big Shoulders Fallback" en global.css): el que
-    // calcula Astro está pensado para minúsculas y los títulos van en
-    // mayúsculas, así que cambiaban de líneas al cargar la fuente.
-    localFont('Big Shoulders Display', '--font-big-shoulders', 'big-shoulders-display-latin.woff2', [700, 800, 900], ['Big Shoulders Fallback', 'sans-serif'], false),
+    // Solo el peso 900 (todos los títulos usan font-black; ver el README de
+    // src/assets/fonts). Respaldo propio ("Big Shoulders Fallback" en
+    // global.css): el que calcula Astro está pensado para minúsculas y los
+    // títulos van en mayúsculas, así que cambiaban de líneas al cargar.
+    localFont('Big Shoulders Display', '--font-big-shoulders', 'big-shoulders-display-900-latin.woff2', [900], ['Big Shoulders Fallback', 'sans-serif'], false),
     localFont('Big Shoulders Stencil Display', '--font-big-shoulders-stencil', 'big-shoulders-stencil-display-latin.woff2', [700, 900], ['monospace']),
     localFont('JetBrains Mono', '--font-jetbrains-mono', 'jetbrains-mono-latin.woff2', [500, 700], ['monospace']),
   ],
