@@ -165,12 +165,10 @@ body {
   }
 }
 
-/* Smooth image rendering */
-img {
-  max-width: 100%;
-  height: auto;
-  display: block;
-}
+/* Las <img> ya traen max-width: 100%, height: auto y display: block desde el
+   preflight de Tailwind (@layer base). No redefinirlas aquí: una regla fuera
+   de @layer le gana a h-full, object-cover, hidden, etc. y las fotos dejan de
+   llenar su recuadro. */
 
 .reveal {
   opacity: 0;

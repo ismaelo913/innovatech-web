@@ -20,16 +20,32 @@ export function projectPhoto(file: string): ImageMetadata {
   return photo;
 }
 
+// Parte de la foto que queda a la vista cuando un marco la recorta
+// (object-position). Casi todas son fotos verticales de celular que se
+// muestran en marcos horizontales, así que por defecto se ve el centro;
+// aquí van las que necesitan otro encuadre.
+const focus: Record<string, string> = {
+  'colina-1.jpeg': '50% 22%', // la casa y la compactadora; el centro es solo suelo
+};
+
 /** Foto ya optimizada para islas React, que no pueden usar <Image>. */
 export interface ResponsivePhoto {
   src: string;
   srcset: string;
   width: number;
   height: number;
+  /** object-position para los marcos que recortan la foto (ver `focus`). */
+  position?: string;
 }
 
 export async function responsivePhoto(file: string, widths: number[]): Promise<ResponsivePhoto> {
   const photo = projectPhoto(file);
   const image = await getImage({ src: photo, widths });
-  return { src: image.src, srcset: image.srcSet.attribute, width: photo.width, height: photo.height };
+  return {
+    src: image.src,
+    srcset: image.srcSet.attribute,
+    width: photo.width,
+    height: photo.height,
+    position: focus[file.split('/').pop()!],
+  };
 }
