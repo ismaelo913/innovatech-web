@@ -33,7 +33,7 @@ const frames = [
   <div class="sticky top-0 h-screen flex items-center overflow-hidden">
     <Container>
       <div class="grid lg:grid-cols-[1.1fr_0.9fr] gap-10 lg:gap-16 items-center">
-        <div class="relative aspect-[4/3] sm:aspect-[16/10] overflow-hidden border-brutal-invert">
+        <div class="project-frames relative aspect-[4/3] sm:aspect-[16/10] overflow-hidden border-brutal-invert">
           {frames.map((frame, i) => (
             <a
               href={`/proyectos/${frame.slug}`}
@@ -80,7 +80,7 @@ const frames = [
             </svg>
           </Button>
 
-          <div class="flex gap-2 mt-10">
+          <div class="project-dots flex gap-2 mt-10">
             {frames.map((_, i) => (
               <span class="project-dot h-1 bg-white/15 transition-all duration-300" data-dot={i} style={`width: ${i === 0 ? '2rem' : '0.75rem'}`}></span>
             ))}
@@ -104,10 +104,35 @@ const frames = [
       height: auto;
       padding: 4rem 0;
     }
+    /* Sin el fundido que sigue al scroll, las tres fotos quedan a la vista en
+       una grilla: la primera grande y las otras dos debajo (una por fila en
+       móvil). Cada marco necesita su propia proporción porque todo lo que
+       tiene adentro es absolute. */
+    .project-frames {
+      display: grid;
+      gap: 0.75rem;
+      aspect-ratio: auto;
+      overflow: visible;
+      border: 0;
+    }
     .project-frame {
       position: relative !important;
       opacity: 1 !important;
-      margin-bottom: 1rem;
+      aspect-ratio: 4 / 3;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+    }
+    .project-dots {
+      display: none;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) and (min-width: 640px) {
+    .project-frames {
+      grid-template-columns: 1fr 1fr;
+    }
+    .project-frame:first-child {
+      grid-column: 1 / -1;
+      aspect-ratio: 16 / 10;
     }
   }
 </style>
