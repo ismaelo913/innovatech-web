@@ -3,7 +3,9 @@ import Container from '../ui/Container.astro';
 import Button from '../ui/Button.astro';
 ---
 
-<section class="py-section bg-neutral-950 texture-grain text-white border-y-brutal-invert">
+{/* overflow-x-clip: mientras entran, .reveal-left/.reveal-right están corridos
+    30 px y en tablet hacían que la página se pudiera deslizar hacia el costado. */}
+<section class="py-section bg-neutral-950 texture-grain text-white border-y-brutal-invert overflow-x-clip">
   <Container>
     <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
 
