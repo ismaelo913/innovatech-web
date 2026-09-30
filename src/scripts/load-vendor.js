@@ -20,7 +20,8 @@ export function loadVendor(file) {
 /**
  * Escritorio con mouse y sin "reducir movimiento": el único caso en que se
  * usan el scroll suave (Lenis) y el tilt 3D (VanillaTilt). En táctil ninguno
- * de los dos aporta, así que ahí ni se descargan.
+ * de los dos aporta, así que ahí ni se descargan. lenis-init.js repite esta
+ * condición para no importar este archivo (ver el comentario ahí).
  */
 export function wantsDesktopMotion() {
   return (

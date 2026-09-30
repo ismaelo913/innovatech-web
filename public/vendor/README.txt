@@ -22,10 +22,11 @@ Dónde se cargan (2026-09-30; antes, las cinco en todas las páginas):
 
   gsap, ScrollTrigger, CustomEase  <script defer> en BaseLayout.astro, solo
                                    en páginas con el prop `gsap` (la home).
-  lenis, vanilla-tilt              bajo demanda desde src/scripts/load-vendor.js,
-                                   solo en escritorio con mouse y sin "reducir
-                                   movimiento" (lenis-init.js y los scripts de
-                                   animación de la home y /servicios).
+  lenis, vanilla-tilt              bajo demanda, solo en escritorio con mouse y
+                                   sin "reducir movimiento": Lenis desde
+                                   src/scripts/lenis-init.js (todas las páginas)
+                                   y VanillaTilt desde services-animations.js
+                                   con load-vendor.js (/servicios).
 
 Splitting.js (splitting.min.js + splitting.css) se eliminó el 2026-09-28:
 solo dividía el titular del hero, que ahora se divide al compilar

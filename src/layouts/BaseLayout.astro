@@ -90,8 +90,9 @@ const canonicalUrl = new URL(Astro.url.pathname, SITE.url);
          public/vendor/README.txt), solo que servidos desde el propio dominio.
          Solo se cargan donde se usan: GSAP en las páginas con el prop `gsap`
          (la home); Lenis y VanillaTilt bajo demanda y solo en escritorio (ver
-         src/scripts/load-vendor.js). Antes las cinco se descargaban en todas
-         las páginas, también en móvil, donde Lenis y el tilt no corren. -->
+         src/scripts/lenis-init.js y load-vendor.js). Antes las cinco se
+         descargaban en todas las páginas, también en móvil, donde Lenis y el
+         tilt no corren. -->
     {gsap && (
       <>
         <script defer src="/vendor/gsap.min.js"></script>
