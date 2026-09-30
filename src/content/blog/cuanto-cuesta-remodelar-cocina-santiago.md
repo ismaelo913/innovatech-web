@@ -1,6 +1,8 @@
 ---
 title: "¿Cuánto cuesta remodelar una cocina en Santiago? Guía de precios 2026"
 description: "Precios reales de remodelación de cocinas en Santiago 2026: desde CLP $1.500.000 hasta $25.000.000. Desglose por partidas, materiales y mano de obra con valores actualizados del mercado RM."
+seoTitle: "¿Cuánto cuesta remodelar una cocina en Santiago?"
+seoDescription: "Precios de remodelación de cocinas en Santiago 2026: desde $1.500.000 hasta $25.000.000, con desglose por partidas, materiales y mano de obra."
 author: "Equipo Innovatech"
 date: 2026-04-19
 tags: ["remodelación", "cocina", "precios", "Santiago", "presupuesto"]

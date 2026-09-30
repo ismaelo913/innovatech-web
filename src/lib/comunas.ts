@@ -13,6 +13,7 @@ export interface ComunaLanding {
   comuna: string;
   comunaSlug: string;
   context: string; // 1-2 frases: por qué este servicio calza con esta comuna
+  description: string; // meta description, ≤ ~155 caracteres (Google corta el resto)
   projectTypes: string[]; // tipos de proyecto típicos en la zona para este servicio
 }
 
@@ -21,6 +22,8 @@ export const COMUNA_LANDINGS: ComunaLanding[] = [
     serviceSlug: 'electricidad-montaje-electrico',
     comuna: 'Pudahuel',
     comunaSlug: 'pudahuel',
+    description:
+      'Salas eléctricas y tableros para bodegas, centros de distribución y naves industriales en Pudahuel. Presupuesto por escrito y supervisor en terreno.',
     context:
       'Pudahuel concentra bodegas logísticas, centros de distribución y naves industriales por su cercanía al Aeropuerto Arturo Merino Benítez y a la Ruta 68. Ese tipo de instalación exige salas eléctricas y tableros de distribución dimensionados para operación continua.',
     projectTypes: [
@@ -33,6 +36,8 @@ export const COMUNA_LANDINGS: ComunaLanding[] = [
     serviceSlug: 'electricidad-montaje-electrico',
     comuna: 'Cerrillos',
     comunaSlug: 'cerrillos',
+    description:
+      'Montaje eléctrico en Cerrillos: tableros, canalización y baja tensión para bodegas, talleres y proyectos inmobiliarios. Presupuesto por escrito.',
     context:
       'Cerrillos es uno de los polos industriales históricos de Santiago poniente, con bodegas, talleres y plantas de proceso que conviven con proyectos inmobiliarios nuevos en el ex-aeródromo. La demanda eléctrica va desde habilitaciones industriales hasta instalaciones para edificios en construcción.',
     projectTypes: [
@@ -45,6 +50,8 @@ export const COMUNA_LANDINGS: ComunaLanding[] = [
     serviceSlug: 'obra-gruesa',
     comuna: 'Maipú',
     comunaSlug: 'maipu',
+    description:
+      'Obra gruesa en Maipú: fundaciones, estructura, albañilería y hormigón armado para proyectos residenciales y comerciales, con cuadrillas propias.',
     context:
       'Maipú ha sido una de las comunas con más crecimiento inmobiliario de la Región Metropolitana en la última década, con loteos nuevos y proyectos de mediana escala que requieren obra gruesa ejecutada con cuadrillas propias y plazos comprometidos.',
     projectTypes: [
@@ -57,6 +64,8 @@ export const COMUNA_LANDINGS: ComunaLanding[] = [
     serviceSlug: 'remodelaciones-comerciales',
     comuna: 'Providencia',
     comunaSlug: 'providencia',
+    description:
+      'Remodelación de oficinas y locales comerciales en Providencia, por fases y coordinada con la administración del edificio para no detener tu negocio.',
     context:
       'Providencia concentra un alto volumen de oficinas corporativas y locales comerciales en edificios ya operativos, donde remodelar sin detener la actividad del negocio — o coordinando con la administración del edificio — es la principal restricción del proyecto.',
     projectTypes: [
@@ -69,6 +78,8 @@ export const COMUNA_LANDINGS: ComunaLanding[] = [
     serviceSlug: 'remodelaciones-residenciales',
     comuna: 'Las Condes',
     comunaSlug: 'las-condes',
+    description:
+      'Remodelación de cocinas, baños y departamentos en Las Condes, con terminaciones de calidad y coordinación con la administración del edificio.',
     context:
       'Las Condes tiene el parque de viviendas de mayor estándar de la Región Metropolitana, lo que eleva la exigencia en terminaciones, materiales y coordinación con administraciones de edificios y comunidades.',
     projectTypes: [

@@ -1,6 +1,8 @@
 ---
 title: "Cuadrillas de construcción en Santiago: tipos, precios y cómo subcontratar bien"
-description: "Guía completa sobre cuadrillas de construcción en Santiago 2026: albanilería, hormigón, terminaciones y estructura metálica. Precios por jornada y claves para subcontratar sin riesgos."
+description: "Guía completa sobre cuadrillas de construcción en Santiago 2026: albañilería, hormigón, terminaciones y estructura metálica. Precios por jornada y claves para subcontratar sin riesgos."
+seoTitle: "Cuadrillas de construcción en Santiago: precios"
+seoDescription: "Cuadrillas de construcción en Santiago 2026: albañilería, hormigón, terminaciones y estructura metálica. Precios por jornada y cómo subcontratar."
 author: "Equipo Innovatech"
 date: 2026-04-19
 tags: ["cuadrillas", "obra gruesa", "subcontrato", "Santiago", "precios", "empresas"]
@@ -14,7 +16,7 @@ Esta guía está dirigida principalmente a mandantes — empresas constructoras,
 
 ## Los 5 tipos de cuadrilla más demandados en Santiago RM
 
-### 1. Cuadrilla de albanilería
+### 1. Cuadrilla de albañilería
 
 Composición habitual: **maestro albañil + 1 ayudante**
 
@@ -63,7 +65,7 @@ Composición habitual: **soldador certificado + montador estructural**
 
 Trabaja en: estructura de techado (cerchas, correas, cumbreras), galpones industriales, escaleras metálicas, pasarelas y refuerzos estructurales.
 
-Requiere soldador con certificación vigente según la norma NCh. No es intercambiable con albanilería general.
+Requiere soldador con certificación vigente según la norma NCh. No es intercambiable con albañilería general.
 
 **Precio referencial Santiago 2026:** CLP $130.000 – $190.000 por jornada
 
@@ -144,6 +146,6 @@ Definir claramente estos límites antes de firmar evita el 80% de los conflictos
 
 ## ¿Necesitas cuadrillas para tu próxima obra en Santiago?
 
-En Innovatech proveemos cuadrillas de albanilería, terminaciones, estructura y supervisores para obras en toda la Región Metropolitana. Trabajamos con contrato, mutualidad vigente y EPP propio. Documentación laboral completa desde el primer día.
+En Innovatech proveemos cuadrillas de albañilería, terminaciones, estructura y supervisores para obras en toda la Región Metropolitana. Trabajamos con contrato, mutualidad vigente y EPP propio. Documentación laboral completa desde el primer día.
 
 [Cotiza tu requerimiento de cuadrillas →](/cotizador)

@@ -10,6 +10,9 @@ const services = defineCollection({
     image: z.string().optional(),
     order: z.number(),
     features: z.array(z.string()),
+    // Descripción para Google (≤ ~155 caracteres) si `description`, que se
+    // muestra en la página, es más larga.
+    seoDescription: z.string().optional(),
   }),
 });
 
@@ -43,6 +46,10 @@ const blog = defineCollection({
     date: z.coerce.date(),
     tags: z.array(z.string()),
     image: z.string().optional(),
+    // Título y descripción para Google (≤ ~60 y ~155 caracteres). Opcionales:
+    // `title` y `description` se siguen mostrando en el artículo y el listado.
+    seoTitle: z.string().optional(),
+    seoDescription: z.string().optional(),
   }),
 });
 

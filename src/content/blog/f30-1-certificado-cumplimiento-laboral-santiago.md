@@ -1,6 +1,8 @@
 ---
 title: "F30-1: qué es, cómo pedirlo y por qué protege a tu empresa del Art. 183-A"
 description: "Guía completa del Certificado F30-1 en Chile: qué es, quién lo emite, cada cuánto pedirlo y cómo usarlo para ejercer el derecho a retención del Art. 183-D. Todo lo que un mandante necesita saber en 2026."
+seoTitle: "Certificado F30-1: qué es y cómo pedirlo"
+seoDescription: "Certificado F30-1 en Chile: qué es, quién lo emite, cada cuánto pedirlo y cómo usarlo para el derecho a retención del Art. 183-D. Guía 2026."
 author: "Equipo Innovatech"
 date: 2026-08-15
 tags: ["F30-1", "Art. 183-A", "responsabilidad solidaria", "Dirección del Trabajo", "empresas", "legal"]

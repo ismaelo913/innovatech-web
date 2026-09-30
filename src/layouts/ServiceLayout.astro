@@ -19,12 +19,14 @@ import { comunaLandingsFor } from '../lib/comunas';
 interface Props {
   title: string;
   description: string;
+  /** Descripción para Google si `description` (visible en la página) es más larga. */
+  seoDescription?: string;
   icon: string;
   features: string[];
   slug: string;
 }
 
-const { title, description, features, slug } = Astro.props;
+const { title, description, seoDescription, features, slug } = Astro.props;
 
 const otherServices = SERVICES.filter((s) => s.slug !== slug);
 // Sin este enlace, las páginas por comuna solo eran visibles vía sitemap.
@@ -50,7 +52,7 @@ const serviceSchema = {
 };
 ---
 
-<BaseLayout title={title} description={description} schema={serviceSchema}>
+<BaseLayout title={title} description={seoDescription ?? description} schema={serviceSchema}>
   {/* Hero */}
   <section class="py-16 sm:py-20 bg-background border-b-brutal">
     <Container>

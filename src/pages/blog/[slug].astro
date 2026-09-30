@@ -44,7 +44,12 @@ const articleSchema = {
 };
 ---
 
-<BaseLayout title={post.data.title} description={post.data.description} ogImage={postImage} schema={articleSchema}>
+<BaseLayout
+  title={post.data.seoTitle || post.data.title}
+  description={post.data.seoDescription || post.data.description}
+  ogImage={postImage}
+  schema={articleSchema}
+>
   <article>
     <section class="py-16 sm:py-20 bg-background border-b-brutal">
       <Container narrow>
