@@ -104,6 +104,24 @@
   --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+/* Respaldo de Big Shoulders mientras carga (va en --font-big-shoulders, ver
+   astro.config.mjs): Arial o Roboto en negrita, achicada para que los títulos
+   —siempre en MAYÚSCULAS— ocupen el mismo ancho y no cambien de número de
+   líneas cuando llega la fuente (eso movía el contenido de abajo: CLS).
+   size-adjust = ancho de los 66 títulos del sitio en Big Shoulders 900 / en
+   Arial negrita (mediana 0,689; entre 0,66 y 0,72). ascent/descent: las de
+   Big Shoulders (0,984 y 0,213 em) divididas por el size-adjust. */
+@font-face {
+  font-family: 'Big Shoulders Fallback';
+  src: local('Arial Bold'), local('Arial-BoldMT'), local('Liberation Sans Bold'), local('LiberationSans-Bold'),
+    local('Roboto Bold'), local('Roboto-Bold'), local('Helvetica Bold'), local('Arial'), local('Roboto');
+  font-weight: 700 900;
+  size-adjust: 68.9%;
+  ascent-override: 142.8%;
+  descent-override: 30.9%;
+  line-gap-override: 0%;
+}
+
 /* Líneas estructurales — usadas por .border-brutal y el grid de fondo */
 :root {
   --grid-line: oklch(5% 0.004 50 / 0.1);
