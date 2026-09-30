@@ -42,7 +42,7 @@ const otherLandings = COMUNA_LANDINGS
   .map((l) => ({ ...l, serviceTitle: SERVICES.find((s) => s.slug === l.serviceSlug)?.title ?? '' }));
 
 const pageTitle = `${title} en ${landing.comuna}`;
-const pageDescription = `${title} en ${landing.comuna}, Santiago. ${landing.context} Presupuesto por escrito, supervisor en terreno, EPP propio.`;
+const pageDescription = landing.description;
 
 const serviceSchema = {
   '@context': 'https://schema.org',

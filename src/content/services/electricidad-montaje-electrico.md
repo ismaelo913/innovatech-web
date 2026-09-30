@@ -1,6 +1,7 @@
 ---
 title: Electricidad y Montaje Eléctrico
 description: Instalaciones eléctricas sin sorpresas en el certificado final. Salas eléctricas, tableros, baja y media tensión — ejecutado y coordinado con tu ITO, con la misma supervisión diaria de cualquier obra Innovatech.
+seoDescription: Salas eléctricas, tableros y montaje en baja y media tensión en Santiago, coordinados con tu ITO y con supervisión diaria. Sin sorpresas en el certificado.
 icon: zap
 image: /images/projects/montaje-electrico-1.jpeg
 order: 1

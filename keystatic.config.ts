@@ -17,6 +17,15 @@ export default config({
       schema: {
         title: fields.slug({ name: { label: 'Título' } }),
         description: fields.text({ label: 'Descripción', multiline: true }),
+        seoTitle: fields.text({
+          label: 'Título para Google (opcional)',
+          description: 'Hasta ~47 caracteres (se le agrega " | Innovatech"). Si queda vacío se usa el título.',
+        }),
+        seoDescription: fields.text({
+          label: 'Descripción para Google (opcional)',
+          description: 'Hasta ~155 caracteres. Si queda vacía se usa la descripción.',
+          multiline: true,
+        }),
         author: fields.text({ label: 'Autor', defaultValue: 'Equipo Innovatech' }),
         date: fields.date({ label: 'Fecha de publicación' }),
         tags: fields.array(

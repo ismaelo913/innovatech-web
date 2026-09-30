@@ -1,6 +1,8 @@
 ---
 title: "Cómo contratar un subcontratista de construcción confiable en Santiago"
 description: "8 puntos clave para contratar subcontratistas sin riesgo legal en Chile. Documentación obligatoria según el Código del Trabajo, Ley 20.123 y responsabilidad solidaria del mandante."
+seoTitle: "Cómo contratar un subcontratista de construcción"
+seoDescription: "8 puntos clave para contratar subcontratistas sin riesgo legal en Chile: los documentos que exige la ley y cómo evitar la responsabilidad solidaria."
 author: "Equipo Innovatech"
 date: 2026-04-19
 tags: ["subcontratista", "construcción", "contratación", "Santiago", "legal", "empresas"]
