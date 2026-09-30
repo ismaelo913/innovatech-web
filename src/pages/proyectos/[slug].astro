@@ -51,7 +51,7 @@ const allDetails = [
 const details = allDetails.filter(d => Boolean(d.value));
 ---
 
-<BaseLayout title={project.data.title} description={`Proyecto ${project.data.title} ejecutado por Innovatech${project.data.location ? ` en ${project.data.location}` : ''}.`}>
+<BaseLayout title={project.data.title} description={`Proyecto ${project.data.title} ejecutado por Innovatech${project.data.location ? ` en ${project.data.location}` : ''}.`} fonts={['display']}>
   {/* Hero */}
   <section class="py-16 sm:py-20 bg-background border-b-brutal">
     <Container>
@@ -61,7 +61,7 @@ const details = allDetails.filter(d => Boolean(d.value));
         { label: project.data.title },
       ]} />
       <Badge variant="primary" class="mb-4">{categoryLabels[project.data.category]}</Badge>
-      <h1 class="text-3xl sm:text-4xl lg:text-5xl font-black uppercase text-neutral-950 tracking-tight leading-tight mb-4">
+      <h1 class="font-display text-4xl sm:text-5xl font-black uppercase text-neutral-950 leading-tight mb-4">
         {project.data.title}
       </h1>
     </Container>

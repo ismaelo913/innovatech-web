@@ -50,6 +50,7 @@ const articleSchema = {
   ogImage={postImage}
   schema={articleSchema}
   article={{ publishedTime: post.data.date }}
+  fonts={['display']}
 >
   <article>
     <section class="py-16 sm:py-20 bg-background border-b-brutal">
@@ -64,7 +65,7 @@ const articleSchema = {
             <Badge variant="primary">{tag}</Badge>
           ))}
         </div>
-        <h1 class="text-3xl sm:text-4xl font-black uppercase text-neutral-950 tracking-tight leading-tight mb-4">
+        <h1 class="font-display text-4xl font-black uppercase text-neutral-950 leading-tight mb-4">
           {post.data.title}
         </h1>
         <div class="flex items-center gap-4 text-sm text-neutral-500">

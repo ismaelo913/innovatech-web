@@ -36,6 +36,7 @@ const contactInfo = [
 <BaseLayout
   title="Contacto"
   description="Contáctanos para conversar sobre tu proyecto de construcción en Santiago. Calidad que se ve, seguridad que se siente."
+  fonts={['display']}
 >
   {/* Hero */}
   <section class="py-16 sm:py-20 bg-background border-b-brutal">
@@ -44,7 +45,7 @@ const contactInfo = [
         <span class="inline-block text-sm font-bold tracking-widest uppercase text-primary-700 mb-4">
           Contacto
         </span>
-        <h1 class="text-3xl sm:text-4xl lg:text-5xl font-black uppercase text-neutral-950 tracking-tight leading-tight mb-6">
+        <h1 class="font-display text-4xl sm:text-5xl font-black uppercase text-neutral-950 leading-tight mb-6">
           Estamos para ayudarte
         </h1>
         <p class="text-lg font-light text-accent-500 leading-relaxed">
@@ -60,13 +61,13 @@ const contactInfo = [
       <div class="grid grid-cols-1 lg:grid-cols-5 gap-12 lg:gap-16">
         {/* Form — React Island */}
         <div class="lg:col-span-3">
-          <h2 class="text-2xl font-black uppercase text-neutral-950 mb-6">Enviar mensaje</h2>
+          <h2 class="font-display text-3xl sm:text-4xl font-black uppercase leading-tight text-neutral-950 mb-6">Enviar mensaje</h2>
           <ContactForm client:visible />
         </div>
 
         {/* Contact info */}
         <div class="lg:col-span-2">
-          <h2 class="text-2xl font-black uppercase text-neutral-950 mb-6">Información de contacto</h2>
+          <h2 class="font-display text-3xl sm:text-4xl font-black uppercase leading-tight text-neutral-950 mb-6">Información de contacto</h2>
           <div class="space-y-5 mb-8">
             {contactInfo.map((info) => (
               <div class="flex items-start gap-4">

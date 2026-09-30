@@ -32,7 +32,7 @@ const headline = [
 
       <h1
         id="hero-headline"
-        class="font-display text-5xl sm:text-6xl lg:text-7xl font-black uppercase text-neutral-950 leading-tight mb-6"
+        class="font-display text-[clamp(2.25rem,13.5vw,3rem)] sm:text-6xl xl:text-7xl font-black uppercase text-neutral-950 leading-tight mb-6"
       >
         {headline.map(({ word, accent }, i) => (
           <><span class:list={['hero-word', { 'text-primary-600': accent }]} style={`--i:${i}`}>{word}</span>{' '}</>
