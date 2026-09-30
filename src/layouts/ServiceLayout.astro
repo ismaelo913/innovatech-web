@@ -52,7 +52,7 @@ const serviceSchema = {
 };
 ---
 
-<BaseLayout title={title} description={seoDescription ?? description} schema={serviceSchema}>
+<BaseLayout title={title} description={seoDescription ?? description} schema={serviceSchema} fonts={['display']}>
   {/* Hero */}
   <section class="py-16 sm:py-20 bg-background border-b-brutal">
     <Container>
@@ -63,7 +63,7 @@ const serviceSchema = {
           { label: title },
         ]} />
         <Badge variant="primary" class="mb-4">{title}</Badge>
-        <h1 class="text-3xl sm:text-4xl lg:text-5xl font-black uppercase text-neutral-950 tracking-tight leading-tight mb-4">
+        <h1 class="font-display text-4xl sm:text-5xl font-black uppercase text-neutral-950 leading-tight mb-4">
           {title}
         </h1>
         <p class="text-lg font-light text-accent-500 leading-relaxed">
@@ -102,7 +102,7 @@ const serviceSchema = {
   {comunaLandings.length > 0 && (
     <section class="py-12 border-t-brutal">
       <Container>
-        <h2 class="text-2xl font-black uppercase text-neutral-950 mb-2">{title} en tu comuna</h2>
+        <h2 class="font-display text-3xl sm:text-4xl font-black uppercase leading-tight text-neutral-950 mb-2">{title} en tu comuna</h2>
         <p class="text-sm text-accent-500 mb-6">
           Trabajamos en toda la Región Metropolitana. Revisa lo que ejecutamos en estas comunas:
         </p>
@@ -134,7 +134,7 @@ const serviceSchema = {
     <Container>
       <div class="flex flex-col sm:flex-row items-center justify-between gap-6">
         <div>
-          <h2 class="text-2xl font-bold text-white mb-2">
+          <h2 class="font-display text-3xl sm:text-4xl font-black uppercase leading-tight text-white mb-2">
             ¿Te interesa este servicio?
           </h2>
           <p class="text-white">
@@ -154,7 +154,7 @@ const serviceSchema = {
   {/* Other services */}
   <section class="py-section bg-surface-alt">
     <Container>
-      <h2 class="text-2xl font-black uppercase text-neutral-950 mb-8">Otros servicios</h2>
+      <h2 class="font-display text-3xl sm:text-4xl font-black uppercase leading-tight text-neutral-950 mb-8">Otros servicios</h2>
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         {otherServices.map((s) => (
           <a

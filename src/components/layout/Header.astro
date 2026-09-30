@@ -15,19 +15,21 @@ const currentPath = Astro.url.pathname;
       <!-- Logo -->
       <a href="/" class="flex items-center gap-2 group" aria-label={SITE.name}>
         <img
-          src="/images/logo/logo-icon-small.jpeg"
+          src="/images/logo/logo-tile.webp"
           alt=""
           width="40"
           height="40"
-          class="w-10 h-10 object-contain bg-neutral-950 border-brutal transition-transform duration-300 group-hover:scale-105"
+          class="w-10 h-10 object-cover bg-neutral-950 border-brutal transition-transform duration-300 group-hover:scale-105"
         />
         <span class="text-xl font-black uppercase tracking-tight text-neutral-950 header-logo-text">
           INNOVA<span class="text-primary-600">TECH</span>
         </span>
       </a>
 
-      <!-- Desktop Nav -->
-      <ul class="hidden lg:flex items-center gap-1">
+      <!-- Desktop Nav: desde 1280 px. Entre 1024 y ~1150 px el logo se montaba
+           sobre "Inicio" y el botón se partía en tres líneas, así que hasta
+           1280 px se usa el menú desplegable. -->
+      <ul class="hidden xl:flex items-center gap-1">
         {NAV_LINKS.map((link) => (
           <li>
             <a
@@ -47,7 +49,7 @@ const currentPath = Astro.url.pathname;
       </ul>
 
       <!-- Desktop CTA -->
-      <div class="hidden lg:flex items-center gap-3">
+      <div class="hidden xl:flex items-center gap-3">
         <Button href="/cotizador" size="sm">
           Cotiza tu proyecto
         </Button>
@@ -58,7 +60,7 @@ const currentPath = Astro.url.pathname;
         href="https://wa.me/56938905488"
         target="_blank"
         rel="noopener noreferrer"
-        class="lg:hidden flex items-center justify-center w-9 h-9 rounded-lg bg-[#25D366] text-white hover:bg-[#20bd5a] transition-colors"
+        class="xl:hidden flex items-center justify-center w-9 h-9 bg-[#25D366] text-white hover:bg-[#20bd5a] transition-colors"
         aria-label="Contactar por WhatsApp"
       >
         <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
@@ -69,7 +71,7 @@ const currentPath = Astro.url.pathname;
       <!-- Mobile Hamburger -->
       <button
         id="menu-toggle"
-        class="lg:hidden flex items-center justify-center w-10 h-10 hover:bg-neutral-100 transition-colors"
+        class="xl:hidden flex items-center justify-center w-10 h-10 hover:bg-neutral-100 transition-colors"
         aria-label="Abrir menu"
         aria-expanded="false"
         aria-controls="mobile-menu"
@@ -87,7 +89,7 @@ const currentPath = Astro.url.pathname;
   <!-- Mobile Menu -->
   <div
     id="mobile-menu"
-    class="lg:hidden fixed inset-x-0 top-18 bottom-0 bg-background/98 backdrop-blur-lg border-t-brutal -translate-x-full transition-transform duration-300 ease-out z-40"
+    class="xl:hidden fixed inset-x-0 top-18 lg:top-20 bottom-0 bg-background/98 backdrop-blur-lg border-t-brutal -translate-x-full transition-transform duration-300 ease-out z-40"
     aria-hidden="true"
     inert
   >

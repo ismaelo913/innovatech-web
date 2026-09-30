@@ -1,34 +1,25 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Container from '../components/ui/Container.astro';
+import { Image } from 'astro:assets';
 import { SITE } from '../lib/constants';
+import { CLIENTS, logoSize } from '../lib/clients';
 
-const clientes = [
-  { nombre: 'Concreta — Grupo Inmobiliario', logo: '/images/clientes/concreta.png' },
-  { nombre: 'GPR Constructora & Inmobiliaria', logo: '/images/clientes/gpr.png' },
-  { nombre: 'Codelco — División El Teniente', logo: '/images/clientes/codelco.png' },
-  { nombre: 'EECOL', logo: '/images/clientes/eecol.png' },
-  { nombre: 'Sonepar', logo: '/images/clientes/sonepar.png' },
-  { nombre: 'Schneider Electric', logo: '/images/clientes/schneider.png' },
-  { nombre: 'Inproco', logo: '/images/clientes/inproco.png' },
-  { nombre: 'CMP', logo: '/images/clientes/cmp.png' },
-  { nombre: 'MIPSS', logo: '/images/clientes/mipss.png' },
-  { nombre: 'EATHON', logo: '/images/clientes/eathon.png' },
-];
-
+// Íconos de línea (trazo 1,5, como los de /servicios y /nosotros): casco,
+// edificio de oficinas y local comercial.
 const icps = [
   {
-    icon: '🏗️',
+    icon: 'M12 3v1m0 0a7 7 0 017 7v2H5v-2a7 7 0 017-7zm-9 10h18v2a2 2 0 01-2 2H5a2 2 0 01-2-2v-2zm4 4v2m10-2v2',
     title: 'Constructoras y subcontratistas',
     desc: 'Necesitas cuadrillas especializadas para partidas específicas: albañilería, terminaciones, estructura. Llegamos con contrato, mutualidad vigente, EPP propio y supervisor en terreno.',
   },
   {
-    icon: '🏢',
+    icon: 'M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4',
     title: 'Inmobiliarias y project managers',
     desc: 'Gestionas múltiples proyectos y necesitas subcontratistas que documenten, cumplan plazo y emitan factura electrónica. Trabajamos con F30-1 mensual y acceso directo al supervisor.',
   },
   {
-    icon: '🏪',
+    icon: 'M13.5 21v-7.5a.75.75 0 0 1 .75-.75h3a.75.75 0 0 1 .75.75V21m-4.5 0H2.36m11.14 0H18m0 0h3.64m-1.39 0V9.349M3.75 21V9.349m0 0a3.001 3.001 0 0 0 3.75-.615A2.993 2.993 0 0 0 9.75 9.75c.896 0 1.7-.393 2.25-1.016a2.993 2.993 0 0 0 2.25 1.016c.896 0 1.7-.393 2.25-1.015a3.001 3.001 0 0 0 3.75.614m-16.5 0a3.004 3.004 0 0 1-.621-4.72l1.189-1.19A1.5 1.5 0 0 1 5.378 3h13.243a1.5 1.5 0 0 1 1.06.44l1.19 1.189a3 3 0 0 1-.621 4.72M6.75 18h3.75a.75.75 0 0 0 .75-.75V13.5a.75.75 0 0 0-.75-.75H6.75a.75.75 0 0 0-.75.75v3.75c0 .414.336.75.75.75Z',
     title: 'Empresas con locales y oficinas',
     desc: 'Necesitas remodelar tu espacio comercial sin detener la operación. Planificamos en fases, trabajamos en horarios acordados y entregamos presupuesto escrito antes de empezar.',
   },
@@ -69,7 +60,7 @@ const schema = JSON.stringify({
 <BaseLayout
   title="Subcontratista para constructoras e inmobiliarias"
   description="Cuadrillas con documentación completa: contratos, mutualidad, EPP y factura electrónica. Cumplimos el Art. 183-A desde el primer día. Santiago RM."
-  fonts={['mono']}
+  fonts={['display', 'mono']}
 >
   <script type="application/ld+json" set:html={schema} />
 
@@ -81,7 +72,7 @@ const schema = JSON.stringify({
         <span class="inline-block text-xs font-bold tracking-widest uppercase text-primary-500 mb-5 border-brutal-invert px-3 py-1">
           Para constructoras, inmobiliarias y empresas
         </span>
-        <h1 class="text-3xl sm:text-4xl lg:text-5xl font-black uppercase tracking-tight leading-tight mb-6">
+        <h1 class="font-display text-[clamp(2.25rem,13vw,3rem)] sm:text-6xl lg:text-7xl font-black uppercase leading-tight mb-6">
           Obra que avanza.<br class="hidden sm:block" />
           <span class="text-primary-500">Documentación que protege.</span>
         </h1>
@@ -131,13 +122,17 @@ const schema = JSON.stringify({
     <Container>
       <div class="max-w-3xl mx-auto">
         <div class="text-center mb-12">
-          <h2 class="text-2xl sm:text-3xl font-black uppercase text-neutral-950 mb-3">¿Para quién trabajamos?</h2>
+          <h2 class="font-display text-3xl sm:text-4xl font-black uppercase leading-tight text-neutral-950 mb-3">¿Para quién trabajamos?</h2>
           <p class="text-accent-500 font-light">Entendemos que cada tipo de empresa tiene necesidades distintas.</p>
         </div>
         <div class="space-y-4">
           {icps.map(({ icon, title, desc }) => (
             <div class="flex gap-5 p-6 border-brutal bg-white hover-bg-brand transition-colors">
-              <div class="text-3xl shrink-0 mt-0.5">{icon}</div>
+              <div class="w-12 h-12 border-brutal bg-primary-50 flex items-center justify-center shrink-0" aria-hidden="true">
+                <svg class="w-6 h-6 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+                  <path stroke-linecap="round" stroke-linejoin="round" d={icon} />
+                </svg>
+              </div>
               <div>
                 <h3 class="font-bold text-neutral-950 mb-1.5">{title}</h3>
                 <p class="text-sm font-light text-accent-500 leading-relaxed">{desc}</p>
@@ -154,7 +149,7 @@ const schema = JSON.stringify({
     <Container>
       <div class="max-w-3xl mx-auto">
         <div class="text-center mb-12">
-          <h2 class="text-2xl sm:text-3xl font-black uppercase text-neutral-950 mb-3">Capacidad operacional</h2>
+          <h2 class="font-display text-3xl sm:text-4xl font-black uppercase leading-tight text-neutral-950 mb-3">Capacidad operacional</h2>
           <p class="text-accent-500 font-light max-w-xl mx-auto">Lo que puedes esperar cuando trabajas con Innovatech como subcontratista.</p>
         </div>
         <div class="grid sm:grid-cols-2 gap-5">
@@ -183,7 +178,7 @@ const schema = JSON.stringify({
       <div class="max-w-3xl mx-auto">
         <div class="mb-10">
           <span class="text-xs font-bold tracking-widest uppercase text-primary-500">Cumplimiento legal</span>
-          <h2 class="text-2xl sm:text-3xl font-black uppercase mt-2 mb-3">
+          <h2 class="font-display text-3xl sm:text-4xl font-black uppercase leading-tight mt-2 mb-3">
             Llegamos con la documentación que la ley exige
           </h2>
           <p class="text-neutral-400 font-light text-sm max-w-xl">
@@ -217,7 +212,7 @@ const schema = JSON.stringify({
     <Container>
       <div class="max-w-3xl mx-auto">
         <div class="text-center mb-12">
-          <h2 class="text-2xl sm:text-3xl font-black uppercase text-neutral-950 mb-3">Cómo funciona el proceso</h2>
+          <h2 class="font-display text-3xl sm:text-4xl font-black uppercase leading-tight text-neutral-950 mb-3">Cómo funciona el proceso</h2>
           <p class="text-accent-500 font-light">Sin demoras ni ambigüedades.</p>
         </div>
         <div class="grid sm:grid-cols-2 gap-6">
@@ -242,7 +237,7 @@ const schema = JSON.stringify({
     <Container>
       <div class="max-w-2xl mx-auto">
         <div class="mb-10">
-          <h2 class="text-2xl sm:text-3xl font-black uppercase text-neutral-950 mb-3">Solicita una propuesta</h2>
+          <h2 class="font-display text-3xl sm:text-4xl font-black uppercase leading-tight text-neutral-950 mb-3">Solicita una propuesta</h2>
           <p class="text-accent-500 font-light text-sm">Cuéntanos el proyecto. Un asesor te responde en menos de 24 horas hábiles.</p>
         </div>
 
@@ -342,30 +337,32 @@ const schema = JSON.stringify({
     <Container>
       <div class="max-w-4xl mx-auto">
         <div class="text-center mb-12">
-          <h2 class="text-2xl sm:text-3xl font-black uppercase text-neutral-950 mb-3">Empresas que han depositado su confianza en nosotros</h2>
+          <h2 class="font-display text-3xl sm:text-4xl font-black uppercase leading-tight text-neutral-950 mb-3">Han confiado en nosotros</h2>
           <p class="text-accent-500 font-light text-sm">Trabajamos junto a constructoras, inmobiliarias, distribuidores eléctricos y empresas del sector industrial.</p>
         </div>
         <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 border-t-brutal border-l-brutal bg-white">
-          {clientes.map(({ nombre, logo }) => (
-            <div class="reveal flex flex-col items-center justify-between gap-3 p-5 border-r-brutal border-b-brutal min-h-[130px] group">
-              {logo ? (
-                <div class="w-full flex items-center justify-center flex-1 h-12">
-                  <img
+          {CLIENTS.map(({ nombre, logo }) => {
+            const size = logoSize(logo, 52, 130);
+            return (
+              <div class="reveal flex flex-col items-center justify-between gap-3 p-5 border-r-brutal border-b-brutal min-h-[130px] group">
+                <div class="w-full flex items-center justify-center flex-1 min-h-16">
+                  <Image
                     src={logo}
                     alt={`Logo ${nombre}`}
-                    width="120"
-                    height="48"
-                    class="max-h-12 max-w-[120px] w-auto h-auto object-contain client-logo"
+                    width={size.width}
+                    height={size.height}
+                    densities={[1, 2]}
+                    class="max-w-[85%] h-auto object-contain client-logo"
                     loading="lazy"
                     decoding="async"
                   />
                 </div>
-              ) : null}
-              <span class={`text-[11px] font-medium text-center leading-tight w-full ${logo ? 'text-neutral-500 group-hover:text-neutral-800' : 'text-sm font-semibold text-neutral-700'} transition-colors`}>
-                {nombre}
-              </span>
-            </div>
-          ))}
+                <span class="text-[11px] font-medium text-center leading-tight w-full text-neutral-500 group-hover:text-neutral-800 transition-colors">
+                  {nombre}
+                </span>
+              </div>
+            );
+          })}
         </div>
       </div>
     </Container>
@@ -396,7 +393,9 @@ const schema = JSON.stringify({
   import emailjs from '@emailjs/browser';
   import { EMAILJS_CONFIG, isEmailConfigured } from '../lib/emailjs';
   import { trackLead } from '../lib/analytics';
-  import { SITE } from '../lib/constants';
+  import { Image } from 'astro:assets';
+import { SITE } from '../lib/constants';
+import { CLIENTS, logoSize } from '../lib/clients';
   import { whatsappUrl } from '../lib/utils';
 
   const form = document.getElementById('b2b-form') as HTMLFormElement;

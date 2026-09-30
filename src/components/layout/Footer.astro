@@ -3,20 +3,25 @@ import Container from '../ui/Container.astro';
 import { NAV_LINKS, SITE, SERVICES } from '../../lib/constants';
 
 const currentYear = new Date().getFullYear();
+// El correo es una sola "palabra" de 42 caracteres: sin un punto de corte no
+// cabía en su columna entre 1024 y 1440 px y empujaba toda la página hacia el
+// costado. Se corta de preferencia después de la @, y la columna de contacto
+// es algo más ancha que las otras.
+const [emailUser, emailDomain] = SITE.email.split('@');
 ---
 
 <footer class="bg-surface-alt text-neutral-700 border-t-brutal pt-20 pb-8">
   <Container>
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-[1fr_0.8fr_1.1fr_1.3fr] gap-12 mb-16">
       <!-- Brand -->
       <div class="lg:col-span-1">
         <a href="/" class="flex items-center gap-2.5 mb-5">
           <img
-            src="/images/logo/logo-icon-small.jpeg"
+            src="/images/logo/logo-tile.webp"
             alt=""
             width="40"
             height="40"
-            class="w-10 h-10 object-contain border-brutal"
+            class="w-10 h-10 object-cover bg-neutral-950 border-brutal"
           />
           <span class="text-xl font-black uppercase tracking-tight text-neutral-950">
             INNOVA<span class="text-primary-600">TECH</span>
@@ -91,7 +96,7 @@ const currentYear = new Date().getFullYear();
               <svg class="w-4 h-4 mt-0.5 text-neutral-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />
               </svg>
-              {SITE.email}
+              <span class="min-w-0 wrap-anywhere">{emailUser}@<wbr />{emailDomain}</span>
             </a>
           </li>
         </ul>

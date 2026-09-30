@@ -58,6 +58,7 @@ export default function ProjectGallery({ images, alt }: Props) {
             height={images[0].height}
             alt={alt}
             className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.02]"
+            style={{ objectPosition: images[0].position }}
             fetchPriority="high"
           />
           <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300 flex items-center justify-center">
@@ -84,6 +85,7 @@ export default function ProjectGallery({ images, alt }: Props) {
                   height={img.height}
                   alt={`${alt} - Foto ${i + 2}`}
                   className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                  style={{ objectPosition: img.position }}
                   loading="lazy"
                 />
                 <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300" />

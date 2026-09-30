@@ -16,14 +16,14 @@ const waUrl = whatsappUrl(SITE.whatsapp, 'Hola, me interesa cotizar un proyecto 
     <p class="text-lg font-light text-accent-500 mb-10 max-w-md leading-relaxed">
       Cuéntanos qué necesitas y te orientamos sin compromiso. Nos gusta construir relaciones antes de construir obras.
     </p>
-    <div class="flex flex-col sm:flex-row gap-4 mb-8">
-      <Button href="/cotizador" size="lg" variant="primary">
+    <div class="flex flex-col sm:flex-row sm:flex-wrap gap-4 mb-8">
+      <Button href="/cotizador" size="lg" variant="primary" class="sm:whitespace-nowrap">
         Solicitar cotización
         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
           <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
         </svg>
       </Button>
-      <Button href="/contacto" size="lg" variant="outline">
+      <Button href="/contacto" size="lg" variant="outline" class="sm:whitespace-nowrap">
         Contactar directamente
       </Button>
     </div>
@@ -38,9 +38,11 @@ const waUrl = whatsappUrl(SITE.whatsapp, 'Hola, me interesa cotizar un proyecto 
   <!-- Lead magnet: checklist mandante -->
   <div class="p-8 lg:p-20 bg-neutral-950 texture-grain text-white flex flex-col justify-center relative overflow-hidden">
     <BlueprintMarks variant="dark" />
-    <div class="relative z-10">
+    <div class="relative z-10 @container">
       <div class="inline-block bg-primary-600 text-white px-4 py-2 font-bold uppercase tracking-widest text-xs mb-8">Recurso Gratuito</div>
-      <h3 class="text-3xl lg:text-4xl font-black uppercase mb-6 leading-tight">¿Contratando Subcontratistas?</h3>
+      {/* "SUBCONTRATISTAS?" es una sola palabra muy larga: el tamaño sigue al
+          ancho de la columna (cqi) para que nunca se salga de ella. */}
+      <h3 class="font-display text-[clamp(1.75rem,13cqi,3.5rem)] font-black uppercase mb-6 leading-tight">¿Contratando Subcontratistas?</h3>
       <p class="text-lg font-light text-white/80 mb-10 max-w-md">Evita multas laborales de hasta 150 UTM. Descarga gratis el checklist de control de obra en Chile.</p>
       <a
         href="/recursos/checklist-subcontratistas"

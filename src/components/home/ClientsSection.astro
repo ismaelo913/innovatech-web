@@ -1,19 +1,7 @@
 ---
+import { Image } from 'astro:assets';
 import Container from '../ui/Container.astro';
-
-// Clientes reales — fuente: Portafolio Innovatech.pdf
-const clientes = [
-  { nombre: 'Concreta — Grupo Inmobiliario', logo: '/images/clientes/concreta.png' },
-  { nombre: 'GPR Constructora & Inmobiliaria', logo: '/images/clientes/gpr.png' },
-  { nombre: 'Codelco — División El Teniente', logo: '/images/clientes/codelco.png' },
-  { nombre: 'EECOL', logo: '/images/clientes/eecol.png' },
-  { nombre: 'Sonepar', logo: '/images/clientes/sonepar.png' },
-  { nombre: 'Schneider Electric', logo: '/images/clientes/schneider.png' },
-  { nombre: 'Inproco', logo: '/images/clientes/inproco.png' },
-  { nombre: 'CMP', logo: '/images/clientes/cmp.png' },
-  { nombre: 'MIPSS', logo: '/images/clientes/mipss.png' },
-  { nombre: 'EATHON', logo: '/images/clientes/eathon.png' },
-];
+import { CLIENTS, logoSize } from '../../lib/clients';
 ---
 
 <section class="border-b-brutal bg-surface-alt pt-section pb-section">
@@ -22,27 +10,31 @@ const clientes = [
       13 años de trayectoria
     </p>
     <h2 class="reveal font-display text-4xl sm:text-5xl font-black uppercase leading-tight text-neutral-950">
-      Empresas que han depositado su confianza en nosotros
+      Han confiado en nosotros
     </h2>
     <p class="reveal text-lg font-light text-accent-500 mt-4">
       Minería, distribuidoras eléctricas, constructoras e inmobiliarias para las que hemos ejecutado y supervisado obra en Santiago y regiones.
     </p>
   </Container>
 
-  <!-- Logo grid — lattice de bordes duros, altura fija para uniformidad -->
+  <!-- Logo grid — lattice de bordes duros; cada logo con la misma superficie (lib/clients.ts) -->
   <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 border-t-brutal border-l-brutal bg-white reveal">
-    {clientes.map((c) => (
-      <div class="border-r-brutal border-b-brutal p-4 flex items-center justify-center min-h-[160px]">
-        <img
-          src={c.logo}
-          alt={`Logo ${c.nombre}`}
-          width="200"
-          height="88"
-          class="max-h-20 max-w-[85%] w-auto h-auto object-contain client-logo"
-          loading="lazy"
-          decoding="async"
-        />
-      </div>
-    ))}
+    {CLIENTS.map((c) => {
+      const size = logoSize(c.logo, 80, 190);
+      return (
+        <div class="border-r-brutal border-b-brutal p-4 flex items-center justify-center min-h-[160px]">
+          <Image
+            src={c.logo}
+            alt={`Logo ${c.nombre}`}
+            width={size.width}
+            height={size.height}
+            densities={[1, 2]}
+            class="max-w-[85%] h-auto object-contain client-logo"
+            loading="lazy"
+            decoding="async"
+          />
+        </div>
+      );
+    })}
   </div>
 </section>

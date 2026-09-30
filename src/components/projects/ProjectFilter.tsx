@@ -58,6 +58,7 @@ export default function ProjectFilter({ projects, categoryLabels }: Props) {
                   sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
                   alt={project.title}
                   className="absolute inset-0 w-full h-full object-cover"
+                  style={{ objectPosition: project.image.position }}
                   loading="lazy"
                   decoding="async"
                   width={project.image.width}
